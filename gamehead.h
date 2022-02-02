@@ -21,5 +21,6 @@ int afficher_menu();
 int init();
 int load_files();
 int menu();
+void show_settings();
 
 #endif // MENU_H_INCLUDED

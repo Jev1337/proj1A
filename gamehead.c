@@ -11,6 +11,9 @@
 
 SDL_Surface *screen;
 SDL_Surface *background;
+SDL_Surface *settings;
+SDL_Surface *donebtn_u;
+SDL_Surface *donebtn_s;
 SDL_Surface *quitbtn_u;
 SDL_Surface *quitbtn_s;
 SDL_Surface *creditsbtn_u;
@@ -27,6 +30,7 @@ SDL_Surface *leftarrow;
 SDL_Surface *rightarrow;
 Mix_Music *music;
 Mix_Chunk *scratch;
+TTF_Font *fontSmall;
 TTF_Font *font;
 TTF_Font *fontBig;
 
@@ -37,7 +41,7 @@ SDL_Rect poscontinuebtn;
 SDL_Rect posgitbtn;
 SDL_Rect possettingsbtn;
 SDL_Event event;
-int ccl, x, y, continueselected, creditsselected, quitselected, gitselected, settingsselected;
+int ccl, x, y, continueselected, creditsselected, quitselected, gitselected, settingsselected, doneselectedsettings;
 SDL_Color white;
 SDL_Color black;
 
@@ -49,7 +53,7 @@ int init()
     {
         return 0;
     }
-    putenv("SDL_VIDEO_WINDOW_POS=center");
+
     //Set up the screen
     screen = SDL_SetVideoMode(SCREEN_W, SCREEN_H, SCREEN_BBP, SDL_SWSURFACE);
 
@@ -77,6 +81,9 @@ int init()
 int load_files()
 {
     background = load_image("images/background.png");
+    settings = IMG_Load("images/settings.png");
+    donebtn_u = IMG_Load("images/done_u.png");
+    donebtn_s = IMG_Load("images/done_s.png");
     quitbtn_u = IMG_Load("images/exitbtn_u.png");
     creditsbtn_u = IMG_Load("images/creditsbtn_u.png");
     continuebtn_u = IMG_Load("images/continuebtn_u.png");
@@ -88,11 +95,12 @@ int load_files()
     gitbtn_s = IMG_Load("images/gitbtn_s.png");
     settingsbtn_s = IMG_Load("images/settingsbtn_s.png");
     music = Mix_LoadMUS("sounds/beat.mp3");
+    fontSmall = TTF_OpenFont("fonts/Retro.ttf", 24);
     font = TTF_OpenFont("fonts/Retro.ttf", 48);
     fontBig = TTF_OpenFont("fonts/Retro.ttf", 72);
 
     if (background == NULL || quitbtn_u == NULL || creditsbtn_u == NULL || continuebtn_u == NULL || gitbtn_u == NULL || settingsbtn_u == NULL || quitbtn_s == NULL || creditsbtn_s == NULL ||
-        continuebtn_s == NULL || gitbtn_s == NULL || settingsbtn_s == NULL)
+        continuebtn_s == NULL || gitbtn_s == NULL || settingsbtn_s == NULL || donebtn_s == NULL || donebtn_u == NULL)
     {
         return 0;
     }
@@ -172,11 +180,12 @@ int afficher_menu()
     gamenameA = TTF_RenderText_Solid(font, "AR:T", white);
     gamenameB = TTF_RenderText_Solid(font, "AR:T", black);
     leftarrow = TTF_RenderText_Solid(fontBig, ">", white);
-    rightarrow = TTF_RenderText_Solid(fontBig,"<", white);
+    rightarrow = TTF_RenderText_Solid(fontBig, "<", white);
 
+    int quit = 0;
     //Where we currently are
-    //For instance, 1 stands for menu, 2 Stands for ingame, 3 Stands for Settings, 4 stands for Credits
-    int actpos = 1;
+    //For instance, 1 stands for menu, 2 Stands for ingame, 3 Stands for Credits, 4 stands for Settings
+    int actpos_previous = 1, actpos = 1;
     //If there was an error in rendering
     if (gamenameA == NULL || gamenameB == NULL)
     {
@@ -192,19 +201,13 @@ int afficher_menu()
     {
         return 1;
     }
+    clock_t last = clock();
 
-    while (actpos != 0)
+    while (quit == 0)
     {
-        switch(actpos){
-            case 1: actpos = menu();
-            break;
-        }
-    }
-    return 0;
-}
+        if (actpos == 1) //If we are in the main menu
+        {
 
-int menu(){
-            clock_t last = clock();
             clock_t current = clock();
             if (current >= (last + TIME_TO_WAIT * CLOCKS_PER_SEC))
             {
@@ -328,7 +331,7 @@ int menu(){
                 }
 
                 if (event.type == SDL_QUIT)
-                    return 0;
+                    quit = 1;
                 if (event.type == SDL_MOUSEBUTTONDOWN)
                 {
                     x = event.button.x;
@@ -345,7 +348,7 @@ int menu(){
                     {
                         if (Mix_PlayChannel(-1, scratch, 0) == -1)
                         {
-                            return -1;
+                            return 1;
                         }
                         //actpos = 2;
                     }
@@ -353,7 +356,7 @@ int menu(){
                     {
                         if (Mix_PlayChannel(-1, scratch, 0) == -1)
                         {
-                            return -1;
+                            return 1;
                         }
                         //actpos = 3;
                     }
@@ -361,19 +364,21 @@ int menu(){
                     {
                         if (Mix_PlayChannel(-1, scratch, 0) == -1)
                         {
-                            return -1;
+                            return 1;
                         }
-                        //actpos = 4;
+                        actpos_previous = 1;
+                        actpos = 4;
+                        show_settings();
+                        SDL_Flip(screen);
                     }
-                    if (x >= 770 && x <= 1149 && y >= 810 && y <= 930) //Settings
+                    if (x >= 770 && x <= 1149 && y >= 810 && y <= 930) //Quit
                     {
                         if (Mix_PlayChannel(-1, scratch, 0) == -1)
                         {
-                            return -1;
+                            return 1;
                         }
-                        return 0;
+                        quit = 1;
                     }
-                    
                 }
                 if (event.type == SDL_KEYDOWN)
                 {
@@ -412,7 +417,100 @@ int menu(){
                     }
                 }
             }
-    return 1;
+        }
+        if (actpos == 4)
+        {
+
+            while (SDL_PollEvent(&event))
+            {
+                if (event.type == SDL_MOUSEMOTION)
+                {
+                    x = event.motion.x;
+                    y = event.motion.y;
+                    if (x >= 775 && x <= 1166 && y >= 779 && y <= 890)
+                    {
+
+                        if (doneselectedsettings == 0)
+                        {
+                            doneselectedsettings = 1;
+                            afficher_ecran(776, 779, donebtn_s, screen);
+                            SDL_Flip(screen);
+                        }
+                    }
+                    else
+                    {
+                        if (doneselectedsettings == 1)
+                        {
+                            doneselectedsettings = 0;
+                            show_settings();
+                            SDL_Flip(screen);
+                        }
+                    }
+                }
+                if (event.type == SDL_MOUSEBUTTONDOWN)
+                {
+                    x = event.button.x;
+                    y = event.button.y;
+                    if (x >= 775 && x <= 1166 && y >= 779 && y <= 890)
+                    {
+                        if (Mix_PlayChannel(-1, scratch, 0) == -1)
+                        {
+                            return 1;
+                        }
+                        if (actpos_previous == 1)
+                            show_menu();
+                        actpos = actpos_previous;
+                        //applysettings
+                    }
+                }
+                if (event.type == SDL_KEYDOWN)
+                {
+                    if (event.key.keysym.sym == SDLK_g)
+                    {
+                        //If there is no music playing
+                        if (Mix_PlayingMusic() == 0)
+                        {
+                            //Play the music
+                            if (Mix_PlayMusic(music, -1) == -1)
+                            {
+                                return 1;
+                            }
+                        }
+                        //If music is being played
+                        else
+                        {
+                            //If the music is paused
+                            if (Mix_PausedMusic() == 1)
+                            {
+                                //Resume the music
+                                Mix_ResumeMusic();
+                            }
+                            //If the music is playing
+                            else
+                            {
+                                //Pause the music
+                                Mix_PauseMusic();
+                            }
+                        }
+                    }
+                    else if (event.key.keysym.sym == SDLK_c)
+                    {
+                        //Stop the music
+                        Mix_HaltMusic();
+                    }
+                }
+                if (event.type == SDL_QUIT)
+                    quit = 1;
+            }
+        }
+    }
+    return 0;
+}
+
+void show_settings()
+{
+    afficher_ecran(584, 164, settings, screen);
+    afficher_ecran(776, 779, donebtn_u, screen);
 }
 
 void finprog()
