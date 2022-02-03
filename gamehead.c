@@ -41,7 +41,7 @@ SDL_Rect poscontinuebtn;
 SDL_Rect posgitbtn;
 SDL_Rect possettingsbtn;
 SDL_Event event;
-int volume,ccl, x, y, continueselected, creditsselected, quitselected, gitselected, settingsselected, doneselectedsettings;
+int volume, ccl, x, y, continueselected, creditsselected, quitselected, gitselected, settingsselected, doneselectedsettings;
 SDL_Color white;
 SDL_Color black;
 
@@ -67,7 +67,7 @@ int init()
     {
         return 0;
     }
-    if (Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 4096) == -1)
+    if (Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 64) == -1)
     {
         return 0;
     }
@@ -175,9 +175,10 @@ void show_menu()
     afficher_ecran(1636, 20, gitbtn_u, screen);
 }
 
-void FillRect(int x, int y, int w, int h, int color) {
-  SDL_Rect rect = {x,y,w,h};
-  SDL_FillRect(screen, &rect, color);
+void FillRect(int x, int y, int w, int h, int color)
+{
+    SDL_Rect rect = {x, y, w, h};
+    SDL_FillRect(screen, &rect, color);
 }
 
 int afficher_menu()
@@ -414,7 +415,7 @@ int afficher_menu()
                             }
                         }
                     }
-                    else if (event.key.keysym.sym == SDLK_c)
+                    else if (event.key.keysym.sym == SDLK_x)
                     {
                         //Stop the music
                         Mix_HaltMusic();
@@ -475,6 +476,7 @@ int afficher_menu()
                         volume = 19;
                         show_settings();
                         Mix_VolumeMusic(volume);
+                        Mix_Volume(-1,volume);
                         SDL_Flip(screen);
                         //applysettings
                     }
@@ -486,6 +488,7 @@ int afficher_menu()
                         }
                         volume = 35;
                         Mix_VolumeMusic(volume);
+                        Mix_Volume(-1,volume);
                         show_settings();
                         SDL_Flip(screen);
                         //applysettings
@@ -497,7 +500,9 @@ int afficher_menu()
                             return 1;
                         }
                         volume = 51;
+                        
                         Mix_VolumeMusic(volume);
+                        Mix_Volume(-1,volume);
                         show_settings();
                         SDL_Flip(screen);
                         //applysettings
@@ -510,6 +515,7 @@ int afficher_menu()
                         }
                         volume = 67;
                         Mix_VolumeMusic(volume);
+                        Mix_Volume(-1,volume);
                         show_settings();
                         SDL_Flip(screen);
                         //applysettings
@@ -522,6 +528,7 @@ int afficher_menu()
                         }
                         volume = 83;
                         Mix_VolumeMusic(volume);
+                        Mix_Volume(-1,volume);
                         show_settings();
                         SDL_Flip(screen);
                         //applysettings
@@ -532,8 +539,9 @@ int afficher_menu()
                         {
                             return 1;
                         }
-                        volume = 100;
+                        volume = 128;
                         Mix_VolumeMusic(volume);
+                        Mix_Volume(-1,volume);
                         show_settings();
                         SDL_Flip(screen);
                         //applysettings
@@ -575,7 +583,7 @@ int afficher_menu()
                             }
                         }
                     }
-                    else if (event.key.keysym.sym == SDLK_c)
+                    else if (event.key.keysym.sym == SDLK_x)
                     {
                         //Stop the music
                         Mix_HaltMusic();
@@ -593,20 +601,27 @@ void show_settings()
 {
     afficher_ecran(584, 164, settings, screen);
     afficher_ecran(776, 779, donebtn_u, screen);
-    FillRect(1207,370,14,87,0x979797);
-    FillRect(1187,370,14,87,0x979797);
-    FillRect(1167,370,14,87,0x979797);
-    FillRect(1147,370,14,87,0x979797);
-    FillRect(1127,370,14,87,0x979797);
-    FillRect(1107,370,14,87,0x979797);
-switch(volume){
-    case 100: FillRect(1207,370,14,87,0x134908);
-    case 83: FillRect(1187,370,14,87,0x134908);
-    case 67: FillRect(1167,370,14,87,0x134908);
-    case 51: FillRect(1147,370,14,87,0x134908);
-    case 35: FillRect(1127,370,14,87,0x134908);
-    case 19: FillRect(1107,370,14,87,0x134908);
-    break;
+    FillRect(1207, 370, 14, 87, 0x979797);
+    FillRect(1187, 370, 14, 87, 0x979797);
+    FillRect(1167, 370, 14, 87, 0x979797);
+    FillRect(1147, 370, 14, 87, 0x979797);
+    FillRect(1127, 370, 14, 87, 0x979797);
+    FillRect(1107, 370, 14, 87, 0x979797);
+    switch (volume)
+    {
+    case 128:
+        FillRect(1207, 370, 14, 87, 0x134908);
+    case 83:
+        FillRect(1187, 370, 14, 87, 0x134908);
+    case 67:
+        FillRect(1167, 370, 14, 87, 0x134908);
+    case 51:
+        FillRect(1147, 370, 14, 87, 0x134908);
+    case 35:
+        FillRect(1127, 370, 14, 87, 0x134908);
+    case 19:
+        FillRect(1107, 370, 14, 87, 0x134908);
+        break;
     }
 }
 
@@ -626,7 +641,7 @@ void finprog()
     SDL_FreeSurface(settingsbtn_u);
 
     SDL_FreeSurface(gitbtn_u);
-    
+
     SDL_FreeSurface(donebtn_u);
 
     SDL_FreeSurface(quitbtn_s);
@@ -636,7 +651,7 @@ void finprog()
     SDL_FreeSurface(continuebtn_s);
 
     SDL_FreeSurface(settingsbtn_s);
-    
+
     SDL_FreeSurface(gitbtn_s);
 
     SDL_FreeSurface(donebtn_s);
