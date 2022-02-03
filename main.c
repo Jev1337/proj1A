@@ -31,7 +31,7 @@ SDL_Rect posquitbtn;
 SDL_Rect poscontinuebtn;
 SDL_Rect posgitbtn;
 SDL_Rect possettingsbtn;
-int x, y, ccl = 1, continueselected = 0, creditsselected = 0, quitselected = 0, gitselected = 0, settingsselected = 0, doneselectedsettings = 0;
+int volume= 100,x, y, ccl = 1, continueselected = 0, creditsselected = 0, quitselected = 0, gitselected = 0, settingsselected = 0, doneselectedsettings = 0;
 
 SDL_Event event;
 Mix_Music *music = NULL;

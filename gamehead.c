@@ -41,7 +41,7 @@ SDL_Rect poscontinuebtn;
 SDL_Rect posgitbtn;
 SDL_Rect possettingsbtn;
 SDL_Event event;
-int ccl, x, y, continueselected, creditsselected, quitselected, gitselected, settingsselected, doneselectedsettings;
+int volume,ccl, x, y, continueselected, creditsselected, quitselected, gitselected, settingsselected, doneselectedsettings;
 SDL_Color white;
 SDL_Color black;
 
@@ -174,6 +174,12 @@ void show_menu()
     afficher_ecran(1792, 24, settingsbtn_u, screen);
     afficher_ecran(1636, 20, gitbtn_u, screen);
 }
+
+void FillRect(int x, int y, int w, int h, int color) {
+  SDL_Rect rect = {x,y,w,h};
+  SDL_FillRect(screen, &rect, color);
+}
+
 int afficher_menu()
 {
     show_menu();
@@ -191,7 +197,6 @@ int afficher_menu()
     {
         return 1;
     }
-
     if (SDL_Flip(screen) == -1)
     {
         return 1;
@@ -202,7 +207,6 @@ int afficher_menu()
         return 1;
     }
     clock_t last = clock();
-
     while (quit == 0)
     {
         if (actpos == 1) //If we are in the main menu
@@ -462,9 +466,87 @@ int afficher_menu()
                         actpos = actpos_previous;
                         //applysettings
                     }
+                    if (x >= 1108 && x <= 1121 && y >= 386 && y <= 477)
+                    {
+                        if (Mix_PlayChannel(-1, scratch, 0) == -1)
+                        {
+                            return 1;
+                        }
+                        volume = 19;
+                        show_settings();
+                        Mix_VolumeMusic(volume);
+                        SDL_Flip(screen);
+                        //applysettings
+                    }
+                    if (x >= 1128 && x <= 1141 && y >= 386 && y <= 477)
+                    {
+                        if (Mix_PlayChannel(-1, scratch, 0) == -1)
+                        {
+                            return 1;
+                        }
+                        volume = 35;
+                        Mix_VolumeMusic(volume);
+                        show_settings();
+                        SDL_Flip(screen);
+                        //applysettings
+                    }
+                    if (x >= 1148 && x <= 1161 && y >= 386 && y <= 477)
+                    {
+                        if (Mix_PlayChannel(-1, scratch, 0) == -1)
+                        {
+                            return 1;
+                        }
+                        volume = 51;
+                        Mix_VolumeMusic(volume);
+                        show_settings();
+                        SDL_Flip(screen);
+                        //applysettings
+                    }
+                    if (x >= 1168 && x <= 1181 && y >= 386 && y <= 477)
+                    {
+                        if (Mix_PlayChannel(-1, scratch, 0) == -1)
+                        {
+                            return 1;
+                        }
+                        volume = 67;
+                        Mix_VolumeMusic(volume);
+                        show_settings();
+                        SDL_Flip(screen);
+                        //applysettings
+                    }
+                    if (x >= 1188 && x <= 1201 && y >= 386 && y <= 477)
+                    {
+                        if (Mix_PlayChannel(-1, scratch, 0) == -1)
+                        {
+                            return 1;
+                        }
+                        volume = 83;
+                        Mix_VolumeMusic(volume);
+                        show_settings();
+                        SDL_Flip(screen);
+                        //applysettings
+                    }
+                    if (x >= 1208 && x <= 1221 && y >= 386 && y <= 477)
+                    {
+                        if (Mix_PlayChannel(-1, scratch, 0) == -1)
+                        {
+                            return 1;
+                        }
+                        volume = 100;
+                        Mix_VolumeMusic(volume);
+                        show_settings();
+                        SDL_Flip(screen);
+                        //applysettings
+                    }
                 }
                 if (event.type == SDL_KEYDOWN)
                 {
+                    if (event.key.keysym.sym == SDLK_j)
+                    {
+                        if (actpos_previous == 1)
+                            show_menu();
+                        actpos = actpos_previous;
+                    }
                     if (event.key.keysym.sym == SDLK_g)
                     {
                         //If there is no music playing
@@ -511,6 +593,21 @@ void show_settings()
 {
     afficher_ecran(584, 164, settings, screen);
     afficher_ecran(776, 779, donebtn_u, screen);
+    FillRect(1207,370,14,87,0x979797);
+    FillRect(1187,370,14,87,0x979797);
+    FillRect(1167,370,14,87,0x979797);
+    FillRect(1147,370,14,87,0x979797);
+    FillRect(1127,370,14,87,0x979797);
+    FillRect(1107,370,14,87,0x979797);
+switch(volume){
+    case 100: FillRect(1207,370,14,87,0x134908);
+    case 83: FillRect(1187,370,14,87,0x134908);
+    case 67: FillRect(1167,370,14,87,0x134908);
+    case 51: FillRect(1147,370,14,87,0x134908);
+    case 35: FillRect(1127,370,14,87,0x134908);
+    case 19: FillRect(1107,370,14,87,0x134908);
+    break;
+    }
 }
 
 void finprog()
@@ -529,6 +626,8 @@ void finprog()
     SDL_FreeSurface(settingsbtn_u);
 
     SDL_FreeSurface(gitbtn_u);
+    
+    SDL_FreeSurface(donebtn_u);
 
     SDL_FreeSurface(quitbtn_s);
 
@@ -537,8 +636,15 @@ void finprog()
     SDL_FreeSurface(continuebtn_s);
 
     SDL_FreeSurface(settingsbtn_s);
-
+    
     SDL_FreeSurface(gitbtn_s);
+
+    SDL_FreeSurface(donebtn_s);
+
+    SDL_FreeSurface(gamenameA);
+
+    SDL_FreeSurface(gamenameB);
+
     SDL_FreeSurface(screen);
     //Quit SDL
     SDL_Quit();
