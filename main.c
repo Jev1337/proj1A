@@ -45,6 +45,9 @@ TTF_Font *fontSmall= NULL;
 TTF_Font *font= NULL;
 TTF_Font *fontBig= NULL;
 
+
+
+
 int volume= 128,x, y, ccl = 1, continueselected = 0, creditsselected = 0, quitselected = 0, gitselected = 0, settingsselected = 0,
  doneselectedsettings = 0, selectedsettingsreal = 0, selectedresume = 0;
 
@@ -54,7 +57,6 @@ SDL_Color black = {14, 0, 68};
 
 int main(int argc, char *args[])
 {
-	
 	//Initializing SDL Lib
 	if (init() == 0)
 		return 1;
