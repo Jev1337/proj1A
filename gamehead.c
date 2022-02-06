@@ -11,7 +11,12 @@
 
 SDL_Surface *screen;
 SDL_Surface *background;
+SDL_Surface *credits;
+SDL_Surface *gamebackground;
+SDL_Surface *pausemenu;
 SDL_Surface *settings;
+SDL_Surface *resumebtn_u;
+SDL_Surface *resumebtn_s;
 SDL_Surface *donebtn_u;
 SDL_Surface *donebtn_s;
 SDL_Surface *quitbtn_u;
@@ -22,6 +27,8 @@ SDL_Surface *continuebtn_u;
 SDL_Surface *continuebtn_s;
 SDL_Surface *gitbtn_u;
 SDL_Surface *gitbtn_s;
+SDL_Surface *settingsbtnreal_u;
+SDL_Surface *settingsbtnreal_s;
 SDL_Surface *settingsbtn_u;
 SDL_Surface *settingsbtn_s;
 SDL_Surface *gamenameA;
@@ -41,7 +48,7 @@ SDL_Rect poscontinuebtn;
 SDL_Rect posgitbtn;
 SDL_Rect possettingsbtn;
 SDL_Event event;
-int volume, ccl, x, y, continueselected, creditsselected, quitselected, gitselected, settingsselected, doneselectedsettings;
+int doneselectedsettings,volume, ccl, x, y, continueselected, creditsselected, quitselected, gitselected, settingsselected, selectedsettingsreal, selectedresume;
 SDL_Color white;
 SDL_Color black;
 
@@ -81,6 +88,9 @@ int init()
 int load_files()
 {
     background = load_image("images/background.png");
+    gamebackground = load_image("images/gamebackground.png");
+    pausemenu = IMG_Load("images/pausemenu.png");
+    credits = IMG_Load("images/credits.png");
     settings = IMG_Load("images/settings.png");
     donebtn_u = IMG_Load("images/done_u.png");
     donebtn_s = IMG_Load("images/done_s.png");
@@ -88,19 +98,31 @@ int load_files()
     creditsbtn_u = IMG_Load("images/creditsbtn_u.png");
     continuebtn_u = IMG_Load("images/continuebtn_u.png");
     gitbtn_u = IMG_Load("images/gitbtn_u.png");
+    resumebtn_u = IMG_Load("images/resumebtn_u.png");
     settingsbtn_u = IMG_Load("images/settingsbtn_u.png");
+    settingsbtnreal_u = IMG_Load("images/settingsbtnreal_u.png");
     quitbtn_s = IMG_Load("images/exitbtn_s.png");
     creditsbtn_s = IMG_Load("images/creditsbtn_s.png");
     continuebtn_s = IMG_Load("images/continuebtn_s.png");
     gitbtn_s = IMG_Load("images/gitbtn_s.png");
+    resumebtn_s = IMG_Load("images/resumebtn_s.png");
     settingsbtn_s = IMG_Load("images/settingsbtn_s.png");
+    settingsbtnreal_s = IMG_Load("images/settingsbtnreal_s.png");
     music = Mix_LoadMUS("sounds/beat.mp3");
     fontSmall = TTF_OpenFont("fonts/Retro.ttf", 24);
     font = TTF_OpenFont("fonts/Retro.ttf", 48);
     fontBig = TTF_OpenFont("fonts/Retro.ttf", 72);
 
-    if (background == NULL || quitbtn_u == NULL || creditsbtn_u == NULL || continuebtn_u == NULL || gitbtn_u == NULL || settingsbtn_u == NULL || quitbtn_s == NULL || creditsbtn_s == NULL ||
-        continuebtn_s == NULL || gitbtn_s == NULL || settingsbtn_s == NULL || donebtn_s == NULL || donebtn_u == NULL)
+    if (background == NULL || quitbtn_u == NULL 
+    || creditsbtn_u == NULL || continuebtn_u == NULL 
+    || gitbtn_u == NULL || settingsbtn_u == NULL 
+    || quitbtn_s == NULL || creditsbtn_s == NULL 
+    || continuebtn_s == NULL || gitbtn_s == NULL 
+    || settingsbtn_s == NULL || donebtn_s == NULL 
+    || donebtn_u == NULL || gamebackground == NULL 
+    || pausemenu == NULL || settingsbtnreal_s == NULL
+    || settingsbtnreal_u == NULL || resumebtn_s == NULL
+    || resumebtn_u == NULL)
     {
         return 0;
     }
@@ -210,6 +232,7 @@ int afficher_menu()
     clock_t last = clock();
     while (quit == 0)
     {
+
         if (actpos == 1) //If we are in the main menu
         {
 
@@ -355,7 +378,10 @@ int afficher_menu()
                         {
                             return 1;
                         }
-                        //actpos = 2;
+                        actpos_previous = 1;
+                        actpos = 2;
+                        show_game();
+                        SDL_Flip(screen);
                     }
                     if (x >= 770 && x <= 1149 && y >= 680 && y <= 790) //Credits
                     {
@@ -363,7 +389,9 @@ int afficher_menu()
                         {
                             return 1;
                         }
-                        //actpos = 3;
+                        actpos = 3;
+                        show_credits();
+                        SDL_Flip(screen);
                     }
                     if (x >= 1791 && x <= 1891 && y >= 20 && y <= 126) //Settings
                     {
@@ -423,6 +451,90 @@ int afficher_menu()
                 }
             }
         }
+        if (actpos == 3){
+            while (SDL_PollEvent(&event))
+            {
+                if (event.type == SDL_KEYDOWN)
+                {
+                    if (event.key.keysym.sym == SDLK_g)
+                    {
+                        //If there is no music playing
+                        if (Mix_PlayingMusic() == 0)
+                        {
+                            //Play the music
+                            if (Mix_PlayMusic(music, -1) == -1)
+                            {
+                                return 1;
+                            }
+                        }
+                        //If music is being played
+                        else
+                        {
+                            //If the music is paused
+                            if (Mix_PausedMusic() == 1)
+                            {
+                                //Resume the music
+                                Mix_ResumeMusic();
+                            }
+                            //If the music is playing
+                            else
+                            {
+                                //Pause the music
+                                Mix_PauseMusic();
+                            }
+                        }
+                    }
+                    else if (event.key.keysym.sym == SDLK_x)
+                    {
+                        //Stop the music
+                        Mix_HaltMusic();
+                    }
+                }
+                if (event.type == SDL_MOUSEMOTION)
+                {
+                    x = event.motion.x;
+                    y = event.motion.y;
+                    if (x >= 775 && x <= 1166 && y >= 779 && y <= 890)
+                    {
+
+                        if (doneselectedsettings == 0)
+                        {
+                            doneselectedsettings = 1;
+                            afficher_ecran(776, 779,donebtn_s,screen);
+                            SDL_Flip(screen);
+                        }
+                    }
+                    else
+                    {
+                        if (doneselectedsettings == 1)
+                        {
+                            doneselectedsettings = 0;
+                            show_credits();
+                            SDL_Flip(screen);
+                        }
+                    }
+                    
+                }
+                if (event.type == SDL_MOUSEBUTTONDOWN)
+                {
+                    x = event.button.x;
+                    y = event.button.y;
+                    if (x >= 775 && x <= 1166 && y >= 779 && y <= 890)
+                    {
+                        if (Mix_PlayChannel(-1, scratch, 0) == -1)
+                        {
+                            return 1;
+                        }
+                        show_menu();
+                        SDL_Flip(screen);
+                        actpos = 1;
+                        //applysettings
+                    }
+                }
+                if (event.type == SDL_QUIT)
+                    quit = 1;
+            }
+        }
         if (actpos == 4)
         {
 
@@ -464,6 +576,8 @@ int afficher_menu()
                         }
                         if (actpos_previous == 1)
                             show_menu();
+                        if (actpos_previous == 5)
+                            show_pausemenu();
                         actpos = actpos_previous;
                         //applysettings
                     }
@@ -553,6 +667,10 @@ int afficher_menu()
                     {
                         if (actpos_previous == 1)
                             show_menu();
+                        if (actpos_previous == 2){
+                            //load game progress
+                            show_game();
+                        }
                         actpos = actpos_previous;
                     }
                     if (event.key.keysym.sym == SDLK_g)
@@ -592,11 +710,240 @@ int afficher_menu()
                 if (event.type == SDL_QUIT)
                     quit = 1;
             }
+            
+        }
+        if (actpos == 2){ //State of Game
+            while (SDL_PollEvent(&event))
+            {
+                if (event.type == SDL_KEYDOWN)
+                {
+                                        if (event.key.keysym.sym == SDLK_g)
+                    {
+                        //If there is no music playing
+                        if (Mix_PlayingMusic() == 0)
+                        {
+                            //Play the music
+                            if (Mix_PlayMusic(music, -1) == -1)
+                            {
+                                return 1;
+                            }
+                        }
+                        //If music is being played
+                        else
+                        {
+                            //If the music is paused
+                            if (Mix_PausedMusic() == 1)
+                            {
+                                //Resume the music
+                                Mix_ResumeMusic();
+                            }
+                            //If the music is playing
+                            else
+                            {
+                                //Pause the music
+                                Mix_PauseMusic();
+                            }
+                        }
+                    }
+                    if (event.key.keysym.sym == SDLK_x)
+                    {
+                        //Stop the music
+                        Mix_HaltMusic();
+                    }
+                    if (event.key.keysym.sym == SDLK_ESCAPE)
+                    {
+                        show_pausemenu();
+                        SDL_Flip(screen);
+                        actpos = 5;
+                    }
+                }
+                if (event.type == SDL_QUIT)
+                    quit = 1;
+            }
+        }
+        if (actpos == 5){
+            while (SDL_PollEvent(&event))
+            {
+                if (event.type == SDL_KEYDOWN)
+                {
+                                        if (event.key.keysym.sym == SDLK_g)
+                    {
+                        //If there is no music playing
+                        if (Mix_PlayingMusic() == 0)
+                        {
+                            //Play the music
+                            if (Mix_PlayMusic(music, -1) == -1)
+                            {
+                                return 1;
+                            }
+                        }
+                        //If music is being played
+                        else
+                        {
+                            //If the music is paused
+                            if (Mix_PausedMusic() == 1)
+                            {
+                                //Resume the music
+                                Mix_ResumeMusic();
+                            }
+                            //If the music is playing
+                            else
+                            {
+                                //Pause the music
+                                Mix_PauseMusic();
+                            }
+                        }
+                    }
+                    if (event.key.keysym.sym == SDLK_x)
+                    {
+                        //Stop the music
+                        Mix_HaltMusic();
+                    }
+                    if (event.key.keysym.sym == SDLK_ESCAPE)
+                    {
+                        actpos = 2;
+                        show_game();
+                        SDL_Flip(screen);
+                    }
+                }
+                if (event.type == SDL_MOUSEBUTTONDOWN)
+                {
+                    x = event.button.x;
+                    y = event.button.y;
+                    if (x >= 760 && x <= 1159 && y >= 665 && y <= 784) //quit
+                    {
+                        if (Mix_PlayChannel(-1, scratch, 0) == -1)
+                        {
+                            return 1;
+                        }
+                        quit =1;
+                    }
+                    if (x >= 760 && x <= 1159 && y >= 413 && y <= 532) //resume
+                    {
+                        if (Mix_PlayChannel(-1, scratch, 0) == -1)
+                        {
+                            return 1;
+                        }
+                        //load the game with the save
+                        show_game();
+                        SDL_Flip(screen);
+                        actpos = 2;
+                    }
+                    if (x >= 760 && x <= 1159 && y >= 540 && y <= 659) //settings
+                    {
+                        if (Mix_PlayChannel(-1, scratch, 0) == -1)
+                        {
+                            return 1;
+                        }
+                        actpos_previous = 5;
+                        actpos = 4;
+                        show_settings();
+                        SDL_Flip(screen);
+                    }
+                }
+                if (event.type == SDL_MOUSEMOTION)
+                {
+                    x = event.motion.x;
+                    y = event.motion.y;
+                    if (x >= 760 && x <= 1159 && y >= 665 && y <= 784)
+                    {
+
+                        if (quitselected== 0)
+                        {
+                            quitselected = 1;
+                            afficher_ecran(760,665, quitbtn_s, screen);
+                            SDL_Flip(screen);
+                        }
+                    }
+                    else
+                    {
+                        if (quitselected == 1)
+                        {
+                            quitselected = 0;
+                            show_pausemenu();
+                            SDL_Flip(screen);
+                        }
+                    }
+
+                    if (x >= 760 && x <= 1159 && y >= 413 && y <= 532)
+                    {
+
+                        if (selectedresume== 0)
+                        {
+                            selectedresume = 1;
+                            afficher_ecran(760,413, resumebtn_s, screen);
+                            SDL_Flip(screen);
+                        }
+                    }
+                    else
+                    {
+                        if (selectedresume == 1)
+                        {
+                            selectedresume = 0;
+                            show_pausemenu();
+                            SDL_Flip(screen);
+                        }
+                    }
+
+                    if (x >= 760 && x <= 1159 && y >= 540 && y <= 659)
+                    {
+
+                        if (selectedsettingsreal== 0)
+                        {
+                            selectedsettingsreal = 1;
+                            afficher_ecran(760,540, settingsbtnreal_s, screen);
+                            SDL_Flip(screen);
+                        }
+                    }
+
+                    
+                    if (x >= 760 && x <= 1159 && y >= 540 && y <= 659)
+                    {
+
+                        if (selectedsettingsreal== 0)
+                        {
+                            selectedsettingsreal = 1;
+                            afficher_ecran(760,540, settingsbtnreal_s, screen);
+                            SDL_Flip(screen);
+                        }
+                    }
+                    else
+                    {
+                        if (selectedsettingsreal == 1)
+                        {
+                            selectedsettingsreal = 0;
+                            show_pausemenu();
+                            SDL_Flip(screen);
+                        }
+                    }
+                }
+
+
+            }
+            if (event.type == SDL_QUIT)
+                    quit = 1;
         }
     }
     return 0;
 }
 
+void show_pausemenu(){
+    afficher_ecran(0,0,gamebackground,screen);
+    afficher_ecran(0,0,pausemenu,screen);
+    afficher_ecran(760,413, resumebtn_u, screen);
+    afficher_ecran(760,540, settingsbtnreal_u, screen);
+    afficher_ecran(760,665, quitbtn_u, screen);
+
+}
+
+void show_game(){
+    afficher_ecran(0,0,gamebackground,screen);
+}
+
+void show_credits(){
+    afficher_ecran(584, 164,credits,screen);
+    afficher_ecran(776, 779,donebtn_u,screen);
+}
 void show_settings()
 {
     afficher_ecran(584, 164, settings, screen);

@@ -22,5 +22,8 @@ int init();
 int load_files();
 int menu();
 void show_settings();
+void show_game();
+void show_pausemenu();
+void show_credits();
 
 #endif // MENU_H_INCLUDED
