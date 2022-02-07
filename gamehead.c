@@ -489,6 +489,7 @@ int setting(int *actpos, int actpos_previous)
                 if (actpos_previous == 5)
                     show_pausemenu();
                 *actpos = actpos_previous;
+                SDL_Flip(screen);
                 // applysettings
             }
             if (x >= 1108 && x <= 1121 && y >= 386 && y <= 477)
