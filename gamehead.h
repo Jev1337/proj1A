@@ -4,8 +4,7 @@
 #define SCREEN_W 1920
 #define SCREEN_H 1080
 #define SCREEN_BBP 32
-#define TIME_TO_WAIT 0.5 /* wait for one second */
-
+#define FRAMES_PER_SECOND 20
 #include <SDL/SDL.h>
 #include <stdio.h>
 #include <SDL/SDL_ttf.h>
@@ -13,7 +12,7 @@
 #include <SDL/SDL_image.h>
 #include <string.h>
 #include <time.h>
-#define TIME_TO_WAIT 0.5 /* wait for one second */
+
 
 typedef struct{
     SDL_Surface *background;
@@ -68,12 +67,38 @@ typedef struct{
     int volume;
 }misc;
 
-SDL_Surface *load_image(char filename[]);
-void afficher_ecran(int x, int y, SDL_Surface *src, SDL_Surface *dest);
+typedef struct
+{
+    //The clock time when the timer started
+    int startTicks;
+    
+    //The ticks stored when the timer was paused
+    int pausedTicks;
+    
+    //The timer status
+    int paused;
+    int started;
+}Timer;
+
+    void timer(Timer *T);
+    //The various clock actions
+    void start(Timer *T);
+    void stop(Timer *T);
+    void pauses(Timer *T);
+    void unpause(Timer *T);
+    
+    //Gets the timer's time
+    int get_ticks(Timer *T);
+    
+    //Checks the status of the timer
+    int is_started(Timer *T);
+    int is_paused(Timer *T);    
+
+
 void FillRect(int x, int y, int w, int h, int color, SDL_Surface *screen);
 SDL_Surface * init();
 int load_files(menuitems *MI, pauseitems *PI, gameitems *GI, settingsitems *SI, misc *M);
-int menu(gameitems *GI, misc *M, menuitems *MI, settingsitems *SI, int *ccl, clock_t *last, int *actpos, int *actpos_previous, SDL_Surface *screen);
+int menu(gameitems *GI, misc *M, menuitems *MI, settingsitems *SI, int *actpos, int *actpos_previous, SDL_Surface *screen);
 int setting(pauseitems *PI, menuitems *MI, gameitems *GI, settingsitems *SI,misc *M, int *actpos, int actpos_previous, SDL_Surface *screen);
 int credit(misc *M, menuitems *MI, settingsitems *SI, int *actpos, SDL_Surface *screen);
 int game(menuitems *MI,gameitems *GI,pauseitems *PI,misc *M, int *actpos, SDL_Surface *screen);

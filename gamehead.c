@@ -7,6 +7,7 @@
 #include <SDL/SDL_image.h>
 #include <time.h>
 #include "gamehead.h"
+#include "ninjahubstd.h"
 
 
 SDL_Surface *init()
@@ -103,26 +104,10 @@ int load_files(menuitems *MI, pauseitems *PI, gameitems *GI, settingsitems *SI, 
     return 1;
 }
 
-int menu(gameitems *GI, misc *M, menuitems *MI, settingsitems *SI, int *ccl, clock_t *last, int *actpos, int *actpos_previous, SDL_Surface *screen)
+int menu(gameitems *GI, misc *M, menuitems *MI, settingsitems *SI, int *actpos, int *actpos_previous, SDL_Surface *screen)
 {
     SDL_Event event;
     int x,y;
-    clock_t current = clock();
-    if (current >= (*last + TIME_TO_WAIT * CLOCKS_PER_SEC))
-    {
-        if (*ccl == 0)
-        {
-            afficher_ecran(896.01, 305.14, MI->gamenameA, screen);
-            *ccl = 1;
-        }
-        else
-        {
-            afficher_ecran(896.01, 305.14, MI->gamenameB, screen);
-            *ccl = 0;
-        }
-        *last = current;
-        SDL_Flip(screen);
-    }
 
     while (SDL_PollEvent(&event))
     {
@@ -139,7 +124,6 @@ int menu(gameitems *GI, misc *M, menuitems *MI, settingsitems *SI, int *ccl, clo
                     afficher_ecran(766, 534, MI->continuebtn_s, screen);
                     afficher_ecran(684, 534, MI->leftarrow, screen);
                     afficher_ecran(1175, 534, MI->rightarrow, screen);
-                    SDL_Flip(screen);
                 }
             }
             else
@@ -148,7 +132,6 @@ int menu(gameitems *GI, misc *M, menuitems *MI, settingsitems *SI, int *ccl, clo
                 {
                     MI->continueselected = 0;
                     show_menu(MI, screen);
-                    SDL_Flip(screen);
                 }
             }
             if (x >= 1791 && x <= 1891 && y >= 20 && y <= 126)
@@ -157,7 +140,7 @@ int menu(gameitems *GI, misc *M, menuitems *MI, settingsitems *SI, int *ccl, clo
                 {
                     MI->settingsselected = 1;
                     afficher_ecran(1792, 24, MI->settingsbtn_s, screen);
-                    SDL_Flip(screen);
+                    
                 }
             }
             else
@@ -166,7 +149,7 @@ int menu(gameitems *GI, misc *M, menuitems *MI, settingsitems *SI, int *ccl, clo
                 {
                     MI->settingsselected = 0;
                     afficher_ecran(1792, 24, MI->settingsbtn_u, screen);
-                    SDL_Flip(screen);
+                    
                 }
             }
             if (x >= 770 && x <= 1149 && y >= 680 && y <= 790)
@@ -177,7 +160,7 @@ int menu(gameitems *GI, misc *M, menuitems *MI, settingsitems *SI, int *ccl, clo
                     afficher_ecran(760, 680, MI->creditsbtn_s, screen);
                     afficher_ecran(684, 680, MI->leftarrow, screen);
                     afficher_ecran(1175, 680, MI->rightarrow, screen);
-                    SDL_Flip(screen);
+                    
                 }
             }
             else
@@ -186,7 +169,7 @@ int menu(gameitems *GI, misc *M, menuitems *MI, settingsitems *SI, int *ccl, clo
                 {
                     MI->creditsselected = 0;
                     show_menu(MI, screen);
-                    SDL_Flip(screen);
+                    
                 }
             }
             if (x >= 770 && x <= 1149 && y >= 810 && y <= 930)
@@ -197,7 +180,7 @@ int menu(gameitems *GI, misc *M, menuitems *MI, settingsitems *SI, int *ccl, clo
                     afficher_ecran(766, 814, MI->quitbtn_s, screen);
                     afficher_ecran(684, 814, MI->leftarrow, screen);
                     afficher_ecran(1175, 814, MI->rightarrow, screen);
-                    SDL_Flip(screen);
+                    
                 }
             }
             else
@@ -206,7 +189,7 @@ int menu(gameitems *GI, misc *M, menuitems *MI, settingsitems *SI, int *ccl, clo
                 {
                     MI->quitselected = 0;
                     show_menu(MI,screen);
-                    SDL_Flip(screen);
+                    
                 }
             }
             if (x >= 1636 && x <= 1745 && y >= 20 && y <= 126)
@@ -215,7 +198,7 @@ int menu(gameitems *GI, misc *M, menuitems *MI, settingsitems *SI, int *ccl, clo
                 {
                     MI->gitselected = 1;
                     afficher_ecran(1636, 20, MI->gitbtn_s, screen);
-                    SDL_Flip(screen);
+                    
                 }
             }
             else
@@ -224,7 +207,7 @@ int menu(gameitems *GI, misc *M, menuitems *MI, settingsitems *SI, int *ccl, clo
                 {
                     MI->gitselected = 0;
                     afficher_ecran(1636, 20, MI->gitbtn_u, screen);
-                    SDL_Flip(screen);
+                    
                 }
             }
         }
@@ -252,7 +235,7 @@ int menu(gameitems *GI, misc *M, menuitems *MI, settingsitems *SI, int *ccl, clo
                 *actpos_previous = 1;
                 *actpos = 2;
                 show_game(GI,screen);
-                SDL_Flip(screen);
+                
             }
             if (x >= 770 && x <= 1149 && y >= 680 && y <= 790) // Credits
             {
@@ -262,7 +245,7 @@ int menu(gameitems *GI, misc *M, menuitems *MI, settingsitems *SI, int *ccl, clo
                 }
                 *actpos = 3;
                 show_credits(MI,SI,screen);
-                SDL_Flip(screen);
+                
             }
             if (x >= 1791 && x <= 1891 && y >= 20 && y <= 126) // Settings
             {
@@ -273,7 +256,7 @@ int menu(gameitems *GI, misc *M, menuitems *MI, settingsitems *SI, int *ccl, clo
                 *actpos_previous = 1;
                 *actpos = 4;
                 show_settings(SI,M, screen);
-                SDL_Flip(screen);
+                
             }
             if (x >= 770 && x <= 1149 && y >= 810 && y <= 930) // Quit
             {
@@ -377,7 +360,7 @@ int credit(misc *M, menuitems *MI, settingsitems *SI, int *actpos, SDL_Surface *
                 {
                     SI->doneselectedsettings = 1;
                     afficher_ecran(776, 779, SI->donebtn_s, screen);
-                    SDL_Flip(screen);
+                    
                 }
             }
             else
@@ -386,7 +369,7 @@ int credit(misc *M, menuitems *MI, settingsitems *SI, int *actpos, SDL_Surface *
                 {
                     SI->doneselectedsettings = 0;
                     show_credits(MI, SI, screen);
-                    SDL_Flip(screen);
+                    
                 }
             }
         }
@@ -401,7 +384,7 @@ int credit(misc *M, menuitems *MI, settingsitems *SI, int *actpos, SDL_Surface *
                     return 2;
                 }
                 show_menu(MI, screen);
-                SDL_Flip(screen);
+                
                 *actpos = 1;
                 // applysettings
             }
@@ -429,7 +412,7 @@ int setting(pauseitems *PI, menuitems *MI, gameitems *GI, settingsitems *SI,misc
                 {
                     SI->doneselectedsettings = 1;
                     afficher_ecran(776, 779, SI->donebtn_s, screen);
-                    SDL_Flip(screen);
+                    
                 }
             }
             else
@@ -438,7 +421,7 @@ int setting(pauseitems *PI, menuitems *MI, gameitems *GI, settingsitems *SI,misc
                 {
                     SI->doneselectedsettings = 0;
                     show_settings(SI, M,screen);
-                    SDL_Flip(screen);
+                    
                 }
             }
         }
@@ -457,7 +440,7 @@ int setting(pauseitems *PI, menuitems *MI, gameitems *GI, settingsitems *SI,misc
                 if (actpos_previous == 5)
                     show_pausemenu(MI,GI,PI,screen);
                 *actpos = actpos_previous;
-                SDL_Flip(screen);
+                
                 // applysettings
             }
             if (x >= 1108 && x <= 1121 && y >= 386 && y <= 477)
@@ -470,7 +453,7 @@ int setting(pauseitems *PI, menuitems *MI, gameitems *GI, settingsitems *SI,misc
                 show_settings(SI, M, screen);
                 Mix_VolumeMusic(M->volume);
                 Mix_Volume(-1, M->volume);
-                SDL_Flip(screen);
+                
                 // applysettings
             }
             if (x >= 1128 && x <= 1141 && y >= 386 && y <= 477)
@@ -483,7 +466,7 @@ int setting(pauseitems *PI, menuitems *MI, gameitems *GI, settingsitems *SI,misc
                 Mix_VolumeMusic(M->volume);
                 Mix_Volume(-1, M->volume);
                 show_settings(SI, M, screen);
-                SDL_Flip(screen);
+                
                 // applysettings
             }
             if (x >= 1148 && x <= 1161 && y >= 386 && y <= 477)
@@ -497,7 +480,7 @@ int setting(pauseitems *PI, menuitems *MI, gameitems *GI, settingsitems *SI,misc
                 Mix_VolumeMusic(M->volume);
                 Mix_Volume(-1, M->volume);
                 show_settings(SI, M, screen);
-                SDL_Flip(screen);
+                
                 // applysettings
             }
             if (x >= 1168 && x <= 1181 && y >= 386 && y <= 477)
@@ -510,7 +493,7 @@ int setting(pauseitems *PI, menuitems *MI, gameitems *GI, settingsitems *SI,misc
                 Mix_VolumeMusic(M->volume);
                 Mix_Volume(-1, M->volume);
                 show_settings(SI, M, screen);
-                SDL_Flip(screen);
+                
                 // applysettings
             }
             if (x >= 1188 && x <= 1201 && y >= 386 && y <= 477)
@@ -523,7 +506,7 @@ int setting(pauseitems *PI, menuitems *MI, gameitems *GI, settingsitems *SI,misc
                 Mix_VolumeMusic(M->volume);
                 Mix_Volume(-1, M->volume);
                 show_settings(SI, M, screen);
-                SDL_Flip(screen);
+                
                 // applysettings
             }
             if (x >= 1208 && x <= 1221 && y >= 386 && y <= 477)
@@ -536,7 +519,7 @@ int setting(pauseitems *PI, menuitems *MI, gameitems *GI, settingsitems *SI,misc
                 Mix_VolumeMusic(M->volume);
                 Mix_Volume(-1, M->volume);
                 show_settings(SI, M, screen);
-                SDL_Flip(screen);
+                
                 // applysettings
             }
         }
@@ -636,7 +619,7 @@ int game(menuitems *MI,gameitems *GI,pauseitems *PI,misc *M, int *actpos, SDL_Su
             if (event.key.keysym.sym == SDLK_ESCAPE)
             {
                 show_pausemenu(MI,GI,PI,screen);
-                SDL_Flip(screen);
+                
                 *actpos = 5;
             }
         }
@@ -692,7 +675,7 @@ int pause(settingsitems *SI, gameitems *GI, pauseitems *PI, menuitems *MI, misc 
             {
                 *actpos = 2;
                 show_game(GI, screen);
-                SDL_Flip(screen);
+                
             }
         }
         if (event.type == SDL_MOUSEBUTTONDOWN)
@@ -715,7 +698,7 @@ int pause(settingsitems *SI, gameitems *GI, pauseitems *PI, menuitems *MI, misc 
                 }
                 // load the game with the save
                 show_game(GI, screen);
-                SDL_Flip(screen);
+                
                 *actpos = 2;
             }
             if (x >= 760 && x <= 1159 && y >= 540 && y <= 659) // settings
@@ -727,7 +710,7 @@ int pause(settingsitems *SI, gameitems *GI, pauseitems *PI, menuitems *MI, misc 
                 *actpos_previous = 5;
                 *actpos = 4;
                 show_settings(SI,M,screen);
-                SDL_Flip(screen);
+                
             }
         }
         if (event.type == SDL_MOUSEMOTION)
@@ -741,7 +724,7 @@ int pause(settingsitems *SI, gameitems *GI, pauseitems *PI, menuitems *MI, misc 
                 {
                     MI->quitselected = 1;
                     afficher_ecran(760, 665, MI->quitbtn_s, screen);
-                    SDL_Flip(screen);
+                    
                 }
             }
             else
@@ -750,7 +733,7 @@ int pause(settingsitems *SI, gameitems *GI, pauseitems *PI, menuitems *MI, misc 
                 {
                     MI->quitselected = 0;
                     show_pausemenu(MI,GI,PI, screen);
-                    SDL_Flip(screen);
+                    
                 }
             }
 
@@ -761,7 +744,7 @@ int pause(settingsitems *SI, gameitems *GI, pauseitems *PI, menuitems *MI, misc 
                 {
                     PI->selectedresume = 1;
                     afficher_ecran(760, 413, PI->resumebtn_s, screen);
-                    SDL_Flip(screen);
+                    
                 }
             }
             else
@@ -770,7 +753,7 @@ int pause(settingsitems *SI, gameitems *GI, pauseitems *PI, menuitems *MI, misc 
                 {
                     PI->selectedresume = 0;
                     show_pausemenu(MI,GI,PI,screen);
-                    SDL_Flip(screen);
+                    
                 }
             }
 
@@ -781,7 +764,7 @@ int pause(settingsitems *SI, gameitems *GI, pauseitems *PI, menuitems *MI, misc 
                 {
                     PI->selectedsettingsreal = 1;
                     afficher_ecran(760, 540, PI->settingsbtnreal_s, screen);
-                    SDL_Flip(screen);
+                    
                 }
             }
 
@@ -792,7 +775,7 @@ int pause(settingsitems *SI, gameitems *GI, pauseitems *PI, menuitems *MI, misc 
                 {
                     PI->selectedsettingsreal = 1;
                     afficher_ecran(760, 540, PI->settingsbtnreal_s, screen);
-                    SDL_Flip(screen);
+                    
                 }
             }
             else
@@ -801,7 +784,7 @@ int pause(settingsitems *SI, gameitems *GI, pauseitems *PI, menuitems *MI, misc 
                 {
                     PI->selectedsettingsreal = 0;
                     show_pausemenu(MI,GI,PI,screen);
-                    SDL_Flip(screen);
+                    
                 }
             }
         }
@@ -820,7 +803,9 @@ int afficher_menu(menuitems *MI, gameitems *GI, settingsitems *SI, pauseitems *P
     MI->gamenameB = TTF_RenderText_Solid(M->font, "AR:T", black);
     MI->leftarrow = TTF_RenderText_Solid(M->fontBig, ">", white);
     MI->rightarrow = TTF_RenderText_Solid(M->fontBig, "<", white);
-    int ccl = 0;
+    int frame = 0;
+    int cap = 1;
+    Timer fps;
     int quit = 0;
     int actpos_previous = 1, actpos = 1;
 
@@ -837,13 +822,13 @@ int afficher_menu(menuitems *MI, gameitems *GI, settingsitems *SI, pauseitems *P
     {
         return 1;
     }
-    clock_t last = clock();
+    
     while (quit == 0)
     {
-
+        start(&fps);
         if (actpos == 1) // If we are in the main menu
         {
-            quit = menu(GI, M, MI,SI, &ccl,&last, &actpos, &actpos_previous, screen);
+            quit = menu(GI, M, MI,SI, &actpos, &actpos_previous, screen);
             if (quit == 2)
                 return 1;
         }
@@ -870,6 +855,18 @@ int afficher_menu(menuitems *MI, gameitems *GI, settingsitems *SI, pauseitems *P
             quit = pause(SI, GI, PI, MI, M,&actpos, &actpos_previous, screen);
             if (quit == 2)
                 return 1;
+        }
+        if( SDL_Flip( screen ) == -1 )
+        {
+            return 1;    
+        }
+        
+        //Increment the frame counter
+        frame++;
+        if( ( cap == 1 ) && ( get_ticks(&fps) < 1000 / FRAMES_PER_SECOND ) )
+        {
+            //Sleep the remaining frame time
+            SDL_Delay( ( 1000 / FRAMES_PER_SECOND ) - get_ticks(&fps) );
         }
     }
     return 0;
@@ -961,4 +958,84 @@ void finprog(menuitems *MI, gameitems *GI, settingsitems *SI, pauseitems *PI, mi
     SDL_FreeSurface(PI->pausemenu);
     // Quit SDL
     SDL_Quit();
+}
+void timer(Timer *T){
+    T->startTicks = 0;
+    T->pausedTicks = 0;
+    T->paused = 0;
+    T->started = 0;    
+}
+void start(Timer *T){
+    //Start the timer
+    T->started = 1;
+    
+    //Unpause the timer
+    T->paused = 0;
+    
+    //Get the current clock time
+    T->startTicks = SDL_GetTicks();    
+}
+
+void stop(Timer *T){
+    //Stop the timer
+    T->started = 0;
+    
+    //Unpause the timer
+    T->paused = 0;    
+    
+}
+
+int get_ticks(Timer *T){
+    //If the timer is running
+    if( T->started == 1 )
+    {
+        //If the timer is paused
+        if( T->paused == 1 )
+        {
+            //Return the number of ticks when the timer was paused
+            return T->pausedTicks;
+        }
+        else
+        {
+            //Return the current time minus the start time
+            return SDL_GetTicks() - T->startTicks;
+        }    
+    }
+    
+    //If the timer isn't running
+    return 0;    
+}
+
+void pauses(Timer *T){
+        //If the timer is running and isn't already paused
+    if( ( T->started == 1 ) && ( T->paused == 1 ) )
+    {
+        //Pause the timer
+        T->paused = 1;
+    
+        //Calculate the paused ticks
+        T->pausedTicks = SDL_GetTicks() - T->startTicks;
+    }
+}
+
+void unpause(Timer *T){
+        //If the timer is paused
+    if( T->paused == 1 )
+    {
+        //Unpause the timer
+        T->paused = 0;
+    
+        //Reset the starting ticks
+        T->startTicks = SDL_GetTicks() - T->pausedTicks;
+        
+        //Reset the paused ticks
+        T->pausedTicks = 0;
+    }
+}
+
+int is_started(Timer *T){
+    return T->started;    
+}
+int is_paused(Timer *T){
+    return T->paused;    
 }
