@@ -11,7 +11,6 @@
 #include <SDL/SDL_mixer.h>
 #include <SDL/SDL_image.h>
 #include <string.h>
-#include <time.h>
 
 
 typedef struct{
@@ -67,32 +66,6 @@ typedef struct{
     int volume;
 }misc;
 
-typedef struct
-{
-    //The clock time when the timer started
-    int startTicks;
-    
-    //The ticks stored when the timer was paused
-    int pausedTicks;
-    
-    //The timer status
-    int paused;
-    int started;
-}Timer;
-
-    void timer(Timer *T);
-    //The various clock actions
-    void start(Timer *T);
-    void stop(Timer *T);
-    void pauses(Timer *T);
-    void unpause(Timer *T);
-    
-    //Gets the timer's time
-    int get_ticks(Timer *T);
-    
-    //Checks the status of the timer
-    int is_started(Timer *T);
-    int is_paused(Timer *T);    
 
 
 void FillRect(int x, int y, int w, int h, int color, SDL_Surface *screen);
