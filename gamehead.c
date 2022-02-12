@@ -12,7 +12,7 @@ SDL_Surface *init()
     }
 
     // Set up the screen
-    screen = SDL_SetVideoMode(SCREEN_W, SCREEN_H, SCREEN_BBP, SDL_SWSURFACE);
+    screen = SDL_SetVideoMode(SCREEN_W, SCREEN_H, SCREEN_BBP, SDL_SWSURFACE | SDL_RESIZABLE);
 
     // If there was an error in setting up the screen
     if (screen == NULL)
@@ -24,7 +24,7 @@ SDL_Surface *init()
     {
         return NULL;
     }
-    if (Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 64) == -1)
+    if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 128) == -1)
     {
         return NULL;
     }
@@ -817,9 +817,9 @@ int afficher_menu(menuitems *MI, gameitems *GI, settingsitems *SI, pauseitems *P
             if (quit == 2)
                 return 1;
             if (frame == 10)
-                afficher_ecran(896.01, 305.14, gamenameB, screen);
-            if (frame == 20){
                 afficher_ecran(896.01, 305.14, gamenameA, screen);
+            if (frame >= 20){
+                afficher_ecran(896.01, 305.14, gamenameB, screen);
                 frame = 0;
             }
         }
