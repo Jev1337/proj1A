@@ -16,20 +16,15 @@
 typedef struct{
     SDL_Surface *background;
     SDL_Surface *credits;
-    SDL_Surface *quitbtn_u;
-    SDL_Surface *quitbtn_s;
-    SDL_Surface *creditsbtn_u;
-    SDL_Surface *creditsbtn_s;
-    SDL_Surface *continuebtn_u;
-    SDL_Surface *continuebtn_s;
-    SDL_Surface *gitbtn_u;
+    SDL_Surface *quitbtn[2];
+    SDL_Surface *creditsbtn[2];
+    SDL_Surface *continuebtn[2];
+    SDL_Surface *gitbtn[2];
+    SDL_Surface *settingsbtn[2];
     SDL_Surface *gitbtn_s;
-    SDL_Surface *settingsbtn_u;
-    SDL_Surface *settingsbtn_s;
-    SDL_Surface *gamenameA;
-    SDL_Surface *gamenameB;
     SDL_Surface *leftarrow;
     SDL_Surface *rightarrow;
+    SDL_Surface *btnreset;
     int continueselected;
     int settingsselected;
     int creditsselected;
@@ -43,18 +38,15 @@ typedef struct{
 
 typedef struct{
     SDL_Surface *pausemenu;
-    SDL_Surface *resumebtn_u;
-    SDL_Surface *resumebtn_s;
-    SDL_Surface *settingsbtnreal_u;
-    SDL_Surface *settingsbtnreal_s;
+    SDL_Surface *resumebtn[2];
+    SDL_Surface *settingsbtnreal[2];
     int selectedresume;
     int selectedsettingsreal;
 }pauseitems;
 
 typedef struct{
-    SDL_Surface *donebtn_u;
-    SDL_Surface *donebtn_s;
-        SDL_Surface *settings;
+    SDL_Surface *settings;
+    SDL_Surface *donebtn[2];
     int doneselectedsettings;
 }settingsitems;
 
@@ -77,7 +69,7 @@ int credit(misc *M, menuitems *MI, settingsitems *SI, int *actpos, SDL_Surface *
 int game(menuitems *MI,gameitems *GI,pauseitems *PI,misc *M, int *actpos, SDL_Surface *screen);
 int pause(settingsitems *SI, gameitems *GI, pauseitems *PI, menuitems *MI, misc *M, int *actpos, int *actpos_previous, SDL_Surface *screen);
 int afficher_menu(menuitems *MI, gameitems *GI, settingsitems *SI, pauseitems *PI, misc *M, SDL_Surface *screen);
-void show_menu(menuitems *MI, SDL_Surface *screen);
+void show_menu(menuitems *MI, settingsitems *SI, SDL_Surface *screen);
 void show_pausemenu(menuitems *MI, gameitems *GI, pauseitems *PI, SDL_Surface *screen);
 void show_game(gameitems *GI, SDL_Surface *screen);
 void show_credits(menuitems *MI,settingsitems *SI, SDL_Surface *screen);

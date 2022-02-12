@@ -43,31 +43,41 @@ int load_files(menuitems *MI, pauseitems *PI, gameitems *GI, settingsitems *SI, 
     MI->gitselected = 0;
     MI->quitselected = 0;
     MI->settingsselected = 0;
+
+
     MI->background = load_image("images/background.png");
-    GI->gamebackground = load_image("images/gamebackground.png");
-    PI->pausemenu = IMG_Load("images/pausemenu.png");
     MI->credits = IMG_Load("images/credits.png");
+    MI->quitbtn[0] = IMG_Load("images/exitbtn_u.png");
+    MI->quitbtn[1] = IMG_Load("images/exitbtn_s.png");
+    MI->btnreset = IMG_Load("images/btnreset.png");
+    MI->creditsbtn[0] = IMG_Load("images/creditsbtn_u.png");
+    MI->continuebtn[0] = IMG_Load("images/continuebtn_u.png");
+    MI->gitbtn[0] = IMG_Load("images/gitbtn_u.png");
+    MI->creditsbtn[1] = IMG_Load("images/creditsbtn_s.png");
+    MI->continuebtn[1] = IMG_Load("images/continuebtn_s.png");
+    MI->gitbtn[1] = IMG_Load("images/gitbtn_s.png");
+    MI->settingsbtn[0] = IMG_Load("images/settingsbtn_u.png");
+    MI->settingsbtn[1] = IMG_Load("images/settingsbtn_s.png");
+
+    GI->gamebackground = load_image("images/gamebackground.png");
+
     SI->settings = IMG_Load("images/settings.png");
-    SI->donebtn_u = IMG_Load("images/done_u.png");
-    SI->donebtn_s = IMG_Load("images/done_s.png");
-    MI->quitbtn_u = IMG_Load("images/exitbtn_u.png");
-    MI->creditsbtn_u = IMG_Load("images/creditsbtn_u.png");
-    MI->continuebtn_u = IMG_Load("images/continuebtn_u.png");
-    MI->gitbtn_u = IMG_Load("images/gitbtn_u.png");
-    PI->resumebtn_u = IMG_Load("images/resumebtn_u.png");
-    MI->settingsbtn_u = IMG_Load("images/settingsbtn_u.png");
-    PI->settingsbtnreal_u = IMG_Load("images/settingsbtnreal_u.png");
-    MI->quitbtn_s = IMG_Load("images/exitbtn_s.png");
-    MI->creditsbtn_s = IMG_Load("images/creditsbtn_s.png");
-    MI->continuebtn_s = IMG_Load("images/continuebtn_s.png");
-    MI->gitbtn_s = IMG_Load("images/gitbtn_s.png");
-    PI->resumebtn_s = IMG_Load("images/resumebtn_s.png");
-    MI->settingsbtn_s = IMG_Load("images/settingsbtn_s.png");
-    PI->settingsbtnreal_s = IMG_Load("images/settingsbtnreal_s.png");
+    SI->donebtn[0] = IMG_Load("images/done_u.png");
+    SI->donebtn[1] = IMG_Load("images/done_s.png");
+
+    SI->doneselectedsettings = 0;
+
+    PI->pausemenu = IMG_Load("images/pausemenu.png");
+    PI->resumebtn[0] = IMG_Load("images/resumebtn_u.png");
+    PI->settingsbtnreal[0] = IMG_Load("images/settingsbtnreal_u.png");
+    PI->resumebtn[1] = IMG_Load("images/resumebtn_s.png");
+    PI->settingsbtnreal[1] = IMG_Load("images/settingsbtnreal_s.png");
+
     M->music = Mix_LoadMUS("sounds/beat.mp3");
     M->font = TTF_OpenFont("fonts/Retro.ttf", 48);
     M->fontBig = TTF_OpenFont("fonts/Retro.ttf", 72);
-    if (SI->settings == NULL || MI->background == NULL || MI->quitbtn_u == NULL || MI->creditsbtn_u == NULL || MI->continuebtn_u == NULL || MI->gitbtn_u == NULL || MI->settingsbtn_u == NULL || MI->quitbtn_s == NULL || MI->creditsbtn_s == NULL || MI->continuebtn_s == NULL || MI->gitbtn_s == NULL || MI->settingsbtn_s == NULL || SI->donebtn_s == NULL || SI->donebtn_u == NULL || GI->gamebackground == NULL || PI->pausemenu == NULL || PI->settingsbtnreal_s == NULL || PI->settingsbtnreal_u == NULL || PI->resumebtn_s == NULL || PI->resumebtn_u == NULL)
+
+    if (SI->settings == NULL || MI->background == NULL || MI->quitbtn[0] == NULL || MI->creditsbtn[0] == NULL || MI->continuebtn[0] == NULL || MI->gitbtn[0] == NULL || MI->settingsbtn[0] == NULL || MI->quitbtn[1] == NULL || MI->creditsbtn[1] == NULL || MI->continuebtn[1] == NULL || MI->gitbtn[1] == NULL || MI->settingsbtn[1] == NULL || SI->donebtn[1] == NULL || SI->donebtn[0] == NULL || GI->gamebackground == NULL || PI->pausemenu == NULL || PI->settingsbtnreal[1] == NULL || PI->settingsbtnreal[0] == NULL || PI->resumebtn[1] == NULL || PI->resumebtn[0] == NULL)
     {
         return 0;
     }
@@ -101,6 +111,8 @@ int menu(gameitems *GI, misc *M, menuitems *MI, settingsitems *SI, int *actpos, 
     SDL_Event event;
     int x, y;
 
+
+
     while (SDL_PollEvent(&event))
     {
         if (event.type == SDL_MOUSEMOTION)
@@ -113,7 +125,7 @@ int menu(gameitems *GI, misc *M, menuitems *MI, settingsitems *SI, int *actpos, 
                 if (MI->continueselected == 0)
                 {
                     MI->continueselected = 1;
-                    afficher_ecran(766, 534, MI->continuebtn_s, screen);
+                    afficher_ecran(766, 534, MI->continuebtn[1], screen);
                     afficher_ecran(684, 534, MI->leftarrow, screen);
                     afficher_ecran(1175, 534, MI->rightarrow, screen);
                 }
@@ -123,7 +135,7 @@ int menu(gameitems *GI, misc *M, menuitems *MI, settingsitems *SI, int *actpos, 
                 if (MI->continueselected == 1)
                 {
                     MI->continueselected = 0;
-                    show_menu(MI, screen);
+                    afficher_ecran(625,528,MI->btnreset, screen);
                 }
             }
             if (x >= 1791 && x <= 1891 && y >= 20 && y <= 126)
@@ -131,7 +143,7 @@ int menu(gameitems *GI, misc *M, menuitems *MI, settingsitems *SI, int *actpos, 
                 if (MI->settingsselected == 0)
                 {
                     MI->settingsselected = 1;
-                    afficher_ecran(1792, 24, MI->settingsbtn_s, screen);
+                    afficher_ecran(1792, 24, MI->settingsbtn[1], screen);
                 }
             }
             else
@@ -139,7 +151,7 @@ int menu(gameitems *GI, misc *M, menuitems *MI, settingsitems *SI, int *actpos, 
                 if (MI->settingsselected == 1)
                 {
                     MI->settingsselected = 0;
-                    afficher_ecran(1792, 24, MI->settingsbtn_u, screen);
+                    afficher_ecran(1792, 24, MI->settingsbtn[0], screen);
                 }
             }
             if (x >= 770 && x <= 1149 && y >= 680 && y <= 790)
@@ -147,7 +159,7 @@ int menu(gameitems *GI, misc *M, menuitems *MI, settingsitems *SI, int *actpos, 
                 if (MI->creditsselected == 0)
                 {
                     MI->creditsselected = 1;
-                    afficher_ecran(760, 680, MI->creditsbtn_s, screen);
+                    afficher_ecran(760, 680, MI->creditsbtn[1], screen);
                     afficher_ecran(684, 680, MI->leftarrow, screen);
                     afficher_ecran(1175, 680, MI->rightarrow, screen);
                 }
@@ -157,7 +169,7 @@ int menu(gameitems *GI, misc *M, menuitems *MI, settingsitems *SI, int *actpos, 
                 if (MI->creditsselected == 1)
                 {
                     MI->creditsselected = 0;
-                    show_menu(MI, screen);
+                    afficher_ecran(625,528,MI->btnreset, screen);
                 }
             }
             if (x >= 770 && x <= 1149 && y >= 810 && y <= 930)
@@ -165,7 +177,7 @@ int menu(gameitems *GI, misc *M, menuitems *MI, settingsitems *SI, int *actpos, 
                 if (MI->quitselected == 0)
                 {
                     MI->quitselected = 1;
-                    afficher_ecran(766, 814, MI->quitbtn_s, screen);
+                    afficher_ecran(766, 814, MI->quitbtn[1], screen);
                     afficher_ecran(684, 814, MI->leftarrow, screen);
                     afficher_ecran(1175, 814, MI->rightarrow, screen);
                 }
@@ -175,7 +187,7 @@ int menu(gameitems *GI, misc *M, menuitems *MI, settingsitems *SI, int *actpos, 
                 if (MI->quitselected == 1)
                 {
                     MI->quitselected = 0;
-                    show_menu(MI, screen);
+                    afficher_ecran(625,528,MI->btnreset, screen);
                 }
             }
             if (x >= 1636 && x <= 1745 && y >= 20 && y <= 126)
@@ -183,7 +195,7 @@ int menu(gameitems *GI, misc *M, menuitems *MI, settingsitems *SI, int *actpos, 
                 if (MI->gitselected == 0)
                 {
                     MI->gitselected = 1;
-                    afficher_ecran(1636, 20, MI->gitbtn_s, screen);
+                    afficher_ecran(1636, 20, MI->gitbtn[1], screen);
                 }
             }
             else
@@ -191,7 +203,7 @@ int menu(gameitems *GI, misc *M, menuitems *MI, settingsitems *SI, int *actpos, 
                 if (MI->gitselected == 1)
                 {
                     MI->gitselected = 0;
-                    afficher_ecran(1636, 20, MI->gitbtn_u, screen);
+                    afficher_ecran(1636, 20, MI->gitbtn[0], screen);
                 }
             }
         }
@@ -285,6 +297,7 @@ int menu(gameitems *GI, misc *M, menuitems *MI, settingsitems *SI, int *actpos, 
             }
         }
     }
+
     return 0;
 }
 
@@ -304,7 +317,7 @@ int credit(misc *M, menuitems *MI, settingsitems *SI, int *actpos, SDL_Surface *
                     // Play the music
                     if (Mix_PlayMusic(M->music, -1) == -1)
                     {
-                        return 1;
+                        return 2;
                     }
                 }
                 // If music is being played
@@ -340,7 +353,7 @@ int credit(misc *M, menuitems *MI, settingsitems *SI, int *actpos, SDL_Surface *
                 if (SI->doneselectedsettings == 0)
                 {
                     SI->doneselectedsettings = 1;
-                    afficher_ecran(776, 779, SI->donebtn_s, screen);
+                    afficher_ecran(776, 779, SI->donebtn[1], screen);
                 }
             }
             else
@@ -362,7 +375,7 @@ int credit(misc *M, menuitems *MI, settingsitems *SI, int *actpos, SDL_Surface *
                 {
                     return 2;
                 }
-                show_menu(MI, screen);
+                show_menu(MI,SI, screen);
 
                 *actpos = 1;
                 // applysettings
@@ -371,6 +384,7 @@ int credit(misc *M, menuitems *MI, settingsitems *SI, int *actpos, SDL_Surface *
         if (event.type == SDL_QUIT)
             return 1;
     }
+
     return 0;
 }
 
@@ -390,7 +404,7 @@ int setting(pauseitems *PI, menuitems *MI, gameitems *GI, settingsitems *SI, mis
                 if (SI->doneselectedsettings == 0)
                 {
                     SI->doneselectedsettings = 1;
-                    afficher_ecran(776, 779, SI->donebtn_s, screen);
+                    afficher_ecran(776, 779, SI->donebtn[1], screen);
                 }
             }
             else
@@ -413,7 +427,7 @@ int setting(pauseitems *PI, menuitems *MI, gameitems *GI, settingsitems *SI, mis
                     return 2;
                 }
                 if (actpos_previous == 1)
-                    show_menu(MI, screen);
+                    show_menu(MI,SI, screen);
                 if (actpos_previous == 5)
                     show_pausemenu(MI, GI, PI, screen);
                 *actpos = actpos_previous;
@@ -505,7 +519,7 @@ int setting(pauseitems *PI, menuitems *MI, gameitems *GI, settingsitems *SI, mis
             if (event.key.keysym.sym == SDLK_j)
             {
                 if (actpos_previous == 1)
-                    show_menu(MI, screen);
+                    show_menu(MI, SI, screen);
                 if (actpos_previous == 2)
                 {
                     // load game progress
@@ -698,7 +712,7 @@ int pause(settingsitems *SI, gameitems *GI, pauseitems *PI, menuitems *MI, misc 
                 if (MI->quitselected == 0)
                 {
                     MI->quitselected = 1;
-                    afficher_ecran(760, 665, MI->quitbtn_s, screen);
+                    afficher_ecran(760, 665, MI->quitbtn[1], screen);
                 }
             }
             else
@@ -716,7 +730,7 @@ int pause(settingsitems *SI, gameitems *GI, pauseitems *PI, menuitems *MI, misc 
                 if (PI->selectedresume == 0)
                 {
                     PI->selectedresume = 1;
-                    afficher_ecran(760, 413, PI->resumebtn_s, screen);
+                    afficher_ecran(760, 413, PI->resumebtn[1], screen);
                 }
             }
             else
@@ -734,7 +748,7 @@ int pause(settingsitems *SI, gameitems *GI, pauseitems *PI, menuitems *MI, misc 
                 if (PI->selectedsettingsreal == 0)
                 {
                     PI->selectedsettingsreal = 1;
-                    afficher_ecran(760, 540, PI->settingsbtnreal_s, screen);
+                    afficher_ecran(760, 540, PI->settingsbtnreal[1], screen);
                 }
             }
 
@@ -744,7 +758,7 @@ int pause(settingsitems *SI, gameitems *GI, pauseitems *PI, menuitems *MI, misc 
                 if (PI->selectedsettingsreal == 0)
                 {
                     PI->selectedsettingsreal = 1;
-                    afficher_ecran(760, 540, PI->settingsbtnreal_s, screen);
+                    afficher_ecran(760, 540, PI->settingsbtnreal[0], screen);
                 }
             }
             else
@@ -766,9 +780,12 @@ int afficher_menu(menuitems *MI, gameitems *GI, settingsitems *SI, pauseitems *P
 {
     SDL_Color white = {255, 255, 255};
     SDL_Color black = {14, 0, 68};
-    show_menu(MI, screen);
-    MI->gamenameA = TTF_RenderText_Solid(M->font, "AR:T", white);
-    MI->gamenameB = TTF_RenderText_Solid(M->font, "AR:T", black);
+
+    show_menu(MI, SI, screen);
+    SDL_Surface *gamenameA;
+    SDL_Surface *gamenameB;
+    gamenameA = TTF_RenderText_Solid(M->font, "AR:T", white);
+    gamenameB = TTF_RenderText_Solid(M->font, "AR:T", black);
     MI->leftarrow = TTF_RenderText_Solid(M->fontBig, ">", white);
     MI->rightarrow = TTF_RenderText_Solid(M->fontBig, "<", white);
     int frame = 0;
@@ -777,7 +794,7 @@ int afficher_menu(menuitems *MI, gameitems *GI, settingsitems *SI, pauseitems *P
     int quit = 0;
     int actpos_previous = 1, actpos = 1;
 
-    if (MI->gamenameA == NULL || MI->gamenameB == NULL)
+    if (gamenameA == NULL || gamenameB == NULL)
     {
         return 1;
     }
@@ -799,6 +816,12 @@ int afficher_menu(menuitems *MI, gameitems *GI, settingsitems *SI, pauseitems *P
             quit = menu(GI, M, MI, SI, &actpos, &actpos_previous, screen);
             if (quit == 2)
                 return 1;
+            if (frame == 10)
+                afficher_ecran(896.01, 305.14, gamenameB, screen);
+            if (frame == 20){
+                afficher_ecran(896.01, 305.14, gamenameA, screen);
+                frame = 0;
+            }
         }
         if (actpos == 3)
         {
@@ -837,27 +860,28 @@ int afficher_menu(menuitems *MI, gameitems *GI, settingsitems *SI, pauseitems *P
             SDL_Delay((1000 / FRAMES_PER_SECOND) - get_ticks(&fps));
         }
     }
+    SDL_FreeSurface(gamenameA);
+    SDL_FreeSurface(gamenameB);
     return 0;
 }
 
-void show_menu(menuitems *MI, SDL_Surface *screen)
+void show_menu(menuitems *MI, settingsitems *SI, SDL_Surface *screen)
 {
     afficher_ecran(0, 0, MI->background, screen);
-    afficher_ecran(896.01, 305.14, MI->gamenameA, screen);
-    afficher_ecran(766, 814, MI->quitbtn_u, screen);
-    afficher_ecran(760, 680, MI->creditsbtn_u, screen);
-    afficher_ecran(766, 534, MI->continuebtn_u, screen);
-    afficher_ecran(1792, 24, MI->settingsbtn_u, screen);
-    afficher_ecran(1636, 20, MI->gitbtn_u, screen);
+    afficher_ecran(766, 814, MI->quitbtn[0], screen);
+    afficher_ecran(760, 680, MI->creditsbtn[0], screen);
+    afficher_ecran(766, 534, MI->continuebtn[0], screen);
+    afficher_ecran(1792, 24, MI->settingsbtn[0], screen);
+    afficher_ecran(1636, 20, MI->gitbtn[0], screen);
 }
 
 void show_pausemenu(menuitems *MI, gameitems *GI, pauseitems *PI, SDL_Surface *screen)
 {
     afficher_ecran(0, 0, GI->gamebackground, screen);
     afficher_ecran(0, 0, PI->pausemenu, screen);
-    afficher_ecran(760, 413, PI->resumebtn_u, screen);
-    afficher_ecran(760, 540, PI->settingsbtnreal_u, screen);
-    afficher_ecran(760, 665, MI->quitbtn_u, screen);
+    afficher_ecran(760, 413, PI->resumebtn[0], screen);
+    afficher_ecran(760, 540, PI->settingsbtnreal[0], screen);
+    afficher_ecran(760, 665, MI->quitbtn[0], screen);
 }
 
 void show_game(gameitems *GI, SDL_Surface *screen)
@@ -868,12 +892,12 @@ void show_game(gameitems *GI, SDL_Surface *screen)
 void show_credits(menuitems *MI, settingsitems *SI, SDL_Surface *screen)
 {
     afficher_ecran(584, 164, MI->credits, screen);
-    afficher_ecran(776, 779, SI->donebtn_u, screen);
+    afficher_ecran(776, 779, SI->donebtn[0], screen);
 }
 void show_settings(settingsitems *SI, misc *M, SDL_Surface *screen)
 {
     afficher_ecran(584, 164, SI->settings, screen);
-    afficher_ecran(776, 779, SI->donebtn_u, screen);
+    afficher_ecran(776, 779, SI->donebtn[0], screen);
     FillRect(1207, 370, 14, 87, 0x979797, screen);
     FillRect(1187, 370, 14, 87, 0x979797, screen);
     FillRect(1167, 370, 14, 87, 0x979797, screen);
@@ -904,26 +928,25 @@ void finprog(menuitems *MI, gameitems *GI, settingsitems *SI, pauseitems *PI, mi
     Mix_FreeChunk(M->scratch);
     SDL_FreeSurface(MI->background);
     SDL_FreeSurface(GI->gamebackground);
-    SDL_FreeSurface(PI->settingsbtnreal_s);
-    SDL_FreeSurface(PI->settingsbtnreal_u);
+    SDL_FreeSurface(PI->settingsbtnreal[1]);
+    SDL_FreeSurface(PI->settingsbtnreal[0]);
     SDL_FreeSurface(SI->settings);
     SDL_FreeSurface(MI->credits);
-    SDL_FreeSurface(MI->quitbtn_u);
-    SDL_FreeSurface(MI->creditsbtn_u);
-    SDL_FreeSurface(MI->continuebtn_u);
-    SDL_FreeSurface(MI->settingsbtn_u);
-    SDL_FreeSurface(MI->gitbtn_u);
-    SDL_FreeSurface(SI->donebtn_u);
-    SDL_FreeSurface(MI->quitbtn_s);
-    SDL_FreeSurface(MI->creditsbtn_s);
-    SDL_FreeSurface(MI->continuebtn_s);
-    SDL_FreeSurface(MI->settingsbtn_s);
-    SDL_FreeSurface(MI->gitbtn_s);
-    SDL_FreeSurface(SI->donebtn_s);
-    SDL_FreeSurface(MI->gamenameA);
-    SDL_FreeSurface(MI->gamenameB);
+    SDL_FreeSurface(MI->quitbtn[0]);
+    SDL_FreeSurface(MI->creditsbtn[0]);
+    SDL_FreeSurface(MI->continuebtn[0]);
+    SDL_FreeSurface(MI->settingsbtn[0]);
+    SDL_FreeSurface(MI->gitbtn[0]);
+    SDL_FreeSurface(SI->donebtn[0]);
+    SDL_FreeSurface(MI->quitbtn[1]);
+    SDL_FreeSurface(MI->creditsbtn[1]);
+    SDL_FreeSurface(MI->continuebtn[1]);
+    SDL_FreeSurface(MI->settingsbtn[1]);
+    SDL_FreeSurface(MI->gitbtn[1]);
+    SDL_FreeSurface(SI->donebtn[1]);
     SDL_FreeSurface(screen);
     SDL_FreeSurface(PI->pausemenu);
+    SDL_FreeSurface(MI->btnreset);
     // Quit SDL
     SDL_Quit();
 }
