@@ -1,10 +1,5 @@
 
-#include <SDL/SDL.h>
-#include <stdio.h>
-#include <SDL/SDL_ttf.h>
-#include <SDL/SDL_mixer.h>
-#include <SDL/SDL_image.h>
-#include <time.h>
+#include "gamehead.h"
 
 SDL_Surface *load_image(char filename[])
 {
@@ -27,8 +22,8 @@ SDL_Surface *load_image(char filename[])
     }
     //Return the optimized image
     return optimizedImage;
-}
-void afficher_ecran(int x, int y, SDL_Surface *src, SDL_Surface *dest)
+} 
+void afficher_ecran(int x, int y, SDL_Surface *src, SDL_Surface *dest, SDL_Rect* clip)
 {
 
     //Make a temporary rectangle to hold the offsets
@@ -38,7 +33,7 @@ void afficher_ecran(int x, int y, SDL_Surface *src, SDL_Surface *dest)
     offset.x = x;
     offset.y = y;
     //Blit the surface
-    SDL_BlitSurface(src, NULL, dest, &offset);
+    SDL_BlitSurface(src, clip, dest, &offset);
 }
 
 void FillRect(int x, int y, int w, int h, int color, SDL_Surface *screen)

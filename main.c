@@ -1,13 +1,3 @@
-/*This source code copyrighted by NinjaHub' Studios (2021-2022)
-and may not be redistributed without written permission.*/
-
-//Using SDL (SDL Itself + SDL TTF) and standard IO
-
-#include <SDL/SDL.h>
-#include <stdio.h>
-#include <SDL/SDL_ttf.h>
-#include <SDL/SDL_mixer.h>
-#include <SDL/SDL_image.h>
 #include "gamehead.h"
 
 
@@ -19,18 +9,21 @@ int main(int argc, char *args[])
 	gameitems GI;
 	settingsitems SI;
 	misc M;
+	btn B;
 	//Initializing SDL Lib
-	screen = init();
+	screen = init(&M);
 	if (screen == NULL)
 		return 1;
 	//Loading images, texts and sounds into the RAMemory
-	if (load_files(&MI,&PI,&GI,&SI,&M) == 0)
+	if (load_files(&B, &MI,&PI,&GI,&SI,&M) == 0)
 		return 1;
+	if (load_clips(&M,&MI) == 0)
+		return 0;
 	//Blitting images, texts, and playing sounds whilst managing motion and clicking events
 	//If returned value is 1, we can not continue execution.
 
-	if (afficher_menu(&MI,&GI,&SI,&PI,&M,screen) == 1)
+	if (afficher_menu(&B,&MI,&GI,&SI,&PI,&M,screen) == 1)
 		return 1;
-	finprog(&MI,&GI,&SI,&PI,&M,screen);
+	finprog(&B, &MI,&GI,&SI,&PI,&M,screen);
 	return 0;
 }
