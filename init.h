@@ -4,7 +4,7 @@
 #include "gamehead.h"
 
 SDL_Surface *init(misc *M);
-int load_files(btn * B, menuitems *MI, pauseitems *PI, gameitems *GI, settingsitems *SI, misc *M);
+int load_files(btndim *BD ,btn * B, menuitems *MI, pauseitems *PI, gameitems *GI, settingsitems *SI, misc *M);
 int load_clips(misc *M,menuitems *MI);
 
 #endif

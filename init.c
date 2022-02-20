@@ -15,7 +15,7 @@ SDL_Surface *init(misc *M)
     M->SCREEN_H = info->current_h;
     M->SCREEN_W = info->current_w;
     // Set up the screen
-    screen = SDL_SetVideoMode(M->SCREEN_W, M->SCREEN_H, SCREEN_BBP, SDL_SWSURFACE | SDL_FULLSCREEN);
+    screen = SDL_SetVideoMode(M->SCREEN_W, M->SCREEN_H, SCREEN_BBP, SDL_SWSURFACE | SDL_FULLSCREEN | SDL_DOUBLEBUF);
 
     // If there was an error in setting up the screen
     if (screen == NULL)
@@ -39,23 +39,62 @@ SDL_Surface *init(misc *M)
 }
 
 
-int load_files(btn *B,menuitems *MI, pauseitems *PI, gameitems *GI, settingsitems *SI, misc *M)
+int load_files(btndim *BD, btn *B,menuitems *MI, pauseitems *PI, gameitems *GI, settingsitems *SI, misc *M)
 {
    
     SDL_Color white = {255, 255, 255};
 
 
+    BD->menubtns[2].x = 766;
+    BD->menubtns[2].y = 814;
+    BD->menubtns[2].w = 400;
+    BD->menubtns[2].h = 110;
+    BD->menubtns[1].x = 760;
+    BD->menubtns[1].y = 680;
+    BD->menubtns[1].w = 400;
+    BD->menubtns[1].h = 110;
+    BD->menubtns[0].x = 766;
+    BD->menubtns[0].y = 534;
+    BD->menubtns[0].w = 400;
+    BD->menubtns[0].h = 110;
+    BD->menubtns[4].x = 1636;
+    BD->menubtns[4].y = 20;
+    BD->menubtns[4].w = 99;
+    BD->menubtns[4].h = 103;
+    BD->menubtns[3].x = 1792;
+    BD->menubtns[3].y = 24;
+    BD->menubtns[3].w = 99;
+    BD->menubtns[3].h = 103;
+    BD->resumebtn.x = 760;
+    BD->resumebtn.y = 413;
+    BD->resumebtn.w = 400;
+    BD->resumebtn.h = 110;
+    BD->settingsbtnreal.x = 760;
+    BD->settingsbtnreal.y = 540;
+    BD->settingsbtnreal.w = 400;
+    BD->settingsbtnreal.h = 110;
+    BD->donebtn.x = 776;
+    BD->donebtn.y = 779;
+    BD->donebtn.w = 400;
+    BD->donebtn.h = 110;
+    BD->fsbtn.x = 776;
+    BD->fsbtn.y = 500;
+    BD->fsbtn.w = 400;
+    BD->fsbtn.h = 110;
+
+ 
+
     //Due to a problem, I am not able to initialize 
-    B->quitbtn[0] = IMG_Load("images/exitbtn_u.png");
-    B->quitbtn[1] = IMG_Load("images/exitbtn_s.png");
-    B->creditsbtn[0] = IMG_Load("images/creditsbtn_u.png");
-    B->creditsbtn[1] = IMG_Load("images/creditsbtn_s.png");
-    B->continuebtn[0] = IMG_Load("images/continuebtn_u.png");
-    B->continuebtn[1] = IMG_Load("images/continuebtn_s.png");
-    B->gitbtn[0] = IMG_Load("images/gitbtn_u.png");
-    B->gitbtn[1] = IMG_Load("images/gitbtn_s.png");
-    B->settingsbtn[0] = IMG_Load("images/settingsbtn_u.png");
-    B->settingsbtn[1] = IMG_Load("images/settingsbtn_s.png");
+    B->menubtns_u[2] = IMG_Load("images/exitbtn_u.png");
+    B->menubtns_s[2] = IMG_Load("images/exitbtn_s.png");
+    B->menubtns_u[1] = IMG_Load("images/creditsbtn_u.png");
+    B->menubtns_s[1] = IMG_Load("images/creditsbtn_s.png");
+    B->menubtns_u[0] = IMG_Load("images/continuebtn_u.png");
+    B->menubtns_s[0] = IMG_Load("images/continuebtn_s.png");
+    B->menubtns_u[4] = IMG_Load("images/gitbtn_u.png");
+    B->menubtns_s[4] = IMG_Load("images/gitbtn_s.png");
+    B->menubtns_u[3] = IMG_Load("images/settingsbtn_u.png");
+    B->menubtns_s[3] = IMG_Load("images/settingsbtn_s.png");
     B->resumebtn[0] = IMG_Load("images/resumebtn_u.png");
     B->resumebtn[1] = IMG_Load("images/resumebtn_s.png");
     B->settingsbtnreal[0] = IMG_Load("images/settingsbtnreal_u.png");
@@ -90,7 +129,7 @@ int load_files(btn *B,menuitems *MI, pauseitems *PI, gameitems *GI, settingsitem
     MI->leftarrow = TTF_RenderText_Solid(M->fontBig, ">", white);
     MI->rightarrow = TTF_RenderText_Solid(M->fontBig, "<", white);
 
-    GI->gamebackground = load_image("images/gamebackground.png");
+    GI->gamebackground = load_image("images/gamebackground.jpg");
     SI->settings = IMG_Load("images/settings.png");
 
 
@@ -101,7 +140,7 @@ int load_files(btn *B,menuitems *MI, pauseitems *PI, gameitems *GI, settingsitem
 
 
     
-    if (MI->rightarrow == NULL || MI->leftarrow == NULL || MI->rainspr == NULL || MI->gamename == NULL || B->fsbtn[0] == NULL || B->fsbtn[1] == NULL || B->fsbtn[2] == NULL || M->music == NULL || M->font == NULL || M->scratch == NULL || SI->settings == NULL || MI->background == NULL || B->quitbtn[0] == NULL || B->creditsbtn[0] == NULL || B->continuebtn[0] == NULL || B->gitbtn[0] == NULL || B->settingsbtn[0] == NULL || B->quitbtn[1] == NULL || B->creditsbtn[1] == NULL || B->continuebtn[1] == NULL || B->gitbtn[1] == NULL || B->settingsbtn[1] == NULL || B->donebtn[1] == NULL || B->donebtn[0] == NULL || GI->gamebackground == NULL || PI->pausemenu == NULL || B->settingsbtnreal[1] == NULL || B->settingsbtnreal[0] == NULL || B->resumebtn[1] == NULL || B->resumebtn[0] == NULL)
+    if (MI->rightarrow == NULL || MI->leftarrow == NULL || MI->rainspr == NULL || MI->gamename == NULL || B->fsbtn[0] == NULL || B->fsbtn[1] == NULL || B->fsbtn[2] == NULL || M->music == NULL || M->font == NULL || M->scratch == NULL || SI->settings == NULL || MI->background == NULL || B->menubtns_u[2] == NULL || B->menubtns_u[1] == NULL || B->menubtns_u[0] == NULL || B->menubtns_u[4] == NULL || B->menubtns_u[3] == NULL || B->donebtn[1] == NULL || B->donebtn[0] == NULL || B->menubtns_s[2] == NULL || B->menubtns_s[1] == NULL || B->menubtns_s[0] == NULL || B->menubtns_s[4] == NULL || B->menubtns_s[3] == NULL || B->donebtn[1] == NULL || B->donebtn[0] == NULL || GI->gamebackground == NULL || PI->pausemenu == NULL || B->settingsbtnreal[1] == NULL || B->settingsbtnreal[0] == NULL || B->resumebtn[1] == NULL || B->resumebtn[0] == NULL)
     {
         return 0;
     }

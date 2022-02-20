@@ -21,6 +21,6 @@
 
 
 
-int afficher_menu(btn *B, menuitems *MI, gameitems *GI, settingsitems *SI, pauseitems *PI, misc *M, SDL_Surface *screen);
+int afficher_menu(btndim *BD,btn *B, menuitems *MI, gameitems *GI, settingsitems *SI, pauseitems *PI, misc *M, SDL_Surface *screen);
 void finprog(btn *B,menuitems *MI, gameitems *GI, settingsitems *SI, pauseitems *PI, misc *M, SDL_Surface *screen);
 #endif // MENU_H_INCLUDED

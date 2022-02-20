@@ -4,11 +4,18 @@
 
 
 typedef struct{
-    SDL_Surface *quitbtn[2];
-    SDL_Surface *creditsbtn[2];
-    SDL_Surface *continuebtn[2];
-    SDL_Surface *gitbtn[2];
-    SDL_Surface *settingsbtn[2];
+
+    SDL_Rect menubtns[5];
+    SDL_Rect donebtn;
+    SDL_Rect resumebtn;
+    SDL_Rect settingsbtnreal;
+    SDL_Rect fsbtn;
+
+}btndim;
+
+typedef struct{
+    SDL_Surface *menubtns_u[5];
+    SDL_Surface *menubtns_s[5];
     SDL_Surface *resumebtn[2];
     SDL_Surface *settingsbtnreal[2];
     SDL_Surface *donebtn[2];
