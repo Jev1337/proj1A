@@ -706,7 +706,12 @@ void show_settings(btndim *BD, btn *B, settingsitems *SI, misc *M, SDL_Surface *
 {
     afficher_ecran(584, 164, SI->settings, screen, NULL);
     afficher_ecran(776, 779, B->donebtn[0], screen, NULL);
-    afficher_ecran(776, 500, B->fsbtn[0], screen, NULL);
+    if (B->isselected[6] == 0)
+        afficher_ecran(776, 500, B->fsbtn[0], screen, NULL);
+    else if (B->isselected[6])
+        afficher_ecran(776, 500, B->fsbtn[2], screen, NULL);
+    else
+        afficher_ecran(776, 500, B->fsbtn[1], screen, NULL);
     FillRect(1207, 370, 14, 87, 0x979797, screen);
     FillRect(1187, 370, 14, 87, 0x979797, screen);
     FillRect(1167, 370, 14, 87, 0x979797, screen);
