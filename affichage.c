@@ -1,6 +1,6 @@
 #include "gamehead.h"
 
-int menu(btndim *BD, btn *B, gameitems *GI, misc *M, menuitems *MI, settingsitems *SI, int *actpos, int *actpos_previous, SDL_Surface *screen)
+int menu(btndim *BD, btn *B, gameitems *GI, misc *M, menuitems *MI, settingsitems *SI, character *p, int *actpos, int *actpos_previous, SDL_Surface *screen)
 {
     SDL_Event event;
     int x, y, i;
@@ -57,6 +57,7 @@ int menu(btndim *BD, btn *B, gameitems *GI, misc *M, menuitems *MI, settingsitem
                     *actpos = 2;
                     Mix_HaltMusic();
                     show_game(BD, B, GI, screen);
+                    initcharacter(p);
                 }
                 if (B->isselected[1]) // Credits
                 {
@@ -453,7 +454,7 @@ int setting(btndim *BD, btn *B, pauseitems *PI, menuitems *MI, gameitems *GI, se
         }
         if (event.type == SDL_VIDEORESIZE)
         {
-            //Resize
+            // Resize
         }
         if (event.type == SDL_KEYDOWN)
         {
@@ -511,9 +512,11 @@ int setting(btndim *BD, btn *B, pauseitems *PI, menuitems *MI, gameitems *GI, se
     return 0;
 }
 
-int game(btndim *BD, btn *B, menuitems *MI, gameitems *GI, pauseitems *PI, misc *M, int *actpos, SDL_Surface *screen)
+int game(btndim *BD, btn *B, menuitems *MI, gameitems *GI, pauseitems *PI, misc *M, character *p, int *actpos, SDL_Surface *screen)
 {
     SDL_Event event;
+     show_game(BD, B, GI, screen);
+    afficher_character(p,screen);
     while (SDL_PollEvent(&event))
     {
         if (event.type == SDL_KEYDOWN)
@@ -524,10 +527,16 @@ int game(btndim *BD, btn *B, menuitems *MI, gameitems *GI, pauseitems *PI, misc 
                 show_pausemenu(BD, B, MI, GI, PI, screen);
                 SDL_Delay(100);
             }
+            if (event.key.keysym.sym == SDLK_UP)
+            {
+                jump(p,BD, B, GI,screen);
+            }
         }
+        setcharacter(p,event);
         if (event.type == SDL_QUIT)
             return 1;
     }
+    changedirection(p);
     return 0;
 }
 
@@ -554,13 +563,12 @@ int pause(btndim *BD, btn *B, settingsitems *SI, gameitems *GI, pauseitems *PI, 
                     {
                         return 2;
                     }
-                        if (Mix_PlayMusic(M->music, -1) == -1)
+                    if (Mix_PlayMusic(M->music, -1) == -1)
                     {
                         return 1;
                     }
                     *actpos_previous = 1;
-                    *actpos=1;
-
+                    *actpos = 1;
                 }
                 if (x >= 760 && x <= 1159 && y >= 413 && y <= 532) // resume
                 {

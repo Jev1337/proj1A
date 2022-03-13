@@ -1,5 +1,5 @@
-prog:main.o gamehead.o ninjahubstd.o init.o affichage.o timer.o 
-	gcc main.o gamehead.o ninjahubstd.o init.o affichage.o timer.o -o prog -lSDL -lSDL_ttf -g -lSDL_image -lSDL_mixer
+prog:main.o character.o gamehead.o ninjahubstd.o init.o affichage.o timer.o 
+	gcc main.o character.c gamehead.o ninjahubstd.o init.o affichage.o timer.o -o prog -lSDL -lSDL_ttf -g -lSDL_image -lSDL_mixer
 main.o:main.c
 	gcc -c main.c -g
 init.o:init.c
@@ -12,4 +12,6 @@ gamehead.o:gamehead.c
 	gcc -c gamehead.c -g
 timer.o:timer.c
 	gcc -c timer.c -g
+character.o:character.c
+	gcc -c character.c -g
 

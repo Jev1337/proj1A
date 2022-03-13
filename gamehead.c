@@ -1,6 +1,6 @@
 #include "gamehead.h"
 
-int afficher_menu(btndim *BD, btn *B,menuitems *MI, gameitems *GI, settingsitems *SI, pauseitems *PI, misc *M, SDL_Surface *screen)
+int afficher_menu(btndim *BD, btn *B,menuitems *MI, gameitems *GI, settingsitems *SI, pauseitems *PI, misc *M, character *p, SDL_Surface *screen)
 {
     show_menu(BD,B,MI, SI, screen);
 
@@ -26,7 +26,7 @@ int afficher_menu(btndim *BD, btn *B,menuitems *MI, gameitems *GI, settingsitems
             }
             afficher_ecran(0,0,MI->rainspr,screen, &MI->rainclip[frame]);
 
-            quit = menu(BD,B,GI, M, MI, SI, &actpos, &actpos_previous, screen);
+            quit = menu(BD,B,GI, M, MI, SI, p, &actpos, &actpos_previous, screen);
             if (quit == 2)
                 return 1;
         }
@@ -44,7 +44,7 @@ int afficher_menu(btndim *BD, btn *B,menuitems *MI, gameitems *GI, settingsitems
         }
         if (actpos == 2)
         { // State of Game
-            quit = game(BD,B,MI, GI, PI, M, &actpos, screen);
+            quit = game(BD,B,MI, GI, PI, M,p, &actpos, screen);
             if (quit == 2)
                 return 1;
         }
@@ -71,7 +71,7 @@ int afficher_menu(btndim *BD, btn *B,menuitems *MI, gameitems *GI, settingsitems
 }
 
 
-void finprog(btn *B, menuitems *MI, gameitems *GI, settingsitems *SI, pauseitems *PI, misc *M, SDL_Surface *screen)
+void finprog(btn *B, menuitems *MI, gameitems *GI, settingsitems *SI, pauseitems *PI, misc *M,character *p, SDL_Surface *screen)
 {
 
     Mix_FreeChunk(M->scratch);
@@ -101,6 +101,8 @@ void finprog(btn *B, menuitems *MI, gameitems *GI, settingsitems *SI, pauseitems
     SDL_FreeSurface(MI->gamename);
     SDL_FreeSurface(MI->rightarrow);
     SDL_FreeSurface(MI->leftarrow);
+    SDL_FreeSurface(p->charsprite[0]);
+    SDL_FreeSurface(p->charsprite[1]);
     // Quit SDL
     SDL_Quit();
 }

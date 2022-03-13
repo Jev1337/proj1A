@@ -17,11 +17,6 @@ SDL_Surface *init(misc *M)
     // Set up the screen
     screen = SDL_SetVideoMode(M->SCREEN_W, M->SCREEN_H, SCREEN_BBP, SDL_SWSURFACE | SDL_FULLSCREEN | SDL_DOUBLEBUF);
 
-    // If there was an error in setting up the screen
-    if (screen == NULL)
-    {
-        return NULL;
-    }
     // Initialize SDL_ttf
     if (TTF_Init() == -1)
     {
@@ -39,9 +34,11 @@ SDL_Surface *init(misc *M)
 }
 
 
-int load_files(btndim *BD, btn *B,menuitems *MI, pauseitems *PI, gameitems *GI, settingsitems *SI, misc *M)
+int load_files(btndim *BD, btn *B,menuitems *MI, pauseitems *PI, gameitems *GI, settingsitems *SI, misc *M, character *p)
 {
    
+
+
     SDL_Color white = {255, 255, 255};
 
 
@@ -84,7 +81,8 @@ int load_files(btndim *BD, btn *B,menuitems *MI, pauseitems *PI, gameitems *GI, 
 
  
 
-    //Due to a problem, I am not able to initialize 
+
+
     B->menubtns_u[2] = IMG_Load("images/exitbtn_u.png");
     B->menubtns_s[2] = IMG_Load("images/exitbtn_s.png");
     B->menubtns_u[1] = IMG_Load("images/creditsbtn_u.png");
@@ -131,16 +129,9 @@ int load_files(btndim *BD, btn *B,menuitems *MI, pauseitems *PI, gameitems *GI, 
 
     GI->gamebackground = load_image("images/gamebackground.jpg");
     SI->settings = IMG_Load("images/settings.png");
-
-
-    
-
     PI->pausemenu = IMG_Load("images/pausemenu.png");
 
-
-
-    
-    if (MI->rightarrow == NULL || MI->leftarrow == NULL || MI->rainspr == NULL || MI->gamename == NULL || B->fsbtn[0] == NULL || B->fsbtn[1] == NULL || B->fsbtn[2] == NULL || M->music == NULL || M->font == NULL || M->scratch == NULL || SI->settings == NULL || MI->background == NULL || B->menubtns_u[2] == NULL || B->menubtns_u[1] == NULL || B->menubtns_u[0] == NULL || B->menubtns_u[4] == NULL || B->menubtns_u[3] == NULL || B->donebtn[1] == NULL || B->donebtn[0] == NULL || B->menubtns_s[2] == NULL || B->menubtns_s[1] == NULL || B->menubtns_s[0] == NULL || B->menubtns_s[4] == NULL || B->menubtns_s[3] == NULL || B->donebtn[1] == NULL || B->donebtn[0] == NULL || GI->gamebackground == NULL || PI->pausemenu == NULL || B->settingsbtnreal[1] == NULL || B->settingsbtnreal[0] == NULL || B->resumebtn[1] == NULL || B->resumebtn[0] == NULL)
+    if ( MI->rightarrow == NULL || MI->leftarrow == NULL || MI->rainspr == NULL || MI->gamename == NULL || B->fsbtn[0] == NULL || B->fsbtn[1] == NULL || B->fsbtn[2] == NULL || M->music == NULL || M->font == NULL || M->scratch == NULL || SI->settings == NULL || MI->background == NULL || B->menubtns_u[2] == NULL || B->menubtns_u[1] == NULL || B->menubtns_u[0] == NULL || B->menubtns_u[4] == NULL || B->menubtns_u[3] == NULL || B->donebtn[1] == NULL || B->donebtn[0] == NULL || B->menubtns_s[2] == NULL || B->menubtns_s[1] == NULL || B->menubtns_s[0] == NULL || B->menubtns_s[4] == NULL || B->menubtns_s[3] == NULL || B->donebtn[1] == NULL || B->donebtn[0] == NULL || GI->gamebackground == NULL || PI->pausemenu == NULL || B->settingsbtnreal[1] == NULL || B->settingsbtnreal[0] == NULL || B->resumebtn[1] == NULL || B->resumebtn[0] == NULL)
     {
         return 0;
     }
@@ -150,13 +141,19 @@ int load_files(btndim *BD, btn *B,menuitems *MI, pauseitems *PI, gameitems *GI, 
 }
 
 
-int load_clips(misc *M, menuitems *MI){
-    int i, w=M->SCREEN_W;
-    for (i=0;i<8;i++, w+=M->SCREEN_W){
+int load_clips(misc *M, menuitems *MI, character *p){
+    int i, w;
+    for (w=M->SCREEN_W,i=0;i<8;i++, w+=M->SCREEN_W){
         MI->rainclip[i].x = w;
         MI->rainclip[i].y = 0;
         MI->rainclip[i].w = M->SCREEN_W;
         MI->rainclip[i].h = M->SCREEN_H;
+    }
+        for (w=0,i=0;i<5;i++, w+=300){
+        p->clips[i].x = w;
+        p->clips[i].y = 0;
+        p->clips[i].w = 300;
+        p->clips[i].h = 484;
     }
     return 1;
 }
