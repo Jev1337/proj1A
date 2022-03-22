@@ -521,6 +521,8 @@ int game(btndim *BD, btn *B, menuitems *MI, gameitems *GI, pauseitems *PI, misc 
     {
         if (event.type == SDL_KEYDOWN)
         {
+            if (event.key.keysym.sym == SDLK_p)
+                *actpos = 6;
             if (event.key.keysym.sym == SDLK_ESCAPE)
             {
                 *actpos = 5;

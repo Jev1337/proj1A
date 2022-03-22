@@ -15,7 +15,7 @@ SDL_Surface *init(misc *M)
     M->SCREEN_H = info->current_h;
     M->SCREEN_W = info->current_w;
     // Set up the screen
-    screen = SDL_SetVideoMode(M->SCREEN_W, M->SCREEN_H, SCREEN_BBP, SDL_SWSURFACE | SDL_FULLSCREEN | SDL_DOUBLEBUF);
+    screen = SDL_SetVideoMode(M->SCREEN_W, M->SCREEN_H, SCREEN_BBP, SDL_SWSURFACE | SDL_DOUBLEBUF | SDL_FULLSCREEN);
 
     // Initialize SDL_ttf
     if (TTF_Init() == -1)

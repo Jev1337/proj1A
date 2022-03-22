@@ -1,5 +1,5 @@
 #include "gamehead.h"
-
+#include "time.h"
 
 int main(int argc, char *args[])
 {
@@ -12,6 +12,8 @@ int main(int argc, char *args[])
 	btn B;
 	btndim BD;
 	character p;
+	srand(time(NULL));
+	
 	//Initializing SDL Lib
 	screen = init(&M);
 	if (screen == NULL)

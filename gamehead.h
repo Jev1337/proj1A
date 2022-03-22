@@ -10,11 +10,13 @@
 #include <SDL/SDL_image.h>
 #include <string.h>
 
+
 #include "ninjahubstd.h"
 #include "gamestructs.h"
 #include "character.h"
 #include "timer.h"
 #include "init.h"
+#include "enigme.h"
 #include "affichage.h"
 
 

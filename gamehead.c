@@ -3,7 +3,7 @@
 int afficher_menu(btndim *BD, btn *B,menuitems *MI, gameitems *GI, settingsitems *SI, pauseitems *PI, misc *M, character *p, SDL_Surface *screen)
 {
     show_menu(BD,B,MI, SI, screen);
-
+    enigme e;
     int frame = 0;
     int cap = 1;
     Timer fps;
@@ -53,6 +53,12 @@ int afficher_menu(btndim *BD, btn *B,menuitems *MI, gameitems *GI, settingsitems
             quit = pause(BD,B,SI, GI, PI, MI, M, &actpos, &actpos_previous, screen);
             if (quit == 2)
                 return 1;
+        }
+        if (actpos == 6){
+            quit = afficher_enigme(&e, screen);
+            if (quit == 2)
+                return 1;
+            actpos = 2;
         }
         if (SDL_Flip(screen) == -1)
         {
