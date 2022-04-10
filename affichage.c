@@ -512,7 +512,7 @@ int setting(btndim *BD, btn *B, pauseitems *PI, menuitems *MI, gameitems *GI, se
     return 0;
 }
 
-int game(btndim *BD, btn *B, menuitems *MI, gameitems *GI, pauseitems *PI, misc *M, character *p, int *actpos, SDL_Surface *screen)
+int game(btndim *BD, btn *B, menuitems *MI, gameitems *GI, pauseitems *PI, misc *M, character *p, int *actpos, SDL_Surface *screen) 
 {
     SDL_Event event;
      show_game(BD, B, GI, screen);
@@ -532,7 +532,7 @@ int game(btndim *BD, btn *B, menuitems *MI, gameitems *GI, pauseitems *PI, misc 
             if (event.key.keysym.sym == SDLK_UP)
             {
                 jump(p,BD, B, GI,screen);
-            }
+            } 
         }
         setcharacter(p,event);
         if (event.type == SDL_QUIT)

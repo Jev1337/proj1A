@@ -12,10 +12,9 @@ typedef struct{
     int rand;
 }enigme;
 
-int afficher_enigme(enigme *e, SDL_Surface *screen);
-int split (const char *txt, char delim, char ***tokens);
-void init_enigme(enigme *e, char nomfich[]);
-int animer(enigme *e, SDL_Event event);
+void afficher_enigme(enigme *e, SDL_Surface *screen);
+int init_enigme(enigme *e, char nomfich[], SDL_Surface *screen);
+void animer(enigme *e, SDL_Surface *screen);
 //void sauvegarder()
 //void charger()
 #endif

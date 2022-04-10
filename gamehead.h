@@ -2,19 +2,18 @@
 #ifndef GAMEHEAD_H_INCLUDED
 #define GAMEHEAD_H_INCLUDED
 #define SCREEN_BBP 32
-#define FRAMES_PER_SECOND 24
+#define FRAMES_PER_SECOND 22
 #include <SDL/SDL.h>
 #include <stdio.h>
 #include <SDL/SDL_ttf.h>
 #include <SDL/SDL_mixer.h>
 #include <SDL/SDL_image.h>
 #include <string.h>
-
-
+#include <time.h>
+#include "timer.h"
 #include "ninjahubstd.h"
 #include "gamestructs.h"
 #include "character.h"
-#include "timer.h"
 #include "init.h"
 #include "enigme.h"
 #include "affichage.h"

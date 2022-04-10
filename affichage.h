@@ -2,6 +2,8 @@
 #define AFFICHAGE_H_INCLUDED
 #include "gamehead.h"
 
+
+
 int menu(btndim *BD, btn *B, gameitems *GI, misc *M, menuitems *MI, settingsitems *SI, character *p, int *actpos, int *actpos_previous, SDL_Surface *screen);
 int setting(btndim *BD,btn *B,pauseitems *PI, menuitems *MI, gameitems *GI, settingsitems *SI,misc *M, int *actpos, int actpos_previous, SDL_Surface *screen);
 int credit(btndim *BD,btn *B,misc *M, menuitems *MI, settingsitems *SI, int *actpos, SDL_Surface *screen); 

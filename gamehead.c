@@ -12,7 +12,7 @@ int afficher_menu(btndim *BD, btn *B,menuitems *MI, gameitems *GI, settingsitems
     
     if (Mix_PlayMusic(M->music, -1) == -1)
     {
-        return 1;
+        return 1; 
     }
 
     while (quit == 0)
@@ -47,6 +47,8 @@ int afficher_menu(btndim *BD, btn *B,menuitems *MI, gameitems *GI, settingsitems
             quit = game(BD,B,MI, GI, PI, M,p, &actpos, screen);
             if (quit == 2)
                 return 1;
+            if (actpos !=2)
+                cleancharacter(p);
         }
         if (actpos == 5)
         {
@@ -55,7 +57,7 @@ int afficher_menu(btndim *BD, btn *B,menuitems *MI, gameitems *GI, settingsitems
                 return 1;
         }
         if (actpos == 6){
-            quit = afficher_enigme(&e, screen);
+            quit = init_enigme(&e,"enigme.txt", screen);
             if (quit == 2)
                 return 1;
             actpos = 2;
@@ -90,7 +92,7 @@ void finprog(btn *B, menuitems *MI, gameitems *GI, settingsitems *SI, pauseitems
     SDL_FreeSurface(B->menubtns_u[2]);
     SDL_FreeSurface(B->menubtns_u[3]);
     SDL_FreeSurface(B->menubtns_u[4]);
-    SDL_FreeSurface(B->donebtn[0]);
+    SDL_FreeSurface(B->donebtn[0]);  
     SDL_FreeSurface(B->menubtns_s[0]);
     SDL_FreeSurface(B->menubtns_s[1]);
     SDL_FreeSurface(B->menubtns_s[2]);
