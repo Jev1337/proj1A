@@ -526,7 +526,7 @@ int game(btndim *BD, btn *B, menuitems *MI, gameitems *GI, pauseitems *PI, misc 
     {
         printf("Collision detected!!\n");
     }*/
-    //Collision Function
+    // Collision Function
     Uint8 *keystate = SDL_GetKeyState(NULL);
 
     if (keystate[SDLK_p])
