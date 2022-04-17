@@ -2,7 +2,7 @@
 #ifndef GAMEHEAD_H_INCLUDED
 #define GAMEHEAD_H_INCLUDED
 #define SCREEN_BBP 32
-#define FRAMES_PER_SECOND 22
+#define FRAMES_PER_SECOND 16
 #include <SDL/SDL.h>
 #include <stdio.h>
 #include <SDL/SDL_ttf.h>
@@ -10,6 +10,8 @@
 #include <SDL/SDL_image.h>
 #include <string.h>
 #include <time.h>
+#include "header.h"
+#include "es.h"
 #include "timer.h"
 #include "ninjahubstd.h"
 #include "gamestructs.h"
@@ -24,6 +26,6 @@
 
 
 
-int afficher_menu(btndim *BD,btn *B, menuitems *MI, gameitems *GI, settingsitems *SI, pauseitems *PI, misc *M, character *p, SDL_Surface *screen);
+int afficher_menu(btndim *BD,btn *B, menuitems *MI, gameitems *GI, settingsitems *SI, pauseitems *PI, misc *M, character *p, Ennemi *en, SDL_Surface *screen);
 void finprog(btn *B,menuitems *MI, gameitems *GI, settingsitems *SI, pauseitems *PI, misc *M, character *p, SDL_Surface *screen);
 #endif // MENU_H_INCLUDED

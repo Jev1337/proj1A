@@ -1,5 +1,5 @@
-prog:main.o enigme.o character.o gamehead.o ninjahubstd.o init.o affichage.o timer.o 
-	gcc main.o enigme.c character.c gamehead.o ninjahubstd.o init.o affichage.o timer.o -o prog -lSDL -lSDL_ttf -g -lSDL_image -lSDL_mixer
+prog:main.o es.o enigme.o character.o gamehead.o ninjahubstd.o init.o affichage.o timer.o
+	gcc main.o es.c enigme.c character.c gamehead.o ninjahubstd.o init.o affichage.o timer.o -o prog -lSDL -lSDL_ttf -g -lSDL_image -lSDL_mixer
 main.o:main.c
 	gcc -c main.c -g
 init.o:init.c
@@ -16,4 +16,6 @@ character.o:character.c
 	gcc -c character.c -g
 enigme.o:enigme.c
 	gcc -c enigme.c -g
+es.o:es.c
+	gcc -c es.c -g
 

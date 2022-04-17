@@ -15,7 +15,7 @@ SDL_Surface *init(misc *M)
     M->SCREEN_H = info->current_h;
     M->SCREEN_W = info->current_w;
     // Set up the screen
-    screen = SDL_SetVideoMode(M->SCREEN_W, M->SCREEN_H, SCREEN_BBP, SDL_SWSURFACE | SDL_DOUBLEBUF | SDL_FULLSCREEN);
+    screen = SDL_SetVideoMode(M->SCREEN_W, M->SCREEN_H, SCREEN_BBP, SDL_SWSURFACE | SDL_DOUBLEBUF /*| SDL_FULLSCREEN*/);
 
     // Initialize SDL_ttf
     if (TTF_Init() == -1)
@@ -40,7 +40,6 @@ int load_files(btndim *BD, btn *B,menuitems *MI, pauseitems *PI, gameitems *GI, 
 
 
     SDL_Color white = {255, 255, 255};
-
 
     BD->menubtns[2].x = 766;
     BD->menubtns[2].y = 814;
@@ -155,5 +154,6 @@ int load_clips(misc *M, menuitems *MI, character *p){
         p->clips[i].w = 300;
         p->clips[i].h = 484;
     }
+
     return 1;
 }

@@ -1,6 +1,6 @@
 #include "gamehead.h"
 
-int afficher_menu(btndim *BD, btn *B,menuitems *MI, gameitems *GI, settingsitems *SI, pauseitems *PI, misc *M, character *p, SDL_Surface *screen)
+int afficher_menu(btndim *BD, btn *B,menuitems *MI, gameitems *GI, settingsitems *SI, pauseitems *PI, misc *M, character *p, Ennemi *en, SDL_Surface *screen)
 {
     show_menu(BD,B,MI, SI, screen);
     enigme e;
@@ -9,6 +9,9 @@ int afficher_menu(btndim *BD, btn *B,menuitems *MI, gameitems *GI, settingsitems
     Timer fps;
     int quit = 0;
     int actpos_previous = 1, actpos = 1;
+    PickUp coin;
+                initEnnemi(en);
+            initCoin(&coin);
     
     if (Mix_PlayMusic(M->music, -1) == -1)
     {
@@ -44,11 +47,14 @@ int afficher_menu(btndim *BD, btn *B,menuitems *MI, gameitems *GI, settingsitems
         }
         if (actpos == 2)
         { // State of Game
-            quit = game(BD,B,MI, GI, PI, M,p, &actpos, screen);
+
+            quit = game(BD,B,MI, GI, PI, M,p,en, &coin,&actpos, screen);
             if (quit == 2)
                 return 1;
-            if (actpos !=2)
+            if (actpos == 1){
                 cleancharacter(p);
+                freeEnnemie(*en);
+            }
         }
         if (actpos == 5)
         {
@@ -109,8 +115,6 @@ void finprog(btn *B, menuitems *MI, gameitems *GI, settingsitems *SI, pauseitems
     SDL_FreeSurface(MI->gamename);
     SDL_FreeSurface(MI->rightarrow);
     SDL_FreeSurface(MI->leftarrow);
-    SDL_FreeSurface(p->charsprite[0]);
-    SDL_FreeSurface(p->charsprite[1]);
     // Quit SDL
     SDL_Quit();
 }

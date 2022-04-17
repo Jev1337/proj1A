@@ -512,32 +512,37 @@ int setting(btndim *BD, btn *B, pauseitems *PI, menuitems *MI, gameitems *GI, se
     return 0;
 }
 
-int game(btndim *BD, btn *B, menuitems *MI, gameitems *GI, pauseitems *PI, misc *M, character *p, int *actpos, SDL_Surface *screen) 
+int game(btndim *BD, btn *B, menuitems *MI, gameitems *GI, pauseitems *PI, misc *M, character *p, Ennemi *e, PickUp *coin, int *actpos, SDL_Surface *screen)
 {
     SDL_Event event;
-     show_game(BD, B, GI, screen);
-    afficher_character(p,screen);
-    while (SDL_PollEvent(&event))
+    show_game(BD, B, GI, screen);
+    afficher_character(p, screen);
+    afficherEnnemi(*e, screen);
+    animerEnnemi(e);
+    animerCoin(coin);
+    afficher_ecran(1300, 800, coin->animation.spriteSheet[0], screen, &coin->animation.Clips[coin->animation.clipLoaded]);
+    deplacer(e);
+    /*if (collisionBB(p->offset, coin->pos) == 1)
     {
-        if (event.type == SDL_KEYDOWN)
-        {
-            if (event.key.keysym.sym == SDLK_p)
-                *actpos = 6;
-            if (event.key.keysym.sym == SDLK_ESCAPE)
-            {
-                *actpos = 5;
-                show_pausemenu(BD, B, MI, GI, PI, screen);
-                SDL_Delay(100);
-            }
-            if (event.key.keysym.sym == SDLK_UP)
-            {
-                jump(p,BD, B, GI,screen);
-            } 
-        }
-        setcharacter(p,event);
-        if (event.type == SDL_QUIT)
-            return 1;
+        printf("Collision detected!!\n");
+    }*/
+    //Collision Function
+    Uint8 *keystate = SDL_GetKeyState(NULL);
+
+    if (keystate[SDLK_p])
+        *actpos = 6;
+    if (keystate[SDLK_ESCAPE])
+    {
+        *actpos = 5;
+        show_pausemenu(BD, B, MI, GI, PI, screen);
     }
+    if (keystate[SDLK_UP])
+    {
+        jump(p, BD, B, GI, e, *coin, screen);
+    }
+    SDL_PollEvent(&event);
+
+    setcharacter(p, keystate);
     changedirection(p);
     return 0;
 }
@@ -548,11 +553,13 @@ int pause(btndim *BD, btn *B, settingsitems *SI, gameitems *GI, pauseitems *PI, 
     int x, y;
     while (SDL_PollEvent(&event))
     {
-        if (event.key.keysym.sym == SDLK_ESCAPE)
+        /*if (event.key.keysym.sym == SDLK_ESCAPE)
         {
             *actpos = 2;
             show_game(BD, B, GI, screen);
         }
+        */
+        // Temporarily Disabled
         if (event.type == SDL_MOUSEBUTTONDOWN)
         {
             if (event.button.button == SDL_BUTTON_LEFT)
