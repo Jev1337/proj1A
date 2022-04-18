@@ -1,8 +1,8 @@
 #include "gamehead.h"
 
-int afficher_menu(btndim *BD, btn *B,menuitems *MI, gameitems *GI, settingsitems *SI, pauseitems *PI, misc *M, character *p, Ennemi *en, SDL_Surface *screen)
+int afficher_menu(btndim *BD, btn *B, menuitems *MI, gameitems *GI, settingsitems *SI, pauseitems *PI, misc *M, character *p, Ennemi *en, background *b, SDL_Surface *screen)
 {
-    show_menu(BD,B,MI, SI, screen);
+    show_menu(BD, B, MI, SI, screen);
     enigme e;
     int frame = 0;
     int cap = 1;
@@ -10,12 +10,12 @@ int afficher_menu(btndim *BD, btn *B,menuitems *MI, gameitems *GI, settingsitems
     int quit = 0;
     int actpos_previous = 1, actpos = 1;
     PickUp coin;
-                initEnnemi(en);
-            initCoin(&coin);
-    
+    initEnnemi(en);
+    initCoin(&coin);
+    init_bg(b);
     if (Mix_PlayMusic(M->music, -1) == -1)
     {
-        return 1; 
+        return 1;
     }
 
     while (quit == 0)
@@ -23,47 +23,51 @@ int afficher_menu(btndim *BD, btn *B,menuitems *MI, gameitems *GI, settingsitems
         start(&fps);
         if (actpos == 1) // If we are in the main menu
         {
-            show_menu(BD,B,MI,SI,screen);
-            if (frame >= 8){
+            show_menu(BD, B, MI, SI, screen);
+            if (frame >= 8)
+            {
                 frame = 0;
             }
-            afficher_ecran(0,0,MI->rainspr,screen, &MI->rainclip[frame]);
+            
+            afficher_ecran(0, 0, MI->rainspr, screen, &MI->rainclip[frame]);
 
-            quit = menu(BD,B,GI, M, MI, SI, p, &actpos, &actpos_previous, screen);
+            quit = menu(BD, B, GI, M, MI, SI, p, b, &actpos, &actpos_previous, screen);
             if (quit == 2)
                 return 1;
         }
         if (actpos == 3)
         {
-            quit = credit(BD,B, M, MI, SI, &actpos, screen);
+            quit = credit(BD, B, M, MI, SI, &actpos, screen);
             if (quit == 2)
                 return 1;
         }
         if (actpos == 4)
         {
-            quit = setting(BD,B, PI, MI, GI, SI, M, &actpos, actpos_previous, screen);
+            quit = setting(BD, B, PI, MI, GI, SI, M,b, &actpos, actpos_previous, screen);
             if (quit == 2)
                 return 1;
         }
         if (actpos == 2)
         { // State of Game
 
-            quit = game(BD,B,MI, GI, PI, M,p,en, &coin,&actpos, screen);
+            quit = game(BD, B, MI, GI, PI, M, p, en, &coin,b, &actpos, screen);
             if (quit == 2)
                 return 1;
-            if (actpos == 1){
+            if (actpos == 1)
+            {
                 cleancharacter(p);
                 freeEnnemie(*en);
             }
         }
         if (actpos == 5)
         {
-            quit = pause(BD,B,SI, GI, PI, MI, M, &actpos, &actpos_previous, screen);
+            quit = pause(BD, B, SI, GI, PI, MI, M,b, &actpos, &actpos_previous, screen);
             if (quit == 2)
                 return 1;
         }
-        if (actpos == 6){
-            quit = init_enigme(&e,"enigme.txt", screen);
+        if (actpos == 6)
+        {
+            quit = init_enigme(&e, "enigme.txt", screen);
             if (quit == 2)
                 return 1;
             actpos = 2;
@@ -84,8 +88,7 @@ int afficher_menu(btndim *BD, btn *B,menuitems *MI, gameitems *GI, settingsitems
     return 0;
 }
 
-
-void finprog(btn *B, menuitems *MI, gameitems *GI, settingsitems *SI, pauseitems *PI, misc *M,character *p, SDL_Surface *screen)
+void finprog(btn *B, menuitems *MI, gameitems *GI, settingsitems *SI, pauseitems *PI, misc *M, character *p, SDL_Surface *screen)
 {
 
     Mix_FreeChunk(M->scratch);
@@ -98,7 +101,7 @@ void finprog(btn *B, menuitems *MI, gameitems *GI, settingsitems *SI, pauseitems
     SDL_FreeSurface(B->menubtns_u[2]);
     SDL_FreeSurface(B->menubtns_u[3]);
     SDL_FreeSurface(B->menubtns_u[4]);
-    SDL_FreeSurface(B->donebtn[0]);  
+    SDL_FreeSurface(B->donebtn[0]);
     SDL_FreeSurface(B->menubtns_s[0]);
     SDL_FreeSurface(B->menubtns_s[1]);
     SDL_FreeSurface(B->menubtns_s[2]);
@@ -111,7 +114,7 @@ void finprog(btn *B, menuitems *MI, gameitems *GI, settingsitems *SI, pauseitems
     SDL_FreeSurface(screen);
     SDL_FreeSurface(PI->pausemenu);
     SDL_FreeSurface(MI->btnreset);
-    SDL_FreeSurface (MI->rainspr);
+    SDL_FreeSurface(MI->rainspr);
     SDL_FreeSurface(MI->gamename);
     SDL_FreeSurface(MI->rightarrow);
     SDL_FreeSurface(MI->leftarrow);

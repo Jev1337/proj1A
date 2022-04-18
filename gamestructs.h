@@ -3,7 +3,6 @@
 #include "gamehead.h"
 
 
-
 typedef struct{
 
     SDL_Rect menubtns[5];

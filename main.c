@@ -13,6 +13,7 @@ int main(int argc, char *args[])
 	btndim BD;
 	character p;
 	Ennemi e;
+	background b;
 	srand(time(NULL));
 	
 	//Initializing SDL Lib
@@ -27,7 +28,7 @@ int main(int argc, char *args[])
 	//Blitting images, texts, and playing sounds whilst managing motion and clicking events
 	//If returned value is 1, we can not continue execution.
 
-	if (afficher_menu(&BD,&B,&MI,&GI,&SI,&PI,&M,&p,&e,screen) == 1)
+	if (afficher_menu(&BD,&B,&MI,&GI,&SI,&PI,&M,&p,&e,&b,screen) == 1)
 		return 1;
 	finprog(&B, &MI,&GI,&SI,&PI,&M,&p,screen);
 	return 0;

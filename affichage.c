@@ -1,6 +1,6 @@
 #include "gamehead.h"
 
-int menu(btndim *BD, btn *B, gameitems *GI, misc *M, menuitems *MI, settingsitems *SI, character *p, int *actpos, int *actpos_previous, SDL_Surface *screen)
+int menu(btndim *BD, btn *B, gameitems *GI, misc *M, menuitems *MI, settingsitems *SI, character *p,background *b, int *actpos, int *actpos_previous, SDL_Surface *screen)
 {
     SDL_Event event;
     int x, y, i;
@@ -56,7 +56,7 @@ int menu(btndim *BD, btn *B, gameitems *GI, misc *M, menuitems *MI, settingsitem
                     *actpos_previous = 1;
                     *actpos = 2;
                     Mix_HaltMusic();
-                    show_game(BD, B, GI, screen);
+                    show_game(BD, B, GI,b, screen);
                     initcharacter(p);
                 }
                 if (B->isselected[1]) // Credits
@@ -135,7 +135,7 @@ int menu(btndim *BD, btn *B, gameitems *GI, misc *M, menuitems *MI, settingsitem
                     }
                     *actpos_previous = 1;
                     *actpos = 2;
-                    show_game(BD, B, GI, screen);
+                    show_game(BD, B, GI,b, screen);
                 }
 
                 else if (B->isselected[1] == 1)
@@ -283,7 +283,7 @@ int credit(btndim *BD, btn *B, misc *M, menuitems *MI, settingsitems *SI, int *a
     return 0;
 }
 
-int setting(btndim *BD, btn *B, pauseitems *PI, menuitems *MI, gameitems *GI, settingsitems *SI, misc *M, int *actpos, int actpos_previous, SDL_Surface *screen)
+int setting(btndim *BD, btn *B, pauseitems *PI, menuitems *MI, gameitems *GI, settingsitems *SI, misc *M, background *b, int *actpos, int actpos_previous, SDL_Surface *screen)
 {
     SDL_Event event;
     int x, y;
@@ -465,7 +465,7 @@ int setting(btndim *BD, btn *B, pauseitems *PI, menuitems *MI, gameitems *GI, se
                 if (actpos_previous == 2)
                 {
                     // load game progress
-                    show_game(BD, B, GI, screen);
+                    show_game(BD, B, GI, b,screen);
                 }
                 *actpos = actpos_previous;
             }
@@ -512,10 +512,10 @@ int setting(btndim *BD, btn *B, pauseitems *PI, menuitems *MI, gameitems *GI, se
     return 0;
 }
 
-int game(btndim *BD, btn *B, menuitems *MI, gameitems *GI, pauseitems *PI, misc *M, character *p, Ennemi *e, PickUp *coin, int *actpos, SDL_Surface *screen)
+int game(btndim *BD, btn *B, menuitems *MI, gameitems *GI, pauseitems *PI, misc *M, character *p, Ennemi *e, PickUp *coin, background *b, int *actpos, SDL_Surface *screen)
 {
     SDL_Event event;
-    show_game(BD, B, GI, screen);
+    show_game(BD, B, GI, b, screen);
     afficher_character(p, screen);
     afficherEnnemi(*e, screen);
     animerEnnemi(e);
@@ -538,16 +538,17 @@ int game(btndim *BD, btn *B, menuitems *MI, gameitems *GI, pauseitems *PI, misc 
     }
     if (keystate[SDLK_UP])
     {
-        jump(p, BD, B, GI, e, *coin, screen);
+        jump(p, BD, B, GI, e, *coin,b, screen);
     }
     SDL_PollEvent(&event);
 
     setcharacter(p, keystate);
-    changedirection(p);
+
+        changedirection(p,b);
     return 0;
 }
 
-int pause(btndim *BD, btn *B, settingsitems *SI, gameitems *GI, pauseitems *PI, menuitems *MI, misc *M, int *actpos, int *actpos_previous, SDL_Surface *screen)
+int pause(btndim *BD, btn *B, settingsitems *SI, gameitems *GI, pauseitems *PI, menuitems *MI, misc *M, background *b, int *actpos, int *actpos_previous, SDL_Surface *screen)
 {
     SDL_Event event;
     int x, y;
@@ -586,7 +587,7 @@ int pause(btndim *BD, btn *B, settingsitems *SI, gameitems *GI, pauseitems *PI, 
                         return 2;
                     }
                     // load the game with the save
-                    show_game(BD, B, GI, screen);
+                    show_game(BD, B, GI, b, screen);
 
                     *actpos = 2;
                 }
@@ -709,9 +710,9 @@ void show_pausemenu(btndim *BD, btn *B, menuitems *MI, gameitems *GI, pauseitems
     afficher_ecran(760, 665, B->menubtns_u[2], screen, NULL);
 }
 
-void show_game(btndim *BD, btn *B, gameitems *GI, SDL_Surface *screen)
+void show_game(btndim *BD, btn *B, gameitems *GI,background *b, SDL_Surface *screen)
 {
-    afficher_ecran(0, 0, GI->gamebackground, screen, NULL);
+    afficher_ecran(b->posimage.x, b->posimage.y, b->image , screen, NULL);
 }
 
 void show_credits(btndim *BD, btn *B, menuitems *MI, settingsitems *SI, SDL_Surface *screen)

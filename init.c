@@ -16,7 +16,7 @@ SDL_Surface *init(misc *M)
     M->SCREEN_W = info->current_w;
     // Set up the screen
     screen = SDL_SetVideoMode(M->SCREEN_W, M->SCREEN_H, SCREEN_BBP, SDL_SWSURFACE | SDL_DOUBLEBUF /*| SDL_FULLSCREEN*/);
-
+    SDL_EnableKeyRepeat(1,1);
     // Initialize SDL_ttf
     if (TTF_Init() == -1)
     {
