@@ -6,8 +6,6 @@
 
 
 
-
-
 void initcharacter(character *p);
 void setcharacter(character *p,  Uint8* keystate); 
 void changedirection (character  *p, background *b);

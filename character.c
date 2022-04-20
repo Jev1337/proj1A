@@ -1,5 +1,6 @@
 #include "character.h"
 
+
 void initcharacter(character *p)
 {
     p->charsprite[0] = IMG_Load("images/leftsheet.png");
@@ -10,8 +11,8 @@ void initcharacter(character *p)
     p->offset.y = 1080 - p->clips[p->direction].h;
     p->offset.w = 300;
     p->offset.h = p->clips[p->direction].h;
-    p->speed = 60;
-    p->score = 0;
+    p->health = 3;
+    p->speed = 30;
 }
 
 void setcharacter(character *p, Uint8 *keystate)
@@ -55,91 +56,11 @@ void jump(character *p, btndim *BD, btn *B, gameitems *GI, Ennemi *e, PickUp coi
 {
     int i, j;
     Mix_Chunk *jump = Mix_LoadWAV("sounds/jump.wav");
-    ;
     Mix_PlayChannel(1, jump, 0);
     for (j = 10, i = 0; i <= 12; i++, j += 3, p->offset.y -= j)
     {
         if (p->side == 1 | p->side == -2)
         {
-            if (p->offset.x < 1920 / 2 - p->offset.w / 2)
-            {
-                p->offset.x += 15;
-                b->posmask.x += 15;
-            }
-            else if (b->posimage.x > -(b->image->w - 1920))
-            {
-                b->posimage.x -= p->speed / 2;
-                b->posmask.x += p->speed;
-            }
-        }
-        else if (p->side == 0 | p->side == -1)
-        {
-            if (p->offset.x - 10 > 0)
-            {
-                p->offset.x -= 15;
-                b->posmask.x -= 15;
-            }
-        }
-
-        show_game(BD, B, GI, b, screen);
-        afficher_character(p, screen);
-        afficherEnnemi(*e, screen);
-        afficher_ecran(1300, 800, coin.animation.spriteSheet[0], screen, &coin.animation.Clips[coin.animation.clipLoaded]);
-        SDL_Flip(screen);
-        SDL_Delay(16);
-    }
-    for (j = 10, i = 0; i <= 12; i++, j += 3, p->offset.y += j)
-    {
-        if (p->side == 1 | p->side == -2)
-        {
-            if (p->offset.x < 1920 / 2 - p->offset.w / 2)
-            {
-                p->offset.x += 15;
-                b->posmask.x += 15;
-            }
-            else if (b->posimage.x > -(b->image->w - 1920))
-            {
-                b->posimage.x -= p->speed;
-                b->posmask.x += p->speed;
-            }
-        }
-        else if (p->side == 0 | p->side == -1)
-        {
-            if (p->offset.x - 10 > 0)
-            {
-                p->offset.x -= 15;
-                b->posmask.x -= 15;
-            }
-        }
-        show_game(BD, B, GI, b, screen);
-        afficher_character(p, screen);
-        afficherEnnemi(*e, screen);
-        afficher_ecran(1300, 800, coin.animation.spriteSheet[0], screen, &coin.animation.Clips[coin.animation.clipLoaded]);
-        SDL_Flip(screen);
-        SDL_Delay(16);
-    }
-}
-
-int changedirection(character *p, background *b)
-{
-    if (p->side == 0)
-    {
-if (collisionPP(b->posmask, b->imageM) == 0)
-        if (p->offset.x > 0)
-        {
-            
-            p->offset.x -= p->speed;
-            b->posmask.x -= p->speed;
-        }
-        p->direction--;
-        if (p->direction == -1)
-            p->direction = 3;
-    }
-    else if (p->side == 1)
-    {
-
-        // we need to add the condition where if we are in the last point in the level we have to allow the player to move around to the next half of the screen
-        if (collisionPP(b->posmask, b->imageM) == 0){
             if (p->offset.x < 1920 / 2 - p->offset.w / 2)
             {
                 p->offset.x += p->speed;
@@ -151,7 +72,106 @@ if (collisionPP(b->posmask, b->imageM) == 0)
                 b->posmask.x += p->speed;
             }
         }
+        else if (p->side == 0 | p->side == -1)
+        {
+            if (p->offset.x - 10 > 0)
+            {
+                p->offset.x -= p->speed;
+                b->posmask.x -= p->speed;
+            }
+            else if (b->posimage.x < 0)
+            {
+                b->posimage.x += p->speed;
+                b->posmask.x -= p->speed;
+            }
+        }
+
+        show_game(BD, B, GI, b, screen);
+        afficher_character(p, screen);
+        afficherEnnemi(*e, screen);
+        afficher_ecran(1300, 800, coin.animation.spriteSheet[0], screen, &coin.animation.Clips[coin.animation.clipLoaded]);
+        animerCoin(&coin);
+        animerEnnemi(e);
+        deplacer(e);
+        SDL_Flip(screen);
+        SDL_Delay(18);
+    }
+    for (j = 10, i = 0; i <= 12; i++, j += 3, p->offset.y += j)
+    {
+        if (p->side == 1 | p->side == -2)
+        {
+            if (p->offset.x < 1920 / 2 - p->offset.w / 2)
+            {
+                p->offset.x += p->speed;
+                b->posmask.x += p->speed;
+            }
+            else if (b->posimage.x > -(b->image->w - 1920))
+            {
+                b->posimage.x -= p->speed;
+                b->posmask.x += p->speed;
+            }
+        }
+        else if (p->side == 0 | p->side == -1)
+        {
+            if (p->offset.x - 10 > 0)
+            {
+                p->offset.x -= p->speed;
+                b->posmask.x -= p->speed;
+            }
+            else if (b->posimage.x < 0)
+            {
+                b->posimage.x += p->speed;
+                b->posmask.x -= p->speed;
+            }
+        }
+        show_game(BD, B, GI, b, screen);
+        afficher_character(p, screen);
+        afficherEnnemi(*e, screen);
+        afficher_ecran(1300, 800, coin.animation.spriteSheet[0], screen, &coin.animation.Clips[coin.animation.clipLoaded]);
+        animerCoin(&coin);
+        animerEnnemi(e);
+        deplacer(e);
+        SDL_Flip(screen);
+        SDL_Delay(18);
+    }
+}
+
+void changedirection(character *p, background *b)
+{
+    if (p->side == 0)
+    {
+        if (collisionPP(b->posmask, b->imageM) == 0){
+            if (p->offset.x > 0)
+            {
+                p->offset.x -= p->speed;
+                b->posmask.x -= p->speed;
+            }
+            else if (b->posimage.x < -p->speed){
+                b->posmask.x -= p->speed;
+                b->posimage.x += p->speed;
+            }
+        }
+        p->direction--;
+        if (p->direction == -1)
+            p->direction = 3;
+    }
+    else if (p->side == 1)
+    {
+
+        // we need to add the condition where if we are in the last point in the level we have to allow the player to move around to the next half of the screen
         if (collisionPP(b->posmask, b->imageM) == 0)
+        {
+            if (p->offset.x < 1920 / 2 - p->offset.w / 2)
+            {
+                p->offset.x += p->speed;
+                b->posmask.x += p->speed;
+            }
+            else if (b->posimage.x > -(b->image->w - 1920))
+            {
+                b->posimage.x -= p->speed;
+                b->posmask.x += p->speed;
+            }
+        }
             p->direction++;
         if (p->direction == 5)
             p->direction = 1;

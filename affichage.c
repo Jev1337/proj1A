@@ -1,6 +1,6 @@
 #include "gamehead.h"
 
-int menu(btndim *BD, btn *B, gameitems *GI, misc *M, menuitems *MI, settingsitems *SI, character *p,background *b, int *actpos, int *actpos_previous, SDL_Surface *screen)
+int menu(btndim *BD, btn *B, gameitems *GI, misc *M, menuitems *MI, settingsitems *SI, character *p, background *b, int *actpos, int *actpos_previous, SDL_Surface *screen)
 {
     SDL_Event event;
     int x, y, i;
@@ -56,7 +56,7 @@ int menu(btndim *BD, btn *B, gameitems *GI, misc *M, menuitems *MI, settingsitem
                     *actpos_previous = 1;
                     *actpos = 2;
                     Mix_HaltMusic();
-                    show_game(BD, B, GI,b, screen);
+                    show_game(BD, B, GI, b, screen);
                     initcharacter(p);
                 }
                 if (B->isselected[1]) // Credits
@@ -135,7 +135,7 @@ int menu(btndim *BD, btn *B, gameitems *GI, misc *M, menuitems *MI, settingsitem
                     }
                     *actpos_previous = 1;
                     *actpos = 2;
-                    show_game(BD, B, GI,b, screen);
+                    show_game(BD, B, GI, b, screen);
                 }
 
                 else if (B->isselected[1] == 1)
@@ -327,7 +327,7 @@ int setting(btndim *BD, btn *B, pauseitems *PI, menuitems *MI, gameitems *GI, se
                     if (actpos_previous == 1)
                         show_menu(BD, B, MI, SI, screen);
                     if (actpos_previous == 5)
-                        show_pausemenu(BD, B, MI, GI, PI, screen);
+                        show_pausemenu(BD, B, MI, GI, PI, b, screen);
                     *actpos = actpos_previous;
                     // applysettings
                 }
@@ -423,7 +423,7 @@ int setting(btndim *BD, btn *B, pauseitems *PI, menuitems *MI, gameitems *GI, se
                         if (actpos_previous == 1)
                             show_menu(BD, B, MI, SI, screen);
                         if (actpos_previous == 5)
-                            show_pausemenu(BD, B, MI, GI, PI, screen);
+                            show_pausemenu(BD, B, MI, GI, PI, b, screen);
                         show_settings(BD, B, SI, M, screen);
                         afficher_ecran(776, 500, B->fsbtn[2], screen, NULL);
                     }
@@ -435,7 +435,7 @@ int setting(btndim *BD, btn *B, pauseitems *PI, menuitems *MI, gameitems *GI, se
                         if (actpos_previous == 1)
                             show_menu(BD, B, MI, SI, screen);
                         if (actpos_previous == 5)
-                            show_pausemenu(BD, B, MI, GI, PI, screen);
+                            show_pausemenu(BD, B, MI, GI, PI, b, screen);
                         show_settings(BD, B, SI, M, screen);
                         afficher_ecran(776, 500, B->fsbtn[1], screen, NULL);
                     }
@@ -446,7 +446,7 @@ int setting(btndim *BD, btn *B, pauseitems *PI, menuitems *MI, gameitems *GI, se
                         if (actpos_previous == 1)
                             show_menu(BD, B, MI, SI, screen);
                         if (actpos_previous == 5)
-                            show_pausemenu(BD, B, MI, GI, PI, screen);
+                            show_pausemenu(BD, B, MI, GI, PI, b, screen);
                         show_settings(BD, B, SI, M, screen);
                     }
                 }
@@ -465,7 +465,7 @@ int setting(btndim *BD, btn *B, pauseitems *PI, menuitems *MI, gameitems *GI, se
                 if (actpos_previous == 2)
                 {
                     // load game progress
-                    show_game(BD, B, GI, b,screen);
+                    show_game(BD, B, GI, b, screen);
                 }
                 *actpos = actpos_previous;
             }
@@ -529,22 +529,122 @@ int game(btndim *BD, btn *B, menuitems *MI, gameitems *GI, pauseitems *PI, misc 
     // Collision Function
     Uint8 *keystate = SDL_GetKeyState(NULL);
 
+    if (b->posmask.x >= 6990 && GI->lvl != 5)
+    {
+        GI->lvl++;
+        b->posmask.x = 0;
+        p->offset.x = 0;
+        b->posimage.x = 0;
+        switch (GI->lvl){
+        case 1:
+            SDL_FillRect(screen, NULL, 0xB2B2B2);
+        SDL_Delay(100);
+        SDL_Flip(screen);
+        SDL_FillRect(screen, NULL, 0x5C5C5C);
+        SDL_Delay(100);
+        SDL_Flip(screen);
+        SDL_FillRect(screen, NULL, 0x222222);
+        SDL_Delay(100);
+        SDL_Flip(screen);
+        SDL_FillRect(screen, NULL, 0);
+        SDL_Delay(100);
+        SDL_Flip(screen);
+        SDL_FreeSurface(b->image);
+        b->image = IMG_Load("images/11night0.png");
+        show_game(BD, B, GI, b, screen);
+        SDL_Flip(screen);
+        break;
+    case 2:
+        SDL_FillRect(screen, NULL, 0xB2B2B2);
+        SDL_Delay(100);
+        SDL_Flip(screen);
+        SDL_FillRect(screen, NULL, 0x5C5C5C);
+        SDL_Delay(100);
+        SDL_Flip(screen);
+        SDL_FillRect(screen, NULL, 0x222222);
+        SDL_Delay(100);
+        SDL_Flip(screen);
+        SDL_FillRect(screen, NULL, 0);
+        SDL_Delay(100);
+        SDL_Flip(screen);
+        SDL_FreeSurface(b->image);
+        b->image = IMG_Load("images/11night1.png");
+        show_game(BD, B, GI, b, screen);
+        SDL_Flip(screen);
+        break;
+    case 3:
+        SDL_FillRect(screen, NULL, 0xB2B2B2);
+        SDL_Delay(100);
+        SDL_Flip(screen);
+        SDL_FillRect(screen, NULL, 0x5C5C5C);
+        SDL_Delay(100);
+        SDL_Flip(screen);
+        SDL_FillRect(screen, NULL, 0x222222);
+        SDL_Delay(100);
+        SDL_Flip(screen);
+        SDL_FillRect(screen, NULL, 0);
+        SDL_Delay(100);
+        SDL_Flip(screen);
+        SDL_FreeSurface(b->image);
+        b->image = IMG_Load("images/11night2.png");
+        show_game(BD, B, GI, b, screen);
+        SDL_Flip(screen);
+        break;
+    case 4:
+        SDL_FillRect(screen, NULL, 0xB2B2B2);
+        SDL_Delay(100);
+        SDL_Flip(screen);
+        SDL_FillRect(screen, NULL, 0x5C5C5C);
+        SDL_Delay(100);
+        SDL_Flip(screen);
+        SDL_FillRect(screen, NULL, 0x222222);
+        SDL_Delay(100);
+        SDL_Flip(screen);
+        SDL_FillRect(screen, NULL, 0);
+        SDL_Delay(100);
+        SDL_Flip(screen);
+        SDL_FreeSurface(b->image);
+        b->image = IMG_Load("images/11night3.png");
+        show_game(BD, B, GI, b, screen);
+        SDL_Flip(screen);
+        break;
+    case 5:
+        SDL_FillRect(screen, NULL, 0xB2B2B2);
+        SDL_Delay(100);
+        SDL_Flip(screen);
+        SDL_FillRect(screen, NULL, 0x5C5C5C);
+        SDL_Delay(100);
+        SDL_Flip(screen);
+        SDL_FillRect(screen, NULL, 0x222222);
+        SDL_Delay(100);
+        SDL_Flip(screen);
+        SDL_FillRect(screen, NULL, 0);
+        SDL_Delay(100);
+        SDL_Flip(screen);
+        SDL_FreeSurface(b->image);
+        b->image = IMG_Load("images/11night4.png");
+        show_game(BD, B, GI, b, screen);
+        SDL_Flip(screen);
+        break;
+    }
+    }
+
     if (keystate[SDLK_p])
         *actpos = 6;
     if (keystate[SDLK_ESCAPE])
     {
         *actpos = 5;
-        show_pausemenu(BD, B, MI, GI, PI, screen);
+        show_pausemenu(BD, B, MI, GI, PI, b, screen);
     }
     if (keystate[SDLK_UP])
     {
-        jump(p, BD, B, GI, e, *coin,b, screen);
+        jump(p, BD, B, GI, e, *coin, b, screen);
     }
     SDL_PollEvent(&event);
 
     setcharacter(p, keystate);
 
-        changedirection(p,b);
+    changedirection(p, b);
     return 0;
 }
 
@@ -621,7 +721,7 @@ int pause(btndim *BD, btn *B, settingsitems *SI, gameitems *GI, pauseitems *PI, 
                 if (B->isselected[2] == 1)
                 {
                     B->isselected[2] = 0;
-                    show_pausemenu(BD, B, MI, GI, PI, screen);
+                    show_pausemenu(BD, B, MI, GI, PI, b, screen);
                 }
             }
 
@@ -639,7 +739,7 @@ int pause(btndim *BD, btn *B, settingsitems *SI, gameitems *GI, pauseitems *PI, 
                 if (B->isselected[5] == 1)
                 {
                     B->isselected[5] = 0;
-                    show_pausemenu(BD, B, MI, GI, PI, screen);
+                    show_pausemenu(BD, B, MI, GI, PI, b, screen);
                 }
             }
 
@@ -657,7 +757,7 @@ int pause(btndim *BD, btn *B, settingsitems *SI, gameitems *GI, pauseitems *PI, 
                 if (B->isselected[6] == 1)
                 {
                     B->isselected[6] = 0;
-                    show_pausemenu(BD, B, MI, GI, PI, screen);
+                    show_pausemenu(BD, B, MI, GI, PI, b, screen);
                 }
             }
         }
@@ -701,18 +801,18 @@ void show_menu(btndim *BD, btn *B, menuitems *MI, settingsitems *SI, SDL_Surface
         afficher_ecran(1636, 20, B->menubtns_u[4], screen, NULL);
 }
 
-void show_pausemenu(btndim *BD, btn *B, menuitems *MI, gameitems *GI, pauseitems *PI, SDL_Surface *screen)
+void show_pausemenu(btndim *BD, btn *B, menuitems *MI, gameitems *GI, pauseitems *PI, background *b, SDL_Surface *screen)
 {
-    afficher_ecran(0, 0, GI->gamebackground, screen, NULL);
+    show_game(BD, B, GI, b, screen);
     afficher_ecran(0, 0, PI->pausemenu, screen, NULL);
     afficher_ecran(760, 413, B->resumebtn[0], screen, NULL);
     afficher_ecran(760, 540, B->settingsbtnreal[0], screen, NULL);
     afficher_ecran(760, 665, B->menubtns_u[2], screen, NULL);
 }
 
-void show_game(btndim *BD, btn *B, gameitems *GI,background *b, SDL_Surface *screen)
+void show_game(btndim *BD, btn *B, gameitems *GI, background *b, SDL_Surface *screen)
 {
-    afficher_ecran(b->posimage.x, b->posimage.y, b->image , screen, NULL);
+    afficher_ecran(b->posimage.x, b->posimage.y, b->image, screen, NULL);
 }
 
 void show_credits(btndim *BD, btn *B, menuitems *MI, settingsitems *SI, SDL_Surface *screen)

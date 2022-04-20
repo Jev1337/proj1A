@@ -1,0 +1,13 @@
+{
+    "makefile.extensionOutputFolder": "./.vscode",
+    "files.associations": {
+        "time.h": "c",
+        "gamehead.h": "c",
+        "math.h": "c",
+        "character.h": "c",
+        "timer.h": "c",
+        "header.h": "c",
+        "background.h": "c",
+        "gamestructs.h": "c"
+    }
+}

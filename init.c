@@ -41,6 +41,8 @@ int load_files(btndim *BD, btn *B,menuitems *MI, pauseitems *PI, gameitems *GI, 
 
     SDL_Color white = {255, 255, 255};
 
+    GI->lvl = 0;
+
     BD->menubtns[2].x = 766;
     BD->menubtns[2].y = 814;
     BD->menubtns[2].w = 400;
@@ -126,11 +128,10 @@ int load_files(btndim *BD, btn *B,menuitems *MI, pauseitems *PI, gameitems *GI, 
     MI->leftarrow = TTF_RenderText_Solid(M->fontBig, ">", white);
     MI->rightarrow = TTF_RenderText_Solid(M->fontBig, "<", white);
 
-    GI->gamebackground = load_image("images/gamebackground.jpg");
     SI->settings = IMG_Load("images/settings.png");
     PI->pausemenu = IMG_Load("images/pausemenu.png");
 
-    if ( MI->rightarrow == NULL || MI->leftarrow == NULL || MI->rainspr == NULL || MI->gamename == NULL || B->fsbtn[0] == NULL || B->fsbtn[1] == NULL || B->fsbtn[2] == NULL || M->music == NULL || M->font == NULL || M->scratch == NULL || SI->settings == NULL || MI->background == NULL || B->menubtns_u[2] == NULL || B->menubtns_u[1] == NULL || B->menubtns_u[0] == NULL || B->menubtns_u[4] == NULL || B->menubtns_u[3] == NULL || B->donebtn[1] == NULL || B->donebtn[0] == NULL || B->menubtns_s[2] == NULL || B->menubtns_s[1] == NULL || B->menubtns_s[0] == NULL || B->menubtns_s[4] == NULL || B->menubtns_s[3] == NULL || B->donebtn[1] == NULL || B->donebtn[0] == NULL || GI->gamebackground == NULL || PI->pausemenu == NULL || B->settingsbtnreal[1] == NULL || B->settingsbtnreal[0] == NULL || B->resumebtn[1] == NULL || B->resumebtn[0] == NULL)
+    if ( MI->rightarrow == NULL || MI->leftarrow == NULL || MI->rainspr == NULL || MI->gamename == NULL || B->fsbtn[0] == NULL || B->fsbtn[1] == NULL || B->fsbtn[2] == NULL || M->music == NULL || M->font == NULL || M->scratch == NULL || SI->settings == NULL || MI->background == NULL || B->menubtns_u[2] == NULL || B->menubtns_u[1] == NULL || B->menubtns_u[0] == NULL || B->menubtns_u[4] == NULL || B->menubtns_u[3] == NULL || B->donebtn[1] == NULL || B->donebtn[0] == NULL || B->menubtns_s[2] == NULL || B->menubtns_s[1] == NULL || B->menubtns_s[0] == NULL || B->menubtns_s[4] == NULL || B->menubtns_s[3] == NULL || B->donebtn[1] == NULL || B->donebtn[0] == NULL || PI->pausemenu == NULL || B->settingsbtnreal[1] == NULL || B->settingsbtnreal[0] == NULL || B->resumebtn[1] == NULL || B->resumebtn[0] == NULL)
     {
         return 0;
     }

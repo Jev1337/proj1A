@@ -34,29 +34,36 @@ int afficher_menu(btndim *BD, btn *B, menuitems *MI, gameitems *GI, settingsitem
             quit = menu(BD, B, GI, M, MI, SI, p, b, &actpos, &actpos_previous, screen);
             if (quit == 2)
                 return 1;
+                                    if (actpos!=1 && actpos!=4 && actpos!=3)
+                SDL_FillRect(screen, NULL, 0);   
         }
         if (actpos == 3)
         {
             quit = credit(BD, B, M, MI, SI, &actpos, screen);
             if (quit == 2)
                 return 1;
+                        if (actpos!=3)
+                SDL_FillRect(screen, NULL, 0);   
         }
         if (actpos == 4)
         {
             quit = setting(BD, B, PI, MI, GI, SI, M,b, &actpos, actpos_previous, screen);
             if (quit == 2)
                 return 1;
+            if (actpos!=4)
+                SDL_FillRect(screen, NULL, 0);   
         }
         if (actpos == 2)
         { // State of Game
-
+                   
             quit = game(BD, B, MI, GI, PI, M, p, en, &coin,b, &actpos, screen);
-            if (quit == 2)
+            if (quit == 2) 
                 return 1;
             if (actpos == 1)
             {
                 cleancharacter(p);
                 freeEnnemie(*en);
+                SDL_FillRect(screen, NULL, 0);   
             }
         }
         if (actpos == 5)
@@ -93,7 +100,6 @@ void finprog(btn *B, menuitems *MI, gameitems *GI, settingsitems *SI, pauseitems
 
     Mix_FreeChunk(M->scratch);
     SDL_FreeSurface(MI->background);
-    SDL_FreeSurface(GI->gamebackground);
     SDL_FreeSurface(SI->settings);
     SDL_FreeSurface(MI->credits);
     SDL_FreeSurface(B->menubtns_u[0]);

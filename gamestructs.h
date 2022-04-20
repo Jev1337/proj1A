@@ -37,7 +37,7 @@ typedef struct{
 }menuitems;
 
 typedef struct{
-    SDL_Surface *gamebackground;
+    int lvl;
 }gameitems;
 
 typedef struct{
