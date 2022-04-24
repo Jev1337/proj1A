@@ -1,0 +1,130 @@
+\hypertarget{gamehead_8h}{}\doxysection{gamehead.\+h File Reference}
+\label{gamehead_8h}\index{gamehead.h@{gamehead.h}}
+
+
+This a header that collects all the headers and calls them all at once.  
+
+
+{\ttfamily \#include $<$S\+D\+L/\+S\+D\+L.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$S\+D\+L/\+S\+D\+L\+\_\+ttf.\+h$>$}\newline
+{\ttfamily \#include $<$S\+D\+L/\+S\+D\+L\+\_\+mixer.\+h$>$}\newline
+{\ttfamily \#include $<$S\+D\+L/\+S\+D\+L\+\_\+image.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$time.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}ninjahubstd.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}es.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}timer.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}gamestructs.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}character.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}background.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}init.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}enigme.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}affichage.\+h\char`\"{}}\newline
+Include dependency graph for gamehead.\+h\+:
+% FIG 0
+This graph shows which files directly or indirectly include this file\+:
+% FIG 1
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{gamehead_8h_a88cded83ab93d3a7238573aaf233d3a1}\label{gamehead_8h_a88cded83ab93d3a7238573aaf233d3a1}} 
+\#define {\bfseries S\+C\+R\+E\+E\+N\+\_\+\+B\+BP}~32
+\item 
+\mbox{\Hypertarget{gamehead_8h_a85f9d29551f1bf30f03229da27cb532f}\label{gamehead_8h_a85f9d29551f1bf30f03229da27cb532f}} 
+\#define {\bfseries F\+R\+A\+M\+E\+S\+\_\+\+P\+E\+R\+\_\+\+S\+E\+C\+O\+ND}~22
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{gamehead_8h_a2e3d8e8229f6fc6962b625e85c051496}{afficher\+\_\+menu}} (\mbox{\hyperlink{structbtndim}{btndim}} $\ast$BD, \mbox{\hyperlink{structbtn}{btn}} $\ast$B, \mbox{\hyperlink{structmenuitems}{menuitems}} $\ast$MI, \mbox{\hyperlink{structgameitems}{gameitems}} $\ast$GI, \mbox{\hyperlink{structsettingsitems}{settingsitems}} $\ast$SI, \mbox{\hyperlink{structpauseitems}{pauseitems}} $\ast$PI, \mbox{\hyperlink{structmisc}{misc}} $\ast$M, \mbox{\hyperlink{structcharacter}{character}} $\ast$p, \mbox{\hyperlink{structEnnemi}{Ennemi}} $\ast$en, \mbox{\hyperlink{structbackground}{background}} $\ast$b, S\+D\+L\+\_\+\+Surface $\ast$screen)
+\begin{DoxyCompactList}\small\item\em Afficher Menu is a function that starts the entire Video Game. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{gamehead_8h_aff37e7fadf47427b4b7b1339c7435884}{finprog}} (\mbox{\hyperlink{structbtn}{btn}} $\ast$B, \mbox{\hyperlink{structmenuitems}{menuitems}} $\ast$MI, \mbox{\hyperlink{structgameitems}{gameitems}} $\ast$GI, \mbox{\hyperlink{structsettingsitems}{settingsitems}} $\ast$SI, \mbox{\hyperlink{structpauseitems}{pauseitems}} $\ast$PI, \mbox{\hyperlink{structmisc}{misc}} $\ast$M, \mbox{\hyperlink{structcharacter}{character}} $\ast$p, S\+D\+L\+\_\+\+Surface $\ast$screen)
+\begin{DoxyCompactList}\small\item\em Fin\+Prog is a function that frees Most of the loaded items especially from the menu. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This a header that collects all the headers and calls them all at once. 
+
+\begin{DoxyAuthor}{Author}
+Abdelmalek Amir Hassen Yasmine Ayadi Yassine Bouzouita Mohamed Sghaier Chaaben Nour Mbarki Akkari Rihem 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+0.\+7 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2022-\/04-\/24
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+Copyright (c) 2022 
+\end{DoxyCopyright}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{gamehead_8h_a2e3d8e8229f6fc6962b625e85c051496}\label{gamehead_8h_a2e3d8e8229f6fc6962b625e85c051496}} 
+\index{gamehead.h@{gamehead.h}!afficher\_menu@{afficher\_menu}}
+\index{afficher\_menu@{afficher\_menu}!gamehead.h@{gamehead.h}}
+\doxysubsubsection{\texorpdfstring{afficher\_menu()}{afficher\_menu()}}
+{\footnotesize\ttfamily int afficher\+\_\+menu (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structbtndim}{btndim}} $\ast$}]{BD,  }\item[{\mbox{\hyperlink{structbtn}{btn}} $\ast$}]{B,  }\item[{\mbox{\hyperlink{structmenuitems}{menuitems}} $\ast$}]{MI,  }\item[{\mbox{\hyperlink{structgameitems}{gameitems}} $\ast$}]{GI,  }\item[{\mbox{\hyperlink{structsettingsitems}{settingsitems}} $\ast$}]{SI,  }\item[{\mbox{\hyperlink{structpauseitems}{pauseitems}} $\ast$}]{PI,  }\item[{\mbox{\hyperlink{structmisc}{misc}} $\ast$}]{M,  }\item[{\mbox{\hyperlink{structcharacter}{character}} $\ast$}]{p,  }\item[{\mbox{\hyperlink{structEnnemi}{Ennemi}} $\ast$}]{en,  }\item[{\mbox{\hyperlink{structbackground}{background}} $\ast$}]{b,  }\item[{S\+D\+L\+\_\+\+Surface $\ast$}]{screen }\end{DoxyParamCaption})}
+
+
+
+Afficher Menu is a function that starts the entire Video Game. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em BD} & Button Dimentions are stored in here \\
+\hline
+{\em B} & Button S\+D\+L\+\_\+\+Surfaces are stored in here \\
+\hline
+{\em MI} & Menu Items are stored in here \\
+\hline
+{\em GI} & Game Items are stored in here \\
+\hline
+{\em SI} & Settings Items are stored in here \\
+\hline
+{\em PI} & Pause Menu Items are stored in here \\
+\hline
+{\em M} & Miscalenous items such as Sound are stored in here \\
+\hline
+{\em p} & Character and it\textquotesingle{}s specifications are stored in here \\
+\hline
+{\em en} & Enemy specifications are stored in here \\
+\hline
+{\em b} & Background and its characteristics are stored in here \\
+\hline
+{\em screen} & The Screen S\+D\+L\+\_\+\+Surface \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 For quitting 1 For Exception Thrown 
+\end{DoxyReturn}
+\mbox{\Hypertarget{gamehead_8h_aff37e7fadf47427b4b7b1339c7435884}\label{gamehead_8h_aff37e7fadf47427b4b7b1339c7435884}} 
+\index{gamehead.h@{gamehead.h}!finprog@{finprog}}
+\index{finprog@{finprog}!gamehead.h@{gamehead.h}}
+\doxysubsubsection{\texorpdfstring{finprog()}{finprog()}}
+{\footnotesize\ttfamily void finprog (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structbtn}{btn}} $\ast$}]{B,  }\item[{\mbox{\hyperlink{structmenuitems}{menuitems}} $\ast$}]{MI,  }\item[{\mbox{\hyperlink{structgameitems}{gameitems}} $\ast$}]{GI,  }\item[{\mbox{\hyperlink{structsettingsitems}{settingsitems}} $\ast$}]{SI,  }\item[{\mbox{\hyperlink{structpauseitems}{pauseitems}} $\ast$}]{PI,  }\item[{\mbox{\hyperlink{structmisc}{misc}} $\ast$}]{M,  }\item[{\mbox{\hyperlink{structcharacter}{character}} $\ast$}]{p,  }\item[{S\+D\+L\+\_\+\+Surface $\ast$}]{screen }\end{DoxyParamCaption})}
+
+
+
+Fin\+Prog is a function that frees Most of the loaded items especially from the menu. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em B} & Button S\+D\+L\+\_\+\+Surfaces to free \\
+\hline
+{\em MI} & Menu Items to free \\
+\hline
+{\em GI} & Game\+Items to free \\
+\hline
+{\em SI} & Settings\+Items to free \\
+\hline
+{\em PI} & Pause Items to free \\
+\hline
+{\em M} & Miscalenous Items to free \\
+\hline
+{\em p} & Character items to free \\
+\hline
+{\em screen} & Screen that we will free \\
+\hline
+\end{DoxyParams}

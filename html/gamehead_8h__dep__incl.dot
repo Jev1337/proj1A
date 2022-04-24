@@ -1,0 +1,32 @@
+digraph "gamehead.h"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="gamehead.h",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="This a header that collects all the headers and calls them all at once."];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="ninjahubstd.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$ninjahubstd_8h_source.html",tooltip=" "];
+  Node2 -> Node1 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="gamestructs.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$gamestructs_8h.html",tooltip="This Header File has most of the Menu Structs that we will need to store the SDL_Surfaces on them."];
+  Node3 -> Node1 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="character.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$character_8h_source.html",tooltip=" "];
+  Node4 -> Node1 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="background.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$background_8h_source.html",tooltip=" "];
+  Node5 -> Node1 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node6 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="init.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$init_8h_source.html",tooltip=" "];
+  Node6 -> Node1 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node7 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node7 [label="enigme.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$enigme_8h_source.html",tooltip=" "];
+  Node7 -> Node1 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node8 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node8 [label="affichage.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$affichage_8h_source.html",tooltip=" "];
+  Node8 -> Node1 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node9 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node9 [label="gamehead.c",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$gamehead_8c.html",tooltip="This .c file includes the most important function that allows us to launch the game and manage the cu..."];
+  Node1 -> Node10 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node10 [label="main.c",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$main_8c.html",tooltip="This is the main.c of an SDL 1.2 Game (Yes Outdated) for our School Project (ESPRIT 1A)"];
+}

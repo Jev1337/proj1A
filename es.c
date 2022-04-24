@@ -5,7 +5,6 @@
 #include <SDL/SDL_image.h>
 #include <SDL/SDL_ttf.h>
 #include "es.h"
-#include "header.h"
 
 void generate_Clips(SDL_Rect Clips[8], int frames, int frameWidth, int clipWidth, int clipHeight)
 {
@@ -79,7 +78,7 @@ void deplacer(Ennemi *e)
     if (e->animation.side == 1)
     {
         e->pos.x += 50;
-        if (e->pos.x >= SCREEN_WIDTH-433)
+        if (e->pos.x >= 1920-433)
             e->animation.side = 2;
     }
     else if (e->animation.side == 2)

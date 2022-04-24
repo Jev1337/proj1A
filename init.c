@@ -1,12 +1,17 @@
 
+
 #include "gamehead.h"
 
-
+/**
+ * @brief 
+ * This function Initializes SDL Library
+ * @param M we need M to save the SCREEN WIDTH and SCREEN HEIGHT on
+ * @return SDL_Surface* which is the screen
+ */
 SDL_Surface *init(misc *M)
 {
 
     SDL_Surface *screen;
-    // Initialize all SDL subsystems
     if (SDL_Init(SDL_INIT_EVERYTHING) == -1)
     {
         return NULL;
@@ -14,10 +19,8 @@ SDL_Surface *init(misc *M)
     const SDL_VideoInfo *info = SDL_GetVideoInfo();
     M->SCREEN_H = info->current_h;
     M->SCREEN_W = info->current_w;
-    // Set up the screen
-    screen = SDL_SetVideoMode(M->SCREEN_W, M->SCREEN_H, SCREEN_BBP, SDL_SWSURFACE | SDL_DOUBLEBUF /*| SDL_FULLSCREEN*/);
+    screen = SDL_SetVideoMode(M->SCREEN_W, M->SCREEN_H, SCREEN_BBP, SDL_SWSURFACE | SDL_DOUBLEBUF | SDL_FULLSCREEN);
     SDL_EnableKeyRepeat(1,1);
-    // Initialize SDL_ttf
     if (TTF_Init() == -1)
     {
         return NULL;
@@ -26,14 +29,23 @@ SDL_Surface *init(misc *M)
     {
         return NULL;
     }
-    // Set the window caption
     SDL_WM_SetCaption("AR:T", NULL);
-
-    // If everything initialized fine
     return screen;
 }
 
-
+/**
+ * @brief 
+ * 
+ * @param BD a struct that has some of the button dimentions in it
+ * @param B a struct that contains the SDL_Surface of the buttons
+ * @param MI a struct that contains Menu Items
+ * @param PI a struct that contains Pause Menu Items
+ * @param GI a struct that contains Game Items
+ * @param SI a struct that contains Settings Items
+ * @param M a struct that contains Miscalenous items
+ * @param p a struct that contains character specifications
+ * @return int (1 For Good 0 for Error)
+ */
 int load_files(btndim *BD, btn *B,menuitems *MI, pauseitems *PI, gameitems *GI, settingsitems *SI, misc *M, character *p)
 {
    
@@ -135,11 +147,19 @@ int load_files(btndim *BD, btn *B,menuitems *MI, pauseitems *PI, gameitems *GI, 
     {
         return 0;
     }
-    // If everything loaded fine
     return 1;
     
 }
 
+
+/**
+ * @brief This function allows us to use split a spritesheet into multiple clips
+ * 
+ * @param M Miscalenous that has Screen Width and Screen Height stored in it
+ * @param MI Menu Items because we need to store the rain clips into it
+ * @param p The character also has sprite sheets, therefore we need to split the pictures
+ * @return int (1 for OK) This function could be void too there is no difference
+ */
 
 int load_clips(misc *M, menuitems *MI, character *p){
     int i, w;
