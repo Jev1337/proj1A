@@ -1,6 +1,5 @@
 #include "character.h"
 
-
 void initcharacter(character *p)
 {
     p->charsprite[0] = IMG_Load("images/leftsheet.png");
@@ -15,19 +14,25 @@ void initcharacter(character *p)
     p->speed = 30;
 }
 
-void setcharacter(character *p, Uint8 *keystate)
+void setcharacter(character *p, character *popt, Uint8 *keystate)
 {
     // Mix_Chunk *run;
     // run = Mix_LoadWAV("sounds/running.wav");
     if (keystate[SDLK_LSHIFT])
     {
         if (p->speed < 100)
+        {
             p->speed += 10;
+            popt->speed += 10;
+        }
     }
     if (keystate[SDLK_RSHIFT])
     {
-        if (p->speed > 0)
+        if (p->speed > 10)
+        {
             p->speed -= 10;
+            popt->speed -= 10;
+        }
     }
     // if (keystate[SDLK_LEFT] || keystate[SDLK_RIGHT])
     // Mix_PlayChannel(2,run, 0);
@@ -50,6 +55,27 @@ void setcharacter(character *p, Uint8 *keystate)
         p->side = -2;
         // Mix_Pause(-1);
     }
+    // if (keystate[SDLK_LEFT] || keystate[SDLK_RIGHT])
+    // Mix_PlayChannel(2,run, 0);
+
+    if (keystate[SDLK_a])
+    {
+        popt->side = 0;
+    }
+    else if (popt->side == 0)
+    {
+        popt->side = -1;
+        // Mix_Pause(-1);
+    }
+    if (keystate[SDLK_d])
+    {
+        popt->side = 1;
+    }
+    else if (popt->side == 1)
+    {
+        popt->side = -2;
+        // Mix_Pause(-1);
+    }
 }
 
 void jump(character *p, btndim *BD, btn *B, gameitems *GI, Ennemi *e, PickUp coin, background *b, SDL_Surface *screen)
@@ -70,6 +96,7 @@ void jump(character *p, btndim *BD, btn *B, gameitems *GI, Ennemi *e, PickUp coi
             {
                 b->posimage.x -= p->speed;
                 b->posmask.x += p->speed;
+                b->posmaskOpt.x += p->speed;
             }
         }
         else if (p->side == 0 | p->side == -1)
@@ -83,16 +110,21 @@ void jump(character *p, btndim *BD, btn *B, gameitems *GI, Ennemi *e, PickUp coi
             {
                 b->posimage.x += p->speed;
                 b->posmask.x -= p->speed;
+                b->posmaskOpt.x -= p->speed;
             }
         }
 
         show_game(BD, B, GI, b, screen);
         afficher_character(p, screen);
-        afficherEnnemi(*e, screen);
-        afficher_ecran(1300, 800, coin.animation.spriteSheet[0], screen, &coin.animation.Clips[coin.animation.clipLoaded]);
-        animerCoin(&coin);
-        animerEnnemi(e);
-        deplacer(e);
+        if (GI->lvl == 5 && (b->posmask.x >= 6200 || b->posmaskOpt.x >= 6200))
+        {
+            afficherEnnemi(*e, screen);
+            afficher_ecran(1300, 800, coin.animation.spriteSheet[0], screen, &coin.animation.Clips[coin.animation.clipLoaded]);
+            animerCoin(&coin);
+            animerEnnemi(e);
+            deplacer(e);
+        }
+
         SDL_Flip(screen);
         SDL_Delay(18);
     }
@@ -109,6 +141,7 @@ void jump(character *p, btndim *BD, btn *B, gameitems *GI, Ennemi *e, PickUp coi
             {
                 b->posimage.x -= p->speed;
                 b->posmask.x += p->speed;
+                b->posmaskOpt.x += p->speed;
             }
         }
         else if (p->side == 0 | p->side == -1)
@@ -122,33 +155,40 @@ void jump(character *p, btndim *BD, btn *B, gameitems *GI, Ennemi *e, PickUp coi
             {
                 b->posimage.x += p->speed;
                 b->posmask.x -= p->speed;
+                b->posmaskOpt.x -= p->speed;
             }
         }
         show_game(BD, B, GI, b, screen);
         afficher_character(p, screen);
-        afficherEnnemi(*e, screen);
-        afficher_ecran(1300, 800, coin.animation.spriteSheet[0], screen, &coin.animation.Clips[coin.animation.clipLoaded]);
-        animerCoin(&coin);
-        animerEnnemi(e);
-        deplacer(e);
+        if (GI->lvl == 5 && (b->posmask.x >= 6200 || b->posmaskOpt.x >= 6200))
+        {
+            afficherEnnemi(*e, screen);
+            afficher_ecran(1300, 800, coin.animation.spriteSheet[0], screen, &coin.animation.Clips[coin.animation.clipLoaded]);
+            animerCoin(&coin);
+            animerEnnemi(e);
+            deplacer(e);
+        }
         SDL_Flip(screen);
         SDL_Delay(18);
     }
 }
 
-void changedirection(character *p, background *b)
+void changedirection(character *p, character *popt, background *b, int SecOpt)
 {
     if (p->side == 0)
     {
-        if (collisionPP(b->posmask, b->imageM) == 0){
+        if (collisionPP(b->posmask, b->imageM) == 0)
+        {
             if (p->offset.x > 0)
             {
                 p->offset.x -= p->speed;
                 b->posmask.x -= p->speed;
             }
-            else if (b->posimage.x < -p->speed){
+            else if (b->posimage.x < -p->speed)
+            {
                 b->posmask.x -= p->speed;
                 b->posimage.x += p->speed;
+                b->posmaskOpt.x -= p->speed;
             }
         }
         p->direction--;
@@ -170,9 +210,10 @@ void changedirection(character *p, background *b)
             {
                 b->posimage.x -= p->speed;
                 b->posmask.x += p->speed;
+                b->posmaskOpt.x += p->speed;
             }
         }
-            p->direction++;
+        p->direction++;
         if (p->direction == 5)
             p->direction = 1;
     }
@@ -183,6 +224,60 @@ void changedirection(character *p, background *b)
         p->direction = 4;
     else
         p->direction = 0;
+
+    //----------------------------------
+    if (SecOpt)
+    {
+        if (popt->side == 0)
+        {
+            if (collisionPP(b->posmaskOpt, b->imageM) == 0)
+            {
+                if (popt->offset.x > 0)
+                {
+                    popt->offset.x -= popt->speed;
+                    b->posmaskOpt.x -= popt->speed;
+                }
+                else if (b->posimage.x < -popt->speed)
+                {
+                    b->posmaskOpt.x -= popt->speed;
+                    b->posimage.x += popt->speed;
+                    b->posmask.x -= p->speed;
+                }
+            }
+            popt->direction--;
+            if (popt->direction == -1)
+                popt->direction = 3;
+        }
+        else if (popt->side == 1)
+        {
+
+            // we need to add the condition where if we are in the last point in the level we have to allow the player to move around to the next half of the screen
+            if (collisionPP(b->posmaskOpt, b->imageM) == 0)
+            {
+                if (popt->offset.x < 1920 / 2 - popt->offset.w / 2)
+                {
+                    popt->offset.x += popt->speed;
+                    b->posmaskOpt.x += popt->speed;
+                }
+                else if (b->posimage.x > -(b->image->w - 1920))
+                {
+                    b->posimage.x -= popt->speed;
+                    b->posmaskOpt.x += popt->speed;
+                    b->posmask.x += p->speed;
+                }
+            }
+            popt->direction++;
+            if (popt->direction == 5)
+                popt->direction = 1;
+        }
+        else if (popt->side == 3)
+        {
+        }
+        else if (popt->side == -1)
+            popt->direction = 4;
+        else
+            popt->direction = 0;
+    }
 }
 
 void afficher_character(character *p, SDL_Surface *screen)

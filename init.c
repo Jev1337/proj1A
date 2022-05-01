@@ -46,7 +46,7 @@ SDL_Surface *init(misc *M)
  * @param p a struct that contains character specifications
  * @return int (1 For Good 0 for Error)
  */
-int load_files(btndim *BD, btn *B,menuitems *MI, pauseitems *PI, gameitems *GI, settingsitems *SI, misc *M, character *p)
+int load_files(btndim *BD, btn *B,menuitems *MI, pauseitems *PI, gameitems *GI, settingsitems *SI, misc *M, character *p, character *popt)
 {
    
 
@@ -161,7 +161,7 @@ int load_files(btndim *BD, btn *B,menuitems *MI, pauseitems *PI, gameitems *GI, 
  * @return int (1 for OK) This function could be void too there is no difference
  */
 
-int load_clips(misc *M, menuitems *MI, character *p){
+int load_clips(misc *M, menuitems *MI, character *p, character *popt){
     int i, w;
     for (w=M->SCREEN_W,i=0;i<8;i++, w+=M->SCREEN_W){
         MI->rainclip[i].x = w;
@@ -174,6 +174,12 @@ int load_clips(misc *M, menuitems *MI, character *p){
         p->clips[i].y = 0;
         p->clips[i].w = 300;
         p->clips[i].h = 484;
+    }
+    for (w=0,i=0;i<5;i++, w+=300){
+        popt->clips[i].x = w;
+        popt->clips[i].y = 0;
+        popt->clips[i].w = 300;
+        popt->clips[i].h = 484;
     }
 
     return 1;

@@ -9,7 +9,7 @@ typedef struct{
     SDL_Surface *imageM;//masque
     SDL_Rect posimage;//position background
     SDL_Rect posmask;
-    
+    SDL_Rect posmaskOpt;
 }background;
 
 typedef struct{

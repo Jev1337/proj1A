@@ -10,7 +10,10 @@ void init_bg(background *b)
   b->posmask.y = 1080 - 484;
   b->posmask.w = 300;
   b->posmask.h = 484;
-  
+  b->posmaskOpt.x = 0;
+  b->posmaskOpt.y = 1080 - 484;
+  b->posmaskOpt.w = 300;
+  b->posmaskOpt.h = 484;
 }
 
 SDL_Color GetPixel(SDL_Surface *pSurface, int x, int y)

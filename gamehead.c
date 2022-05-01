@@ -32,7 +32,7 @@
  * @param screen The Screen SDL_Surface
  * @return 0 For quitting 1 For Exception Thrown
  */
-int afficher_menu(btndim *BD, btn *B, menuitems *MI, gameitems *GI, settingsitems *SI, pauseitems *PI, misc *M, character *p, Ennemi *en, background *b, SDL_Surface *screen)
+int afficher_menu(btndim *BD, btn *B, menuitems *MI, gameitems *GI, settingsitems *SI, pauseitems *PI, misc *M, character *p, character *popt, Ennemi *en, background *b, SDL_Surface *screen)
 {
     show_menu(BD, B, MI, SI, screen);
     enigme e;
@@ -63,7 +63,7 @@ int afficher_menu(btndim *BD, btn *B, menuitems *MI, gameitems *GI, settingsitem
             
             afficher_ecran(0, 0, MI->rainspr, screen, &MI->rainclip[frame]);
 
-            quit = menu(BD, B, GI, M, MI, SI, p, b, &actpos, &actpos_previous, screen);
+            quit = menu(BD, B, GI, M, MI, SI, p,popt, b, &actpos, &actpos_previous, screen);
             if (quit == 2)
                 return 1;
                                     if (actpos!=1 && actpos!=4 && actpos!=3)
@@ -88,7 +88,7 @@ int afficher_menu(btndim *BD, btn *B, menuitems *MI, gameitems *GI, settingsitem
         if (actpos == 2)
         { // State of Game
                    
-            quit = game(BD, B, MI, GI, PI, M, p, en, &coin,b, &actpos, screen);
+            quit = game(BD, B, MI, GI, PI, M, p, popt, en, &coin,b, &actpos, screen);
             if (quit == 2) 
                 return 1;
             if (actpos == 1)
@@ -139,7 +139,7 @@ int afficher_menu(btndim *BD, btn *B, menuitems *MI, gameitems *GI, settingsitem
  * @param p Character items to free
  * @param screen Screen that we will free
  */
-void finprog(btn *B, menuitems *MI, gameitems *GI, settingsitems *SI, pauseitems *PI, misc *M, character *p, SDL_Surface *screen)
+void finprog(btn *B, menuitems *MI, gameitems *GI, settingsitems *SI, pauseitems *PI, misc *M, character *p,character *popt, SDL_Surface *screen)
 {
 
     Mix_FreeChunk(M->scratch);

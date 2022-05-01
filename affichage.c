@@ -1,6 +1,6 @@
 #include "gamehead.h"
 
-int menu(btndim *BD, btn *B, gameitems *GI, misc *M, menuitems *MI, settingsitems *SI, character *p, background *b, int *actpos, int *actpos_previous, SDL_Surface *screen)
+int menu(btndim *BD, btn *B, gameitems *GI, misc *M, menuitems *MI, settingsitems *SI, character *p, character *popt, background *b, int *actpos, int *actpos_previous, SDL_Surface *screen)
 {
     SDL_Event event;
     int x, y, i;
@@ -58,6 +58,7 @@ int menu(btndim *BD, btn *B, gameitems *GI, misc *M, menuitems *MI, settingsitem
                     Mix_HaltMusic();
                     show_game(BD, B, GI, b, screen);
                     initcharacter(p);
+                    initcharacter(popt);
                 }
                 if (B->isselected[1]) // Credits
                 {
@@ -512,16 +513,22 @@ int setting(btndim *BD, btn *B, pauseitems *PI, menuitems *MI, gameitems *GI, se
     return 0;
 }
 
-int game(btndim *BD, btn *B, menuitems *MI, gameitems *GI, pauseitems *PI, misc *M, character *p, Ennemi *e, PickUp *coin, background *b, int *actpos, SDL_Surface *screen)
+int game(btndim *BD, btn *B, menuitems *MI, gameitems *GI, pauseitems *PI, misc *M, character *p, character *popt, Ennemi *e, PickUp *coin, background *b, int *actpos, SDL_Surface *screen)
 {
     SDL_Event event;
     show_game(BD, B, GI, b, screen);
     afficher_character(p, screen);
-    afficherEnnemi(*e, screen);
-    animerEnnemi(e);
-    animerCoin(coin);
-    afficher_ecran(1300, 800, coin->animation.spriteSheet[0], screen, &coin->animation.Clips[coin->animation.clipLoaded]);
-    deplacer(e);
+    if (GI->SecOpt)
+        afficher_character(popt, screen);
+    if (GI->lvl == 5 && (b->posmask.x >= 6200 || b->posmaskOpt.x >= 6200)){
+        afficherEnnemi(*e, screen);
+        animerEnnemi(e);
+        animerCoin(coin);
+        deplacer(e);
+        afficher_ecran(1300, 800, coin->animation.spriteSheet[0], screen, &coin->animation.Clips[coin->animation.clipLoaded]);
+    }
+    
+
     /*if (collisionBB(p->offset, coin->pos) == 1)
     {
         printf("Collision detected!!\n");
@@ -529,108 +536,111 @@ int game(btndim *BD, btn *B, menuitems *MI, gameitems *GI, pauseitems *PI, misc 
     // Collision Function
     Uint8 *keystate = SDL_GetKeyState(NULL);
 
-    if (b->posmask.x >= 6990 && GI->lvl != 5)
+    if ((b->posmask.x >= 6990 || b->posmaskOpt.x >= 6990) && GI->lvl != 5)
     {
+        *actpos = 6;
         GI->lvl++;
         b->posmask.x = 0;
+        b->posmaskOpt.x = 0;
         p->offset.x = 0;
+        popt->offset.x = 0;
         b->posimage.x = 0;
-        switch (GI->lvl){
+        switch (GI->lvl)
+        {
         case 1:
             SDL_FillRect(screen, NULL, 0xB2B2B2);
-        SDL_Delay(100);
-        SDL_Flip(screen);
-        SDL_FillRect(screen, NULL, 0x5C5C5C);
-        SDL_Delay(100);
-        SDL_Flip(screen);
-        SDL_FillRect(screen, NULL, 0x222222);
-        SDL_Delay(100);
-        SDL_Flip(screen);
-        SDL_FillRect(screen, NULL, 0);
-        SDL_Delay(100);
-        SDL_Flip(screen);
-        SDL_FreeSurface(b->image);
-        b->image = IMG_Load("images/11night0.png");
-        show_game(BD, B, GI, b, screen);
-        SDL_Flip(screen);
-        break;
-    case 2:
-        SDL_FillRect(screen, NULL, 0xB2B2B2);
-        SDL_Delay(100);
-        SDL_Flip(screen);
-        SDL_FillRect(screen, NULL, 0x5C5C5C);
-        SDL_Delay(100);
-        SDL_Flip(screen);
-        SDL_FillRect(screen, NULL, 0x222222);
-        SDL_Delay(100);
-        SDL_Flip(screen);
-        SDL_FillRect(screen, NULL, 0);
-        SDL_Delay(100);
-        SDL_Flip(screen);
-        SDL_FreeSurface(b->image);
-        b->image = IMG_Load("images/11night1.png");
-        show_game(BD, B, GI, b, screen);
-        SDL_Flip(screen);
-        break;
-    case 3:
-        SDL_FillRect(screen, NULL, 0xB2B2B2);
-        SDL_Delay(100);
-        SDL_Flip(screen);
-        SDL_FillRect(screen, NULL, 0x5C5C5C);
-        SDL_Delay(100);
-        SDL_Flip(screen);
-        SDL_FillRect(screen, NULL, 0x222222);
-        SDL_Delay(100);
-        SDL_Flip(screen);
-        SDL_FillRect(screen, NULL, 0);
-        SDL_Delay(100);
-        SDL_Flip(screen);
-        SDL_FreeSurface(b->image);
-        b->image = IMG_Load("images/11night2.png");
-        show_game(BD, B, GI, b, screen);
-        SDL_Flip(screen);
-        break;
-    case 4:
-        SDL_FillRect(screen, NULL, 0xB2B2B2);
-        SDL_Delay(100);
-        SDL_Flip(screen);
-        SDL_FillRect(screen, NULL, 0x5C5C5C);
-        SDL_Delay(100);
-        SDL_Flip(screen);
-        SDL_FillRect(screen, NULL, 0x222222);
-        SDL_Delay(100);
-        SDL_Flip(screen);
-        SDL_FillRect(screen, NULL, 0);
-        SDL_Delay(100);
-        SDL_Flip(screen);
-        SDL_FreeSurface(b->image);
-        b->image = IMG_Load("images/11night3.png");
-        show_game(BD, B, GI, b, screen);
-        SDL_Flip(screen);
-        break;
-    case 5:
-        SDL_FillRect(screen, NULL, 0xB2B2B2);
-        SDL_Delay(100);
-        SDL_Flip(screen);
-        SDL_FillRect(screen, NULL, 0x5C5C5C);
-        SDL_Delay(100);
-        SDL_Flip(screen);
-        SDL_FillRect(screen, NULL, 0x222222);
-        SDL_Delay(100);
-        SDL_Flip(screen);
-        SDL_FillRect(screen, NULL, 0);
-        SDL_Delay(100);
-        SDL_Flip(screen);
-        SDL_FreeSurface(b->image);
-        b->image = IMG_Load("images/11night4.png");
-        show_game(BD, B, GI, b, screen);
-        SDL_Flip(screen);
-        break;
-    }
+            SDL_Delay(100);
+            SDL_Flip(screen);
+            SDL_FillRect(screen, NULL, 0x5C5C5C);
+            SDL_Delay(100);
+            SDL_Flip(screen);
+            SDL_FillRect(screen, NULL, 0x222222);
+            SDL_Delay(100);
+            SDL_Flip(screen);
+            SDL_FillRect(screen, NULL, 0);
+            SDL_Delay(100);
+            SDL_Flip(screen);
+            SDL_FreeSurface(b->image);
+            b->image = IMG_Load("images/11night0.png");
+            show_game(BD, B, GI, b, screen);
+            SDL_Flip(screen);
+            break;
+        case 2:
+            SDL_FillRect(screen, NULL, 0xB2B2B2);
+            SDL_Delay(100);
+            SDL_Flip(screen);
+            SDL_FillRect(screen, NULL, 0x5C5C5C);
+            SDL_Delay(100);
+            SDL_Flip(screen);
+            SDL_FillRect(screen, NULL, 0x222222);
+            SDL_Delay(100);
+            SDL_Flip(screen);
+            SDL_FillRect(screen, NULL, 0);
+            SDL_Delay(100);
+            SDL_Flip(screen);
+            SDL_FreeSurface(b->image);
+            b->image = IMG_Load("images/11night1.png");
+            show_game(BD, B, GI, b, screen);
+            SDL_Flip(screen);
+            break;
+        case 3:
+            SDL_FillRect(screen, NULL, 0xB2B2B2);
+            SDL_Delay(100);
+            SDL_Flip(screen);
+            SDL_FillRect(screen, NULL, 0x5C5C5C);
+            SDL_Delay(100);
+            SDL_Flip(screen);
+            SDL_FillRect(screen, NULL, 0x222222);
+            SDL_Delay(100);
+            SDL_Flip(screen);
+            SDL_FillRect(screen, NULL, 0);
+            SDL_Delay(100);
+            SDL_Flip(screen);
+            SDL_FreeSurface(b->image);
+            b->image = IMG_Load("images/11night2.png");
+            show_game(BD, B, GI, b, screen);
+            SDL_Flip(screen);
+            break;
+        case 4:
+            SDL_FillRect(screen, NULL, 0xB2B2B2);
+            SDL_Delay(100);
+            SDL_Flip(screen);
+            SDL_FillRect(screen, NULL, 0x5C5C5C);
+            SDL_Delay(100);
+            SDL_Flip(screen);
+            SDL_FillRect(screen, NULL, 0x222222);
+            SDL_Delay(100);
+            SDL_Flip(screen);
+            SDL_FillRect(screen, NULL, 0);
+            SDL_Delay(100);
+            SDL_Flip(screen);
+            SDL_FreeSurface(b->image);
+            b->image = IMG_Load("images/11night3.png");
+            show_game(BD, B, GI, b, screen);
+            SDL_Flip(screen);
+            break;
+        case 5:
+            SDL_FillRect(screen, NULL, 0xB2B2B2);
+            SDL_Delay(100);
+            SDL_Flip(screen);
+            SDL_FillRect(screen, NULL, 0x5C5C5C);
+            SDL_Delay(100);
+            SDL_Flip(screen);
+            SDL_FillRect(screen, NULL, 0x222222);
+            SDL_Delay(100);
+            SDL_Flip(screen);
+            SDL_FillRect(screen, NULL, 0);
+            SDL_Delay(100);
+            SDL_Flip(screen);
+            SDL_FreeSurface(b->image);
+            b->image = IMG_Load("images/11night4.png");
+            show_game(BD, B, GI, b, screen);
+            SDL_Flip(screen);
+            break;
+        }
     }
 
-    if (keystate[SDLK_p])
-        *actpos = 6;
+        
     if (keystate[SDLK_ESCAPE])
     {
         *actpos = 5;
@@ -640,11 +650,16 @@ int game(btndim *BD, btn *B, menuitems *MI, gameitems *GI, pauseitems *PI, misc 
     {
         jump(p, BD, B, GI, e, *coin, b, screen);
     }
+    if (GI->SecOpt)
+        if (keystate[SDLK_w])
+        {
+            jump(popt, BD, B, GI, e, *coin, b, screen);
+        }
     SDL_PollEvent(&event);
 
-    setcharacter(p, keystate);
+    setcharacter(p, popt, keystate);
 
-    changedirection(p, b);
+    changedirection(p, popt, b, GI->SecOpt);
     return 0;
 }
 

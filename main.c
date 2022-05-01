@@ -37,18 +37,20 @@ int main(int argc, char *args[])
 	btn B;
 	btndim BD;
 	character p;
+	character popt;
 	Ennemi e;
 	background b;
 	srand(time(NULL));
 	screen = init(&M);
+	GI.SecOpt = 0;
 	if (screen == NULL)
 		return 1;
-	if (load_files(&BD, &B, &MI,&PI,&GI,&SI,&M, &p) == 0)
+	if (load_files(&BD, &B, &MI,&PI,&GI,&SI,&M, &p, &popt) == 0)
 		return 1;
-	if (load_clips(&M,&MI, &p) == 0)
+	if (load_clips(&M,&MI, &p, &popt) == 0)
 		return 0;
-	if (afficher_menu(&BD,&B,&MI,&GI,&SI,&PI,&M,&p,&e,&b,screen) == 1)
+	if (afficher_menu(&BD,&B,&MI,&GI,&SI,&PI,&M,&p, &popt,&e,&b,screen) == 1)
 		return 1;
-	finprog(&B, &MI,&GI,&SI,&PI,&M,&p,screen);
+	finprog(&B, &MI,&GI,&SI,&PI,&M,&p, &popt,screen);
 	return 0;
 }

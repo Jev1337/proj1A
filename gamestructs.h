@@ -70,6 +70,7 @@ typedef struct{
  */
 typedef struct{
     int lvl; /*!< Level is stored in the GameItems*/
+    int SecOpt;
 }gameitems;
 
 /**

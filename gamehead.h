@@ -57,7 +57,7 @@
  */
 
 
-int afficher_menu(btndim *BD,btn *B, menuitems *MI, gameitems *GI, settingsitems *SI, pauseitems *PI, misc *M, character *p, Ennemi *en, background *b, SDL_Surface *screen);
+int afficher_menu(btndim *BD,btn *B, menuitems *MI, gameitems *GI, settingsitems *SI, pauseitems *PI, misc *M, character *p, character *popt, Ennemi *en, background *b, SDL_Surface *screen);
 
 /**
  * @brief FinProg is a function that frees Most of the loaded items especially from the menu
@@ -71,5 +71,5 @@ int afficher_menu(btndim *BD,btn *B, menuitems *MI, gameitems *GI, settingsitems
  * @param p Character items to free
  * @param screen Screen that we will free
  */
-void finprog(btn *B,menuitems *MI, gameitems *GI, settingsitems *SI, pauseitems *PI, misc *M, character *p, SDL_Surface *screen);
+void finprog(btn *B,menuitems *MI, gameitems *GI, settingsitems *SI, pauseitems *PI, misc *M, character *p, character *popt, SDL_Surface *screen);
 #endif // MENU_H_INCLUDED
