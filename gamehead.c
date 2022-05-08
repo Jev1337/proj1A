@@ -17,6 +17,7 @@
  */
 
 #include "en.h"
+#include "XO.h"
 #include "gamehead.h"
 
 /**
@@ -54,17 +55,21 @@ int afficher_menu(btndim *BD, btn *B, menuitems *MI, gameitems *GI, settingsitem
     char image[30] = "";
     int t_prev, currentTime;
     SDL_Event event;
+    tic t;
+    int coup;
+    int joueur;
+        initialiserTic(&t);
+    int a, bint;
     if (Mix_PlayMusic(M->music, -1) == -1)
     {
         return 1;
     }
-    
+
     SDL_Surface *savemenu = IMG_Load("images/savemenu.png");
 
-
-        initmap(&m, 0);
-        init_bg(b, 0);
-        initcharacter(p, 0);
+    initmap(&m, 0);
+    init_bg(b, 0);
+    initcharacter(p, 0);
 
     while (quit == 0)
     {
@@ -82,15 +87,16 @@ int afficher_menu(btndim *BD, btn *B, menuitems *MI, gameitems *GI, settingsitem
             quit = menu(BD, B, GI, M, MI, SI, p, popt, b, &actpos, &actpos_previous, screen);
             if (quit == 2)
                 return 1;
-            
-            if (actpos == 2){
+
+            if (actpos == 2)
+            {
                 FILE *file = fopen("savegame.txt", "r");
                 int c = fgetc(file);
                 if (c != EOF)
                     GI->LoadSave = 1;
                 else
                     GI->LoadSave = 0;
-                    fclose(file);
+                fclose(file);
             }
             if (actpos == 2 && GI->LoadSave == 1)
             {
@@ -123,51 +129,108 @@ int afficher_menu(btndim *BD, btn *B, menuitems *MI, gameitems *GI, settingsitem
                 {
                     charger(p, b, &m, GI);
                     switch (GI->lvl)
-        {
-        case 1:
-            SDL_FreeSurface(b->image);
-            b->image = IMG_Load("images/11night0.png");
-            show_game(BD, B, GI, b, screen);
-            SDL_Flip(screen);
-            break;
-        case 2:
-            
-            SDL_FreeSurface(b->image);
-            b->image = IMG_Load("images/11night1.png");
-            show_game(BD, B, GI, b, screen);
-            SDL_Flip(screen);
-            break;
-        case 3:
-            
-            SDL_FreeSurface(b->image);
-            b->image = IMG_Load("images/11night2.png");
-            show_game(BD, B, GI, b, screen);
-            SDL_Flip(screen);
-            break;
-        case 4:
-            
-            SDL_FreeSurface(b->image);
-            b->image = IMG_Load("images/11night3.png");
-            show_game(BD, B, GI, b, screen);
-            SDL_Flip(screen);
-            break;
-        case 5:
-            
-            SDL_FreeSurface(b->image);
-            b->image = IMG_Load("images/11night4.png");
-            show_game(BD, B, GI, b, screen);
-            SDL_Flip(screen);
-            break;
-        }
-                }else{
+                    {
+                    case 1:
+                        SDL_FreeSurface(b->image);
+                        b->image = IMG_Load("images/11night0.png");
+                        show_game(BD, B, GI, b, screen);
+                        SDL_Flip(screen);
+                        break;
+                    case 2:
+
+                        SDL_FreeSurface(b->image);
+                        b->image = IMG_Load("images/11night1.png");
+                        show_game(BD, B, GI, b, screen);
+                        SDL_Flip(screen);
+                        break;
+                    case 3:
+
+                        SDL_FreeSurface(b->image);
+                        b->image = IMG_Load("images/11night2.png");
+                        show_game(BD, B, GI, b, screen);
+                        SDL_Flip(screen);
+                        break;
+                    case 4:
+
+                        SDL_FreeSurface(b->image);
+                        b->image = IMG_Load("images/11night3.png");
+                        show_game(BD, B, GI, b, screen);
+                        SDL_Flip(screen);
+                        break;
+                    case 5:
+
+                        SDL_FreeSurface(b->image);
+                        b->image = IMG_Load("images/11night4.png");
+                        show_game(BD, B, GI, b, screen);
+                        SDL_Flip(screen);
+                        break;
+                    }
+                }
+                else
+                {
                     initmap(&m, 0);
                     init_bg(b, 0);
                     initcharacter(p, 0);
                 }
-                    
             }
             if (actpos != 1 && actpos != 4 && actpos != 3)
                 SDL_FillRect(screen, NULL, 0);
+        }
+        if (actpos == 8)
+        {
+            afficherTic(t.tabsuiv, screen);
+                printf("%d\n", atilganer(t.tabsuiv));
+                if (t.tour < 9 && atilganer(t.tabsuiv) == 0)
+                {
+                    if (t.joueur != -1)
+                    {
+                        calcul_coup(t.tabsuiv);
+                        t.joueur = -1;
+                        t.tour++;
+                    }
+                    else
+                    {
+                        SDL_WaitEvent(&event);
+                        if (event.type == SDL_MOUSEBUTTONDOWN)
+                        {
+
+                            if (event.button.x > 0 && event.button.x <= 200 && event.button.y > 0 && event.button.y <= 200)
+                                coup = 0;
+                            if (event.button.x > 200 && event.button.x <= 400 && event.button.y > 0 && event.button.y <= 200)
+                                coup = 1;
+                            if (event.button.x > 400 && event.button.x <= 600 && event.button.y > 0 && event.button.y <= 200)
+                                coup = 2;
+
+                            if (event.button.x > 0 && event.button.x <= 200 && event.button.y > 200 && event.button.y <= 400)
+                                coup = 3;
+                            if (event.button.x > 200 && event.button.x <= 400 && event.button.y > 200 && event.button.y <= 400)
+                                coup = 4;
+                            if (event.button.x > 400 && event.button.x <= 600 && event.button.y > 200 && event.button.y <= 400)
+                                coup = 5;
+
+                            if (event.button.x > 0 && event.button.x <= 200 && event.button.y > 400 && event.button.y <= 600)
+                                coup = 6;
+                            if (event.button.x > 200 && event.button.x <= 400 && event.button.y > 400 && event.button.y <= 600)
+                                coup = 7;
+                            if (event.button.x > 400 && event.button.x <= 600 && event.button.y > 400 && event.button.y <= 600)
+                                coup = 8;
+
+                            t.tabsuiv[coup] = -1;
+                            t.joueur = 1;
+                            t.tour++;
+                        }
+                        else if (event.type == SDL_QUIT)
+                        {
+                            quit = 0;
+                        }
+                    }
+                }
+                else
+                {
+                    actpos = 2;
+                    Resultat(t.tabsuiv, screen, t);
+                    quit = 0;
+                }
         }
         if (actpos == 3)
         {

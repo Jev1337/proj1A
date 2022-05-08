@@ -518,7 +518,7 @@ int game(btndim *BD, btn *B, menuitems *MI, gameitems *GI, pauseitems *PI, misc 
     afficher_character(p, screen);
     afficherminimap(*m, GI->zoomable, screen);
     affichertemps(time(NULL)-m->temps, screen);
-    
+
     if (GI->SecOpt)
         afficher_character(popt, screen);
     if (GI->lvl == 5 && (b->posmask.x >= 6200 || b->posmask.x >= 6200))
@@ -651,6 +651,9 @@ int game(btndim *BD, btn *B, menuitems *MI, gameitems *GI, pauseitems *PI, misc 
     {
         *actpos = 5;
         show_pausemenu(BD, B, MI, GI, PI, b, screen);
+    }
+    if (keystate[SDLK_p]){
+        *actpos = 8;
     }
     if (keystate[SDLK_UP])
     {

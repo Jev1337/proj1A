@@ -13,6 +13,7 @@
         "sdl_image.h": "c",
         "stdlib.h": "c",
         "ninjahubstd.h": "c",
-        "unistd.h": "c"
+        "unistd.h": "c",
+        "xo.h": "c"
     }
 }

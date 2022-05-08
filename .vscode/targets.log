@@ -1,4 +1,6 @@
 make all --print-data-base --no-builtin-variables --no-builtin-rules --question
+make: *** No rule to make target 'all'.  Stop.
+
 # GNU Make 4.2.1
 # Built for x86_64-pc-linux-gnu
 # Copyright (C) 1988-2016 Free Software Foundation, Inc.
@@ -6,7 +8,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Sun May  8 19:11:25 2022
+# Make data base, printed on Sun May  8 20:25:23 2022
 
 # Variables
 
@@ -121,7 +123,7 @@ XDG_SESSION_DESKTOP = ubuntu
 # environment
 SSH_AUTH_SOCK = /run/user/1000/keyring/ssh
 # environment
-GIO_LAUNCHED_DESKTOP_FILE_PID = 34663
+GIO_LAUNCHED_DESKTOP_FILE_PID = 42508
 # automatic
 %F = $(notdir $%)
 # environment
@@ -187,7 +189,7 @@ SHLVL = 0
 # environment
 GNOME_SHELL_SESSION_MODE = ubuntu
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-5b333bcc-dfca-4e48-ad77-5ba43a6d284c.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-b7cb2f96-b0f5-4c05-86c8-bb5a40414207.sock
 # default
 MAKE_VERSION := 4.2.1
 # environment
@@ -267,7 +269,7 @@ LC_ADDRESS = ar_TN.UTF-8
 # environment
 LANG = C
 # environment
-VSCODE_PID = 34713
+VSCODE_PID = 42554
 # variable set hash-table stats:
 # Load=129/1024=13%, Rehash=0, Collisions=23/154=15%
 
@@ -277,12 +279,10 @@ VSCODE_PID = 34713
 
 # Directories
 
-# . (device 2053, inode 792429): 52 files, no impossibilities.
+# . (device 2053, inode 792429): 55 files, no impossibilities.
 
  
-make: *** No rule to make target 'all'.  Stop.
-
-# 52 files, no impossibilities in 1 directories.
+# 55 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -329,6 +329,13 @@ all:
 #  File does not exist.
 #  File has not been updated.
 
+XO.o: XO.c
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'makefile', line 28):
+	gcc -c XO.c -g
+
 # Not a target:
 main.c:
 #  Implicit rule search has not been done.
@@ -368,7 +375,7 @@ character.c:
 # Not a target:
 makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-05-08 14:12:24.561963808
+#  Last modified 2022-05-08 20:05:55.419425333
 #  File has been updated.
 #  Successfully updated.
 
@@ -384,12 +391,18 @@ enigme2.c:
 #  Modification time never checked.
 #  File has not been updated.
 
-prog: main.o enigme2.o minimap.o background.o es.o enigme.o character.o gamehead.o ninjahubstd.o init.o affichage.o timer.o
+prog: main.o XO.o enigme2.o minimap.o background.o es.o enigme.o character.o gamehead.o ninjahubstd.o init.o affichage.o timer.o
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 #  recipe to execute (from 'makefile', line 2):
-	gcc main.o enigme2.c minimap.c background.c es.c enigme.c character.c gamehead.o ninjahubstd.o init.o affichage.o timer.o -o prog -lSDL -lSDL_ttf -g -lSDL_image -lSDL_mixer
+	gcc main.o XO.c enigme2.c minimap.c background.c es.c enigme.c character.c gamehead.o ninjahubstd.o init.o affichage.o timer.o -o prog -lSDL -lSDL_ttf -g -lSDL_image -lSDL_mixer
+
+# Not a target:
+XO.c:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 # Not a target:
 .DEFAULT:
@@ -474,19 +487,19 @@ ninjahubstd.c:
 #  File has not been updated.
 
 # files hash-table stats:
-# Load=29/1024=3%, Rehash=0, Collisions=2/75=3%
+# Load=31/1024=3%, Rehash=0, Collisions=2/80=2%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 57 / storage = 535 B / avg = 9 B
-# current buf: size = 8162 B / used = 535 B / count = 57 / avg = 9 B
+# strcache buffers: 1 (0) / strings = 60 / storage = 550 B / avg = 9 B
+# current buf: size = 8162 B / used = 550 B / count = 60 / avg = 9 B
 
-# strcache performance: lookups = 111 / hit rate = 48%
+# strcache performance: lookups = 118 / hit rate = 49%
 # hash-table stats:
-# Load=57/8192=1%, Rehash=0, Collisions=3/111=3%
-# Finished Make data base on Sun May  8 19:11:25 2022
+# Load=60/8192=1%, Rehash=0, Collisions=4/118=3%
+# Finished Make data base on Sun May  8 20:25:23 2022
 
  
