@@ -45,6 +45,8 @@ int afficher_menu(btndim *BD, btn *B, menuitems *MI, gameitems *GI, settingsitem
     initEnnemi(en);
     initCoin(&coin);
     init_bg(b);
+    minimap m;
+    initmap(&m);
     if (Mix_PlayMusic(M->music, -1) == -1)
     {
         return 1;
@@ -88,7 +90,7 @@ int afficher_menu(btndim *BD, btn *B, menuitems *MI, gameitems *GI, settingsitem
         if (actpos == 2)
         { // State of Game
                    
-            quit = game(BD, B, MI, GI, PI, M, p, popt, en, &coin,b, &actpos, screen);
+            quit = game(BD, B, MI, GI, PI, M, p, popt, en, &coin,b,&m, &actpos, screen);
             if (quit == 2) 
                 return 1;
             if (actpos == 1)

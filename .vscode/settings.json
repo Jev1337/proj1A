@@ -8,6 +8,9 @@
         "timer.h": "c",
         "header.h": "c",
         "background.h": "c",
-        "gamestructs.h": "c"
+        "gamestructs.h": "c",
+        "init.h": "c",
+        "sdl_image.h": "c",
+        "stdlib.h": "c"
     }
 }

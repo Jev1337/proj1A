@@ -19,7 +19,7 @@ SDL_Surface *init(misc *M)
     const SDL_VideoInfo *info = SDL_GetVideoInfo();
     M->SCREEN_H = info->current_h;
     M->SCREEN_W = info->current_w;
-    screen = SDL_SetVideoMode(M->SCREEN_W, M->SCREEN_H, SCREEN_BBP, SDL_SWSURFACE | SDL_DOUBLEBUF | SDL_FULLSCREEN);
+    screen = SDL_SetVideoMode(M->SCREEN_W, M->SCREEN_H, SCREEN_BBP, SDL_SWSURFACE | SDL_DOUBLEBUF /*| SDL_FULLSCREEN*/);
     SDL_EnableKeyRepeat(1,1);
     if (TTF_Init() == -1)
     {
@@ -31,6 +31,15 @@ SDL_Surface *init(misc *M)
     }
     SDL_WM_SetCaption("AR:T", NULL);
     return screen;
+}
+
+
+void MI_Init(menuitems *MI){
+
+ 	MI->background = load_image("images/background.png");
+    MI->credits = IMG_Load("images/credits.png");
+    MI->btnreset = IMG_Load("images/btnreset.png");
+    MI->rainspr = IMG_Load("images/rainsh.png");
 }
 
 /**
@@ -124,11 +133,6 @@ int load_files(btndim *BD, btn *B,menuitems *MI, pauseitems *PI, gameitems *GI, 
     B->isselected[6] = 0;
     B->isselected[7] = 0;
     B->isselected[8] = 0;
-
-    MI->background = load_image("images/background.png");
-    MI->credits = IMG_Load("images/credits.png");
-    MI->btnreset = IMG_Load("images/btnreset.png");
-    MI->rainspr = IMG_Load("images/rainsh.png");
 
     M->music = Mix_LoadMUS("sounds/beat.mp3");
     M->scratch = Mix_LoadWAV("sounds/scratch.wav");

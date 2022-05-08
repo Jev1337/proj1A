@@ -59,6 +59,7 @@ int menu(btndim *BD, btn *B, gameitems *GI, misc *M, menuitems *MI, settingsitem
                     show_game(BD, B, GI, b, screen);
                     initcharacter(p);
                     initcharacter(popt);
+                    
                 }
                 if (B->isselected[1]) // Credits
                 {
@@ -513,19 +514,27 @@ int setting(btndim *BD, btn *B, pauseitems *PI, menuitems *MI, gameitems *GI, se
     return 0;
 }
 
-int game(btndim *BD, btn *B, menuitems *MI, gameitems *GI, pauseitems *PI, misc *M, character *p, character *popt, Ennemi *e, PickUp *coin, background *b, int *actpos, SDL_Surface *screen)
+int game(btndim *BD, btn *B, menuitems *MI, gameitems *GI, pauseitems *PI, misc *M, character *p, character *popt, Ennemi *e, PickUp *coin, background *b, minimap *m, int *actpos, SDL_Surface *screen)
 {
     SDL_Event event;
     show_game(BD, B, GI, b, screen);
     afficher_character(p, screen);
+    afficherminimap(*m, screen);
+    affichertemps(m->temps,screen);
+    m->temps--;
     if (GI->SecOpt)
         afficher_character(popt, screen);
     if (GI->lvl == 5 && (b->posmask.x >= 6200 || b->posmaskOpt.x >= 6200)){
-        afficherEnnemi(*e, screen);
-        animerEnnemi(e);
+        if (e->attack)
+        {
+            afficherAttack(*e, screen);
+            attackPerso(e, screen);
+        }
+        else
+            afficherEnnemi(*e, screen);
         animerCoin(coin);
         deplacer(e);
-        afficher_ecran(1300, 800, coin->animation.spriteSheet[0], screen, &coin->animation.Clips[coin->animation.clipLoaded]);
+        afficher_ecran(1300, 800, coin->animation.spriteSheet[0], screen, &coin->animation.Clips[coin->animation.clipLoaded]); //afficher coin
     }
     
 
@@ -538,6 +547,8 @@ int game(btndim *BD, btn *B, menuitems *MI, gameitems *GI, pauseitems *PI, misc 
 
     if ((b->posmask.x >= 6990 || b->posmaskOpt.x >= 6990) && GI->lvl != 5)
     {
+        m->pospoint.x = 400;
+        m->pospoint.y = 80;
         *actpos = 6;
         GI->lvl++;
         b->posmask.x = 0;
@@ -648,18 +659,20 @@ int game(btndim *BD, btn *B, menuitems *MI, gameitems *GI, pauseitems *PI, misc 
     }
     if (keystate[SDLK_UP])
     {
-        jump(p, BD, B, GI, e, *coin, b, screen);
+        jump(p, BD, B, GI, e, *coin, b,m, screen);
     }
     if (GI->SecOpt)
         if (keystate[SDLK_w])
         {
-            jump(popt, BD, B, GI, e, *coin, b, screen);
+            jump(popt, BD, B, GI, e, *coin, b,m, screen);
         }
     SDL_PollEvent(&event);
 
     setcharacter(p, popt, keystate);
 
-    changedirection(p, popt, b, GI->SecOpt);
+    changedirection(p, popt,m, b, GI->SecOpt);
+
+    
     return 0;
 }
 

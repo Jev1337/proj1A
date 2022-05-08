@@ -9,7 +9,7 @@ void init_bg(background *b)
   b->posmask.x = 0;
   b->posmask.y = 1080 - 484;
   b->posmask.w = 300;
-  b->posmask.h = 484;
+  b->posmask.h = 484; 
   b->posmaskOpt.x = 0;
   b->posmaskOpt.y = 1080 - 484;
   b->posmaskOpt.w = 300;

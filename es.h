@@ -1,3 +1,4 @@
+
 #ifndef ES
 #define ES
 #include <stdio.h>
@@ -5,9 +6,15 @@
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
 #include <SDL/SDL_ttf.h>
+
+/**
+ * @struct Animation
+ * @brief struct for animation
+ */
+
 typedef struct
 {
-    SDL_Surface *spriteSheet[3]; // 0: dead 1: right 2:left
+    SDL_Surface *spriteSheet[3]; // 1: right 0:left
     SDL_Rect Clips[8];
     int side; // 1: right 2: left 0: dead
     int frames;
@@ -16,10 +23,30 @@ typedef struct
 
 typedef struct
 {
+    SDL_Surface *spriteSheet[3]; // 1: right 0:left
+    SDL_Rect Clips[8];
+    int side; // 1: right 2: left 0: dead
+    int frames;
+    int clipLoaded;
+} attack;
+/**
+ * @struct Enemi
+ * @brief struct for Ennemi
+ */
+
+typedef struct
+{
     SDL_Rect pos;
     animation animation;
-    int col; // 0: non colusion 1: colusion
+    int attack;             // new
+    attack attackAnimation; // new
+    int col;                // 0: non colusion 1: colusion
 } Ennemi;
+
+/**
+ * @struct PickUP
+ * @brief struct for pickup
+ */
 
 typedef struct
 {
@@ -45,4 +72,6 @@ int collisionBB(SDL_Rect posp, SDL_Rect pose);
 void deplacerIA(Ennemi *e, SDL_Rect posPerso);
 
 void freeEnnemie(Ennemi e);
-#endif /* ES */
+void afficherAttack(Ennemi e, SDL_Surface *screen); // new
+void attackPerso(Ennemi *e, SDL_Surface *screen);   // new
+#endif                                              /* ES */

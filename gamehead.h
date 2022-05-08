@@ -26,10 +26,10 @@
 #include <SDL/SDL_image.h>
 #include <string.h>
 #include <time.h>
-#include "ninjahubstd.h"
 #include "es.h"
+#include "minimap.h"
+#include "ninjahubstd.h"
 #include "timer.h"
-
 #include "gamestructs.h"
 #include "character.h"
 #include "background.h"

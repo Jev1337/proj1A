@@ -1,6 +1,4 @@
 make all --print-data-base --no-builtin-variables --no-builtin-rules --question
-make: *** No rule to make target 'all'.  Stop.
-
 # GNU Make 4.2.1
 # Built for x86_64-pc-linux-gnu
 # Copyright (C) 1988-2016 Free Software Foundation, Inc.
@@ -8,7 +6,7 @@ make: *** No rule to make target 'all'.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Wed Apr 20 13:18:29 2022
+# Make data base, printed on Sun May  8 12:27:57 2022
 
 # Variables
 
@@ -43,15 +41,15 @@ GDMSESSION = ubuntu
 # environment
 XMODIFIERS = @im=ibus
 # makefile
-CURDIR := /home/malek/proj1A-main
+CURDIR := /home/malek/proj1A
 # makefile
 SHELL = /bin/sh
 # environment
-SNAP_DATA = /var/snap/code/94
+SNAP_DATA = /var/snap/code/95
 # environment
 VSCODE_NLS_CONFIG = {"locale":"en-us","availableLanguages":{},"_languagePackSupport":true}
 # environment
-JOURNAL_STREAM = 8:32925
+JOURNAL_STREAM = 8:32901
 # environment
 XDG_CONFIG_DIRS = /etc/xdg/xdg-ubuntu:/etc/xdg
 # environment
@@ -75,9 +73,9 @@ DBUS_SESSION_BUS_ADDRESS = unix:path=/run/user/1000/bus
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-_ = /snap/code/94/usr/share/code/code
+_ = /snap/code/95/usr/share/code/code
 # environment
-MANAGERPID = 1070
+MANAGERPID = 1104
 # environment
 LESSOPEN = | /usr/bin/lesspipe %s
 # environment
@@ -85,7 +83,7 @@ LC_NAME = ar_TN.UTF-8
 # environment
 VSCODE_CWD = /home/malek
 # environment
-GSETTINGS_SCHEMA_DIR = /snap/code/94/usr/share/glib-2.0/schemas
+GSETTINGS_SCHEMA_DIR = /snap/code/95/usr/share/glib-2.0/schemas
 # default
 MAKE_HOST := x86_64-pc-linux-gnu
 # environment
@@ -93,15 +91,15 @@ PATH = /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/
 # environment
 GPG_AGENT_INFO = /run/user/1000/gnupg/S.gpg-agent:0:1
 # environment
-SESSION_MANAGER = local/malek-VirtualBox:@/tmp/.ICE-unix/1344,unix/malek-VirtualBox:/tmp/.ICE-unix/1344
+SESSION_MANAGER = local/malek-VirtualBox:@/tmp/.ICE-unix/1381,unix/malek-VirtualBox:/tmp/.ICE-unix/1381
 # environment
 XDG_RUNTIME_DIR = /run/user/1000
 # environment
 GDK_PIXBUF_MODULE_FILE = /home/malek/snap/code/common/.cache/gdk-pixbuf-loaders.cache
 # environment
-SNAP = /snap/code/94
+SNAP = /snap/code/95
 # environment
-SNAP_VERSION = dfd34e82
+SNAP_VERSION = 57fd6d01
 # environment
 XDG_MENU_PREFIX = gnome-
 # environment
@@ -111,9 +109,9 @@ DISABLE_WAYLAND = 1
 # environment
 ELECTRON_RUN_AS_NODE = 1
 # environment
-INVOCATION_ID = af996ca7740f4de5a070120c419ba7de
+INVOCATION_ID = 94a40577a4f5447e98242810e0969c16
 # environment
-GDK_PIXBUF_MODULEDIR = /snap/code/94/usr/lib/x86_64-linux-gnu/gdk-pixbuf-2.0/2.10.0/loaders
+GDK_PIXBUF_MODULEDIR = /snap/code/95/usr/lib/x86_64-linux-gnu/gdk-pixbuf-2.0/2.10.0/loaders
 # default
 .FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell archives jobserver output-sync check-symlink load
 # environment
@@ -123,7 +121,7 @@ XDG_SESSION_DESKTOP = ubuntu
 # environment
 SSH_AUTH_SOCK = /run/user/1000/keyring/ssh
 # environment
-GIO_LAUNCHED_DESKTOP_FILE_PID = 2228
+GIO_LAUNCHED_DESKTOP_FILE_PID = 6039
 # automatic
 %F = $(notdir $%)
 # environment
@@ -133,11 +131,11 @@ VSCODE_PIPE_LOGGING = true
 # environment
 SNAP_INSTANCE_KEY = 
 # environment
-PWD = /home/malek/proj1A-main
+PWD = /home/malek/proj1A
 # default
 .LOADED := 
 # environment
-SSH_AGENT_PID = 1309
+SSH_AGENT_PID = 1344
 # environment
 ORIGINAL_XDG_CURRENT_DESKTOP = ubuntu:GNOME
 # environment
@@ -151,7 +149,7 @@ LESSCLOSE = /usr/bin/lesspipe %s %s
 # environment
 VSCODE_CLI = 1
 # environment
-VSCODE_CODE_CACHE_PATH = /home/malek/.config/Code/CachedData/dfd34e8260c270da74b5c2d86d61aee4b6d56977
+VSCODE_CODE_CACHE_PATH = /home/malek/.config/Code/CachedData/57fd6d0195bb9b9d1b49f6da5db789060795de47
 # environment
 LOGNAME = malek
 # environment
@@ -183,19 +181,19 @@ MAKECMDGOALS := all
 # environment
 QT_IM_MODULE = ibus
 # environment
-SNAP_USER_DATA = /home/malek/snap/code/94
+SNAP_USER_DATA = /home/malek/snap/code/95
 # environment
 SHLVL = 0
 # environment
 GNOME_SHELL_SESSION_MODE = ubuntu
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-57bd1ae1-918c-4e7e-b798-96ed97067796.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-8f3a10a7-d8c9-4ced-a525-08692add82f0.sock
 # default
 MAKE_VERSION := 4.2.1
 # environment
 USER = malek
 # environment
-SNAP_REVISION = 94
+SNAP_REVISION = 95
 # environment
 LC_MONETARY = ar_TN.UTF-8
 # makefile
@@ -213,7 +211,7 @@ MAKE_COMMAND := make
 # automatic
 *F = $(notdir $*)
 # environment
-VSCODE_IPC_HOOK = /run/user/1000/vscode-a41887fa-1.66.2-main.sock
+VSCODE_IPC_HOOK = /run/user/1000/vscode-a41887fa-1.67.0-main.sock
 # environment
 BAMF_DESKTOP_FILE_HINT = /var/lib/snapd/desktop/applications/code_code.desktop
 # makefile
@@ -269,7 +267,7 @@ LC_ADDRESS = ar_TN.UTF-8
 # environment
 LANG = C
 # environment
-VSCODE_PID = 2274
+VSCODE_PID = 6085
 # variable set hash-table stats:
 # Load=129/1024=13%, Rehash=0, Collisions=23/154=15%
 
@@ -279,10 +277,12 @@ VSCODE_PID = 2274
 
 # Directories
 
-# . (device 2053, inode 792429): 43 files, no impossibilities.
+# . (device 2053, inode 792429): 48 files, no impossibilities.
 
  
-# 43 files, no impossibilities in 1 directories.
+make: *** No rule to make target 'all'.  Stop.
+
+# 48 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -341,6 +341,12 @@ timer.c:
 #  File has not been updated.
 
 # Not a target:
+minimap.c:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
 gamehead.c:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
@@ -355,7 +361,7 @@ character.c:
 # Not a target:
 makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-04-17 16:39:46.344669085
+#  Last modified 2022-05-07 11:27:42.926430579
 #  File has been updated.
 #  Successfully updated.
 
@@ -365,12 +371,12 @@ background.c:
 #  Modification time never checked.
 #  File has not been updated.
 
-prog: main.o background.o es.o enigme.o character.o gamehead.o ninjahubstd.o init.o affichage.o timer.o
+prog: main.o minimap.o background.o es.o enigme.o character.o gamehead.o ninjahubstd.o init.o affichage.o timer.o
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 #  recipe to execute (from 'makefile', line 2):
-	gcc main.o background.c es.c enigme.c character.c gamehead.o ninjahubstd.o init.o affichage.o timer.o -o prog -lSDL -lSDL_ttf -g -lSDL_image -lSDL_mixer
+	gcc main.o minimap.c background.c es.c enigme.c character.c gamehead.o ninjahubstd.o init.o affichage.o timer.o -o prog -lSDL -lSDL_ttf -g -lSDL_image -lSDL_mixer
 
 # Not a target:
 .DEFAULT:
@@ -427,6 +433,13 @@ timer.o: timer.c
 #  recipe to execute (from 'makefile', line 14):
 	gcc -c timer.c -g
 
+minimap.o: minimap.c
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'makefile', line 24):
+	gcc -c minimap.c -g
+
 gamehead.o: gamehead.c
 #  Implicit rule search has not been done.
 #  Modification time never checked.
@@ -438,7 +451,6 @@ character.o: character.c
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
- 
 #  recipe to execute (from 'makefile', line 16):
 	gcc -c character.c -g
 
@@ -449,19 +461,19 @@ ninjahubstd.c:
 #  File has not been updated.
 
 # files hash-table stats:
-# Load=25/1024=2%, Rehash=0, Collisions=2/65=3%
+# Load=27/1024=3%, Rehash=0, Collisions=2/70=3%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 48 / storage = 456 B / avg = 9 B
-# current buf: size = 8162 B / used = 456 B / count = 48 / avg = 9 B
+# strcache buffers: 1 (0) / strings = 53 / storage = 497 B / avg = 9 B
+# current buf: size = 8162 B / used = 497 B / count = 53 / avg = 9 B
 
-# strcache performance: lookups = 94 / hit rate = 48%
+# strcache performance: lookups = 103 / hit rate = 48%
 # hash-table stats:
-# Load=48/8192=1%, Rehash=0, Collisions=3/94=3%
-# Finished Make data base on Wed Apr 20 13:18:29 2022
+# Load=53/8192=1%, Rehash=0, Collisions=3/103=3%
+# Finished Make data base on Sun May  8 12:27:57 2022
 
  

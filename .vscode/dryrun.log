@@ -1,6 +1,7 @@
 make --dry-run --always-make --keep-going --print-directory
-make: Entering directory '/home/malek/proj1A-main'
+make: Entering directory '/home/malek/proj1A'
 gcc -c main.c -g
+gcc -c minimap.c -g
 gcc -c background.c -g
 gcc -c es.c -g
 gcc -c enigme.c -g
@@ -10,6 +11,6 @@ gcc -c ninjahubstd.c -g
 gcc -c init.c -g
 gcc -c affichage.c -g
 gcc -c timer.c -g
-gcc main.o background.c es.c enigme.c character.c gamehead.o ninjahubstd.o init.o affichage.o timer.o -o prog -lSDL -lSDL_ttf -g -lSDL_image -lSDL_mixer
-make: Leaving directory '/home/malek/proj1A-main'
+gcc main.o minimap.c background.c es.c enigme.c character.c gamehead.o ninjahubstd.o init.o affichage.o timer.o -o prog -lSDL -lSDL_ttf -g -lSDL_image -lSDL_mixer
+make: Leaving directory '/home/malek/proj1A'
  
