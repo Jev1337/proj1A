@@ -1,19 +1,33 @@
 #include "character.h"
-void initcharacter(character *p)
+void initcharacter(character *p, int x)
 {
-    p->charsprite[0] = IMG_Load("images/leftsheetC.png");
-    p->charsprite[1] = IMG_Load("images/rightsheetC.png");
-    p->direction = 1;
-    p->side = -2;
-    p->offset.x = 0;
-    p->offset.y = 1080 - p->clips[p->direction].h;
-    p->offset.w = 300;
-    p->offset.h = p->clips[p->direction].h;
-    p->health = 3;
-    p->speed = 30;
+    if (x)
+    {
+        p->charsprite[0] = IMG_Load("images/leftsheetC.png");
+        p->charsprite[1] = IMG_Load("images/rightsheetC.png");
+
+        p->offset.y = 1080 - p->clips[1].h;
+        p->offset.w = 300;
+        p->offset.h = p->clips[1].h;
+    }
+    else
+    {
+        p->direction = 1;
+        p->side = -2;
+        p->offset.x = 0;
+        p->health = 3;
+        p->speed = 30;
+        p->charsprite[0] = IMG_Load("images/leftsheetC.png");
+        p->charsprite[1] = IMG_Load("images/rightsheetC.png");
+
+        p->offset.y = 1080 - p->clips[p->direction].h;
+        p->offset.w = 300;
+        p->offset.h = p->clips[p->direction].h;
+
+    }
 }
 
-void setcharacter(character *p, character *popt,Uint8 *keystate)
+void setcharacter(character *p, character *popt, Uint8 *keystate)
 {
     // Mix_Chunk *run;
     // run = Mix_LoadWAV("sounds/running.wav");
@@ -39,7 +53,6 @@ void setcharacter(character *p, character *popt,Uint8 *keystate)
     if (keystate[SDLK_LEFT])
     {
         p->side = 0;
-
     }
     else if (p->side == 0)
     {
@@ -92,15 +105,14 @@ void jump(character *p, btndim *BD, btn *B, gameitems *GI, Ennemi *e, PickUp coi
                 p->offset.x += p->speed;
                 b->posmask.x += p->speed;
                 if (m->pospoint.x >= m->posminimap.x) // point follow player
-                    m->pospoint.x+= p->speed/5.3;
+                    m->pospoint.x += p->speed / 5.3;
             }
             else if (b->posimage.x > -(b->image->w - 1920))
             {
                 b->posimage.x -= p->speed;
                 b->posmask.x += p->speed;
-                b->posmaskOpt.x += p->speed;
                 if (m->pospoint.x >= m->posminimap.x) // point follow player
-                    m->pospoint.x+= p->speed/5.3;
+                    m->pospoint.x += p->speed / 5.3;
             }
         }
         else if (p->side == 0 | p->side == -1)
@@ -110,27 +122,32 @@ void jump(character *p, btndim *BD, btn *B, gameitems *GI, Ennemi *e, PickUp coi
                 p->offset.x -= p->speed;
                 b->posmask.x -= p->speed;
                 if (m->pospoint.x >= m->posminimap.x) // point follow player
-                    m->pospoint.x-= p->speed/5.3;
+                    m->pospoint.x -= p->speed / 5.3;
             }
             else if (b->posimage.x < 0)
             {
                 b->posimage.x += p->speed;
                 b->posmask.x -= p->speed;
-                b->posmaskOpt.x -= p->speed;
                 if (m->pospoint.x >= m->posminimap.x) // point follow player
-                    m->pospoint.x-= p->speed/5.3;
+                    m->pospoint.x -= p->speed / 5.3;
             }
         }
 
         show_game(BD, B, GI, b, screen);
         afficher_character(p, screen);
-        afficherminimap(*m,screen);
-        if (GI->lvl == 5 && (b->posmask.x >= 6200 || b->posmaskOpt.x >= 6200))
+        afficherminimap(*m,GI->zoomable, screen);
+        if (GI->lvl == 5 && (b->posmask.x >= 6200))
         {
-            afficherEnnemi(*e, screen);
+            
             afficher_ecran(1300, 800, coin.animation.spriteSheet[0], screen, &coin.animation.Clips[coin.animation.clipLoaded]);
             animerCoin(&coin);
-            animerEnnemi(e);
+    if (e->attack)
+        {
+            afficherAttack(*e, screen);
+            attackPerso(e, screen);
+        }
+        else
+            afficherEnnemi(*e, screen);
             deplacer(e);
         }
 
@@ -146,15 +163,14 @@ void jump(character *p, btndim *BD, btn *B, gameitems *GI, Ennemi *e, PickUp coi
                 p->offset.x += p->speed;
                 b->posmask.x += p->speed;
                 if (m->pospoint.x >= m->posminimap.x) // point follow player
-                    m->pospoint.x+= p->speed/5.3;
+                    m->pospoint.x += p->speed / 5.3;
             }
             else if (b->posimage.x > -(b->image->w - 1920))
             {
                 b->posimage.x -= p->speed;
                 b->posmask.x += p->speed;
-                b->posmaskOpt.x += p->speed;
                 if (m->pospoint.x >= m->posminimap.x) // point follow player
-                    m->pospoint.x+= p->speed/5.3;
+                    m->pospoint.x += p->speed / 5.3;
             }
         }
         else if (p->side == 0 | p->side == -1)
@@ -164,26 +180,31 @@ void jump(character *p, btndim *BD, btn *B, gameitems *GI, Ennemi *e, PickUp coi
                 p->offset.x -= p->speed;
                 b->posmask.x -= p->speed;
                 if (m->pospoint.x >= m->posminimap.x) // point follow player
-                    m->pospoint.x-= p->speed/5.3;
+                    m->pospoint.x -= p->speed / 5.3;
             }
             else if (b->posimage.x < 0)
             {
                 b->posimage.x += p->speed;
                 b->posmask.x -= p->speed;
-                b->posmaskOpt.x -= p->speed;
                 if (m->pospoint.x >= m->posminimap.x) // point follow player
-                    m->pospoint.x-= p->speed/5.3;
+                    m->pospoint.x -= p->speed / 5.3;
             }
         }
-        show_game(BD, B, GI, b, screen);
+        show_game(BD, B, GI, b,screen);
         afficher_character(p, screen);
-        afficherminimap(*m,screen);
-        if (GI->lvl == 5 && (b->posmask.x >= 6200 || b->posmaskOpt.x >= 6200))
+        afficherminimap(*m,GI->zoomable, screen);
+        if (GI->lvl == 5 && (b->posmask.x >= 6200))
         {
-            afficherEnnemi(*e, screen);
+           
             afficher_ecran(1300, 800, coin.animation.spriteSheet[0], screen, &coin.animation.Clips[coin.animation.clipLoaded]);
-            animerCoin(&coin);
-            animerEnnemi(e);
+            animerCoin(&coin); 
+        if (e->attack)
+        {
+            afficherAttack(*e, screen);
+            attackPerso(e, screen);
+        }
+        else
+            afficherEnnemi(*e, screen);
             deplacer(e);
         }
         SDL_Flip(screen);
@@ -191,7 +212,7 @@ void jump(character *p, btndim *BD, btn *B, gameitems *GI, Ennemi *e, PickUp coi
     }
 }
 
-void changedirection(character *p, character *popt,minimap *m, background *b, int SecOpt)
+void changedirection(character *p, character *popt, minimap *m, background *b, int SecOpt)
 {
     if (p->side == 0)
     {
@@ -201,16 +222,15 @@ void changedirection(character *p, character *popt,minimap *m, background *b, in
             {
                 p->offset.x -= p->speed;
                 b->posmask.x -= p->speed;
-                                if (m->pospoint.x >= m->posminimap.x) // point follow player
-                    m->pospoint.x-= p->speed/5.3;
+                if (m->pospoint.x >= m->posminimap.x) // point follow player
+                    m->pospoint.x -= p->speed / 5.3;
             }
             else if (b->posimage.x < -p->speed)
             {
                 b->posmask.x -= p->speed;
                 b->posimage.x += p->speed;
-                b->posmaskOpt.x -= p->speed;
-                                if (m->pospoint.x >= m->posminimap.x) // point follow player
-                    m->pospoint.x-= p->speed/5.3;
+                if (m->pospoint.x >= m->posminimap.x) // point follow player
+                    m->pospoint.x -= p->speed / 5.3;
             }
         }
         p->direction--;
@@ -228,15 +248,14 @@ void changedirection(character *p, character *popt,minimap *m, background *b, in
                 p->offset.x += p->speed;
                 b->posmask.x += p->speed;
                 if (m->pospoint.x >= m->posminimap.x) // point follow player
-                    m->pospoint.x+= p->speed/5.3;
+                    m->pospoint.x += p->speed / 5.3;
             }
             else if (b->posimage.x > -(b->image->w - 1920))
             {
                 b->posimage.x -= p->speed;
                 b->posmask.x += p->speed;
-                b->posmaskOpt.x += p->speed;
                 if (m->pospoint.x >= m->posminimap.x) // point follow player
-                    m->pospoint.x+= p->speed/5.3;
+                    m->pospoint.x += p->speed / 5.3;
             }
         }
         p->direction++;
@@ -256,16 +275,16 @@ void changedirection(character *p, character *popt,minimap *m, background *b, in
     {
         if (popt->side == 0)
         {
-            if (collisionPP(b->posmaskOpt, b->imageM) == 0)
+            if (collisionPP(b->posmask, b->imageM) == 0)
             {
-                if (popt->offset.x > 0)
+                if (popt->offset.x > 1920/2 + popt->offset.w)
                 {
                     popt->offset.x -= popt->speed;
-                    b->posmaskOpt.x -= popt->speed;
+                    b->posmask.x -= popt->speed;
                 }
-                else if (b->posimage.x < -popt->speed)
+                else if (b->posimage.x < 1920+p->speed)
                 {
-                    b->posmaskOpt.x -= popt->speed;
+                    b->posmask.x -= popt->speed;
                     b->posimage.x += popt->speed;
                     b->posmask.x -= p->speed;
                 }
@@ -278,17 +297,17 @@ void changedirection(character *p, character *popt,minimap *m, background *b, in
         {
 
             // we need to add the condition where if we are in the last point in the level we have to allow the player to move around to the next half of the screen
-            if (collisionPP(b->posmaskOpt, b->imageM) == 0)
+            if (collisionPP(b->posmask, b->imageM) == 0)
             {
-                if (popt->offset.x < 1920 / 2 - popt->offset.w / 2)
+                if (popt->offset.x < 1920/2 - p->offset.w / 2)
                 {
                     popt->offset.x += popt->speed;
-                    b->posmaskOpt.x += popt->speed;
+                    b->posmask.x += popt->speed;
                 }
                 else if (b->posimage.x > -(b->image->w - 1920))
                 {
                     b->posimage.x -= popt->speed;
-                    b->posmaskOpt.x += popt->speed;
+                    b->posmask.x += popt->speed;
                     b->posmask.x += p->speed;
                 }
             }

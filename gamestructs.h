@@ -66,11 +66,13 @@ typedef struct{
 
 /**
  * @struct gameitems
- * @brief This struct allows us to store the level of the game
+ * @brief This struct allows us to store things that we cannot store in other structures
  */
 typedef struct{
     int lvl; /*!< Level is stored in the GameItems*/
     int SecOpt;
+    int LoadSave;
+    SDL_Surface *zoomable;
 }gameitems;
 
 /**

@@ -11,14 +11,17 @@
  * @brief This .c file includes the most important function that allows us to launch the game and manage the current screen
  * @version 0.7
  * @date 2022-04-24
- * 
+ *
  * @copyright Copyright (c) 2022
- * 
+ *
  */
+
+#include "en.h"
 #include "gamehead.h"
+
 /**
  * @brief Afficher Menu is a function that starts the entire Video Game
- * 
+ *
  * @param BD Button Dimentions are stored in here
  * @param B  Button SDL_Surfaces are stored in here
  * @param MI Menu Items are stored in here
@@ -36,6 +39,8 @@ int afficher_menu(btndim *BD, btn *B, menuitems *MI, gameitems *GI, settingsitem
 {
     show_menu(BD, B, MI, SI, screen);
     enigme e;
+    enigme2 e2;
+    // init_enigme2(&e2);
     int frame = 0;
     int cap = 1;
     Timer fps;
@@ -44,13 +49,22 @@ int afficher_menu(btndim *BD, btn *B, menuitems *MI, gameitems *GI, settingsitem
     PickUp coin;
     initEnnemi(en);
     initCoin(&coin);
-    init_bg(b);
     minimap m;
-    initmap(&m);
+    int run = 1, running = 1, alea;
+    char image[30] = "";
+    int t_prev, currentTime;
+    SDL_Event event;
     if (Mix_PlayMusic(M->music, -1) == -1)
     {
         return 1;
     }
+    
+    SDL_Surface *savemenu = IMG_Load("images/savemenu.png");
+
+
+        initmap(&m, 0);
+        init_bg(b, 0);
+        initcharacter(p, 0);
 
     while (quit == 0)
     {
@@ -62,55 +76,178 @@ int afficher_menu(btndim *BD, btn *B, menuitems *MI, gameitems *GI, settingsitem
             {
                 frame = 0;
             }
-            
+
             afficher_ecran(0, 0, MI->rainspr, screen, &MI->rainclip[frame]);
 
-            quit = menu(BD, B, GI, M, MI, SI, p,popt, b, &actpos, &actpos_previous, screen);
+            quit = menu(BD, B, GI, M, MI, SI, p, popt, b, &actpos, &actpos_previous, screen);
             if (quit == 2)
                 return 1;
-                                    if (actpos!=1 && actpos!=4 && actpos!=3)
-                SDL_FillRect(screen, NULL, 0);   
+            
+            if (actpos == 2){
+                FILE *file = fopen("savegame.txt", "r");
+                int c = fgetc(file);
+                if (c != EOF)
+                    GI->LoadSave = 1;
+                else
+                    GI->LoadSave = 0;
+                    fclose(file);
+            }
+            if (actpos == 2 && GI->LoadSave == 1)
+            {
+                afficher_ecran(700, 250, savemenu, screen, NULL);
+                SDL_Flip(screen);
+                GI->LoadSave = -1;
+                while (GI->LoadSave == -1)
+                    while (SDL_PollEvent(&event))
+                    {
+
+                        if (event.type == SDL_MOUSEBUTTONDOWN)
+                        {
+                            if (event.button.button == SDL_BUTTON_LEFT)
+                            {
+                                int x = event.button.x;
+                                int y = event.button.y;
+                                if (x >= 670 && x <= 269 + 670 && y >= 650 && y <= 650 + 119)
+                                {
+                                    GI->LoadSave = 1;
+                                }
+                                if (x >= 1080 && x <= 269 + 1080 && y >= 650 && y <= 650 + 119)
+                                {
+                                    GI->LoadSave = 0;
+                                }
+                            }
+                        }
+                    }
+
+                if (GI->LoadSave)
+                {
+                    charger(p, b, &m, GI);
+                    switch (GI->lvl)
+        {
+        case 1:
+            SDL_FreeSurface(b->image);
+            b->image = IMG_Load("images/11night0.png");
+            show_game(BD, B, GI, b, screen);
+            SDL_Flip(screen);
+            break;
+        case 2:
+            
+            SDL_FreeSurface(b->image);
+            b->image = IMG_Load("images/11night1.png");
+            show_game(BD, B, GI, b, screen);
+            SDL_Flip(screen);
+            break;
+        case 3:
+            
+            SDL_FreeSurface(b->image);
+            b->image = IMG_Load("images/11night2.png");
+            show_game(BD, B, GI, b, screen);
+            SDL_Flip(screen);
+            break;
+        case 4:
+            
+            SDL_FreeSurface(b->image);
+            b->image = IMG_Load("images/11night3.png");
+            show_game(BD, B, GI, b, screen);
+            SDL_Flip(screen);
+            break;
+        case 5:
+            
+            SDL_FreeSurface(b->image);
+            b->image = IMG_Load("images/11night4.png");
+            show_game(BD, B, GI, b, screen);
+            SDL_Flip(screen);
+            break;
+        }
+                }else{
+                    initmap(&m, 0);
+                    init_bg(b, 0);
+                    initcharacter(p, 0);
+                }
+                    
+            }
+            if (actpos != 1 && actpos != 4 && actpos != 3)
+                SDL_FillRect(screen, NULL, 0);
         }
         if (actpos == 3)
         {
             quit = credit(BD, B, M, MI, SI, &actpos, screen);
             if (quit == 2)
                 return 1;
-                        if (actpos!=3)
-                SDL_FillRect(screen, NULL, 0);   
+            if (actpos != 3)
+                SDL_FillRect(screen, NULL, 0);
         }
         if (actpos == 4)
         {
-            quit = setting(BD, B, PI, MI, GI, SI, M,b, &actpos, actpos_previous, screen);
+            quit = setting(BD, B, PI, MI, GI, SI, M, b, &actpos, actpos_previous, screen);
             if (quit == 2)
                 return 1;
-            if (actpos!=4)
-                SDL_FillRect(screen, NULL, 0);   
+            if (actpos != 4)
+                SDL_FillRect(screen, NULL, 0);
         }
         if (actpos == 2)
         { // State of Game
-                   
-            quit = game(BD, B, MI, GI, PI, M, p, popt, en, &coin,b,&m, &actpos, screen);
-            if (quit == 2) 
+
+            quit = game(BD, B, MI, GI, PI, M, p, popt, en, &coin, b, &m, &actpos, screen);
+            if (quit == 2)
                 return 1;
-            if (actpos == 1)
-            {
-                cleancharacter(p);
-                freeEnnemie(*en);
-                SDL_FillRect(screen, NULL, 0);   
-            }
         }
         if (actpos == 5)
         {
-            quit = pause(BD, B, SI, GI, PI, MI, M,b, &actpos, &actpos_previous, screen);
+            quit = pause(BD, B, SI, GI, PI, MI, M, b, &actpos, &actpos_previous, screen);
             if (quit == 2)
                 return 1;
+            if (actpos == 1)
+                sauvegarder(*p, *b, m, *GI);
         }
         if (actpos == 6)
         {
             quit = init_enigme(&e, "enigme.txt", screen);
             if (quit == 2)
                 return 1;
+            actpos = 2;
+        }
+        if (actpos == 7)
+        {
+            t_prev = SDL_GetTicks();
+            generate_afficher(screen, image, &e2, &alea);
+            running = 1;
+            SDL_PollEvent(&event);
+            switch (event.type)
+            {
+            case SDL_QUIT:
+                run = 0;
+                break;
+            }
+            do
+            {
+                currentTime = (SDL_GetTicks() - t_prev) / 1000;
+
+                SDL_BlitSurface(e2.img, NULL, screen, &(e2.p));
+                SDL_BlitSurface(e2.animation.SpriteSheet, &e2.animation.Clips[e2.animation.ClipLoaded], screen, &e2.animation.pos);
+                SDL_Flip(screen);
+                if (currentTime <= 10)
+                    e2.animation.ClipLoaded = 0;
+                if (currentTime == 10)
+                    e2.animation.ClipLoaded = 1;
+                if (currentTime == 15)
+                    e2.animation.ClipLoaded = 2;
+                if (currentTime == 25)
+                    e2.animation.ClipLoaded = 3;
+                if (currentTime == 30)
+                    e2.animation.ClipLoaded = 4;
+                e2.reponse = resolution(&running, &run);
+            } while (currentTime <= 30 && (e2.reponse > 3 || e2.reponse < 1) && running != 0);
+            if (e2.reponse_juste == e2.reponse)
+                afficher_resultat(screen, 1, &e2);
+            else if (currentTime >= 30 && e2.reponse == 0)
+            {
+                afficher_resultat(screen, 0, &e2);
+            }
+            else
+                afficher_resultat(screen, 0, &e2);
+
+            SDL_WaitEvent(&event);
             actpos = 2;
         }
         if (SDL_Flip(screen) == -1)
@@ -131,7 +268,7 @@ int afficher_menu(btndim *BD, btn *B, menuitems *MI, gameitems *GI, settingsitem
 
 /**
  * @brief FinProg is a function that frees Most of the loaded items especially from the menu
- * 
+ *
  * @param B Button SDL_Surfaces to free
  * @param MI Menu Items to free
  * @param GI GameItems to free
@@ -141,7 +278,7 @@ int afficher_menu(btndim *BD, btn *B, menuitems *MI, gameitems *GI, settingsitem
  * @param p Character items to free
  * @param screen Screen that we will free
  */
-void finprog(btn *B, menuitems *MI, gameitems *GI, settingsitems *SI, pauseitems *PI, misc *M, character *p,character *popt, SDL_Surface *screen)
+void finprog(btn *B, menuitems *MI, gameitems *GI, settingsitems *SI, pauseitems *PI, misc *M, character *p, character *popt, SDL_Surface *screen)
 {
 
     Mix_FreeChunk(M->scratch);

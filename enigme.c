@@ -154,3 +154,35 @@ int init_enigme(enigme *e, char nomfich[], SDL_Surface *screen)
     SDL_FreeSurface(e->R[2]);
     return 0;
 }
+    SDL_Surface *image;//background
+    SDL_Surface *imageM;//masque
+    SDL_Rect posimage;//position background
+    SDL_Rect posmask;
+    SDL_Rect posmaskOpt;
+void sauvegarder(character p, background b, minimap m, gameitems GI){
+    FILE* F = fopen("savegame.txt","w");
+    fprintf(F, "%d:%d:%d:%d:%d:%d:%d:%d:%d",p.offset.x, p.direction, p.side, p.health, p.speed, b.posimage.x, b.posmask.x, m.pospoint.x, GI.lvl);
+    fclose(F);
+}
+void charger(character *p, background *b, minimap *m, gameitems *GI){
+    FILE* F = fopen("savegame.txt","r");
+    char string[255];
+    fscanf(F, "%s", string);
+    char **tokens;
+    int count;
+    count = split(string, ':', &tokens);
+    p->offset.x = atoi(tokens[0]); 
+    p->direction = atoi(tokens[1]);
+    p->side = atoi(tokens[2]);
+    p->health = atoi(tokens[3]);
+    p->speed = atoi(tokens[4]);
+    b->posimage.x = atoi(tokens[5]);
+    b->posmask.x = atoi(tokens[6]);
+    m->pospoint.x = atoi(tokens[7]);
+    GI->lvl = atoi(tokens[8]);
+    int i;
+    for (i = 0; i < count; i++)
+        free(tokens[i]);
+    free(tokens);
+    fclose(F);
+}

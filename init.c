@@ -59,7 +59,6 @@ int load_files(btndim *BD, btn *B,menuitems *MI, pauseitems *PI, gameitems *GI, 
 {
    
 
-
     SDL_Color white = {255, 255, 255};
 
     GI->lvl = 0;
@@ -173,8 +172,8 @@ int load_clips(misc *M, menuitems *MI, character *p, character *popt){
         MI->rainclip[i].w = M->SCREEN_W;
         MI->rainclip[i].h = M->SCREEN_H;
     }
-        for (w=0,i=0;i<5;i++, w+=300){
-        p->clips[i].x = w;
+        for (w=0,i=0;i<5;i++, w+=300){ 
+        p->clips[i].x = w; 
         p->clips[i].y = 0;
         p->clips[i].w = 300;
         p->clips[i].h = 484;

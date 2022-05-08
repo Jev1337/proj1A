@@ -3,7 +3,7 @@
 #include "gamehead.h"
 
 
-void init_bg(background *b);
+void init_bg(background *b, int x);
 SDL_Color GetPixel (SDL_Surface* pSurface,int x,int y);
 int collisionPP( SDL_Rect p, SDL_Surface * Masque);
 #endif

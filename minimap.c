@@ -15,19 +15,46 @@ void affichertemps(int temps, SDL_Surface *screen) // temps compteur
     txt = TTF_RenderText_Blended(police, s, couleur);
     SDL_BlitSurface(txt, NULL, screen, &postemps); // affichage temps
 }
-void initmap(minimap *m)
+void initmap(minimap *m, int x)
 {
-    
+    if (x){
     m->minimap = IMG_Load("images/11minimap.png");
     m->posminimap.x = 400;
     m->posminimap.y = 20;
     m->point = IMG_Load("images/point.png");
-    m->pospoint.x = 400;
+    m->temps = time(NULL);;
     m->pospoint.y = 80;
-    m->temps = 60;
+    }
+    else{
+        m->minimap = IMG_Load("images/11minimap.png");
+        m->posminimap.x = 400;
+        m->posminimap.y = 20;
+        m->point = IMG_Load("images/point.png");
+        m->temps = 60;
+        m->pospoint.x = 400;
+        m->pospoint.y = 80;
+        m->temps = time(NULL);
+    }
 }
-void afficherminimap(minimap m, SDL_Surface *screen)
+void afficherminimap(minimap m, SDL_Surface *zoomable, SDL_Surface *screen)
 {
-    SDL_BlitSurface(m.minimap, NULL, screen, &m.posminimap); // affichage minimap
-    SDL_BlitSurface(m.point, NULL, screen, &m.pospoint);     // affichage point
+    Uint8 *keystate = SDL_GetKeyState(NULL);
+    SDL_Rect zoomMAP;
+    SDL_Rect zoomPOINT;
+    zoomMAP = m.posminimap;
+    zoomPOINT = m.pospoint;
+    zoomMAP.y = m.posminimap.y +500;
+    zoomPOINT.y = m.pospoint.y +550;
+    zoomMAP.x = 0;
+    zoomPOINT.x = zoomPOINT.x-20;
+    
+    
+    if (keystate[SDLK_z]){
+        SDL_BlitSurface(zoomable, NULL, screen, &zoomMAP); // affichage minimap
+        SDL_BlitSurface(m.point, NULL, screen, &zoomPOINT);     // affichage point
+    }
+    else{
+        SDL_BlitSurface(m.minimap, NULL, screen, &m.posminimap); // affichage minimap
+        SDL_BlitSurface(m.point, NULL, screen, &m.pospoint);     // affichage point     
+    }
 }

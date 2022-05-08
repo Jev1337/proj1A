@@ -56,10 +56,7 @@ int menu(btndim *BD, btn *B, gameitems *GI, misc *M, menuitems *MI, settingsitem
                     *actpos_previous = 1;
                     *actpos = 2;
                     Mix_HaltMusic();
-                    show_game(BD, B, GI, b, screen);
-                    initcharacter(p);
-                    initcharacter(popt);
-                    
+                    show_game(BD, B, GI, b,screen);
                 }
                 if (B->isselected[1]) // Credits
                 {
@@ -519,12 +516,13 @@ int game(btndim *BD, btn *B, menuitems *MI, gameitems *GI, pauseitems *PI, misc 
     SDL_Event event;
     show_game(BD, B, GI, b, screen);
     afficher_character(p, screen);
-    afficherminimap(*m, screen);
-    affichertemps(m->temps,screen);
-    m->temps--;
+    afficherminimap(*m, GI->zoomable, screen);
+    affichertemps(time(NULL)-m->temps, screen);
+    
     if (GI->SecOpt)
         afficher_character(popt, screen);
-    if (GI->lvl == 5 && (b->posmask.x >= 6200 || b->posmaskOpt.x >= 6200)){
+    if (GI->lvl == 5 && (b->posmask.x >= 6200 || b->posmask.x >= 6200))
+    {
         if (e->attack)
         {
             afficherAttack(*e, screen);
@@ -534,9 +532,8 @@ int game(btndim *BD, btn *B, menuitems *MI, gameitems *GI, pauseitems *PI, misc 
             afficherEnnemi(*e, screen);
         animerCoin(coin);
         deplacer(e);
-        afficher_ecran(1300, 800, coin->animation.spriteSheet[0], screen, &coin->animation.Clips[coin->animation.clipLoaded]); //afficher coin
+        afficher_ecran(1300, 800, coin->animation.spriteSheet[0], screen, &coin->animation.Clips[coin->animation.clipLoaded]); // afficher coin
     }
-    
 
     /*if (collisionBB(p->offset, coin->pos) == 1)
     {
@@ -545,14 +542,13 @@ int game(btndim *BD, btn *B, menuitems *MI, gameitems *GI, pauseitems *PI, misc 
     // Collision Function
     Uint8 *keystate = SDL_GetKeyState(NULL);
 
-    if ((b->posmask.x >= 6990 || b->posmaskOpt.x >= 6990) && GI->lvl != 5)
+    if ((b->posmask.x >= 6990) && GI->lvl != 5)
     {
         m->pospoint.x = 400;
         m->pospoint.y = 80;
         *actpos = 6;
         GI->lvl++;
         b->posmask.x = 0;
-        b->posmaskOpt.x = 0;
         p->offset.x = 0;
         popt->offset.x = 0;
         b->posimage.x = 0;
@@ -651,7 +647,6 @@ int game(btndim *BD, btn *B, menuitems *MI, gameitems *GI, pauseitems *PI, misc 
         }
     }
 
-        
     if (keystate[SDLK_ESCAPE])
     {
         *actpos = 5;
@@ -659,20 +654,19 @@ int game(btndim *BD, btn *B, menuitems *MI, gameitems *GI, pauseitems *PI, misc 
     }
     if (keystate[SDLK_UP])
     {
-        jump(p, BD, B, GI, e, *coin, b,m, screen);
+        jump(p, BD, B, GI, e, *coin, b, m, screen);
     }
     if (GI->SecOpt)
         if (keystate[SDLK_w])
         {
-            jump(popt, BD, B, GI, e, *coin, b,m, screen);
+            jump(popt, BD, B, GI, e, *coin, b, m, screen);
         }
     SDL_PollEvent(&event);
 
     setcharacter(p, popt, keystate);
 
-    changedirection(p, popt,m, b, GI->SecOpt);
+    changedirection(p, popt, m, b, GI->SecOpt);
 
-    
     return 0;
 }
 
@@ -831,7 +825,7 @@ void show_menu(btndim *BD, btn *B, menuitems *MI, settingsitems *SI, SDL_Surface
 
 void show_pausemenu(btndim *BD, btn *B, menuitems *MI, gameitems *GI, pauseitems *PI, background *b, SDL_Surface *screen)
 {
-    show_game(BD, B, GI, b, screen);
+    show_game(BD, B, GI, b,screen);
     afficher_ecran(0, 0, PI->pausemenu, screen, NULL);
     afficher_ecran(760, 413, B->resumebtn[0], screen, NULL);
     afficher_ecran(760, 540, B->settingsbtnreal[0], screen, NULL);
@@ -840,7 +834,21 @@ void show_pausemenu(btndim *BD, btn *B, menuitems *MI, gameitems *GI, pauseitems
 
 void show_game(btndim *BD, btn *B, gameitems *GI, background *b, SDL_Surface *screen)
 {
-    afficher_ecran(b->posimage.x, b->posimage.y, b->image, screen, NULL);
+    /*if (GI->SecOpt){
+        SDL_Rect clip1, clip2;
+        clip1 = b->posmask;
+        clip2= bopt->posmask;
+        clip1.y=0;
+        clip2.y=0;
+        clip1.h = 1080;
+        clip2.h = 1080;
+        clip1.w = 1920/2;
+        clip2.w = 1920/2;
+        afficher_ecran(b->posimage.x, b->posimage.y, b->image, screen, NULL);
+        afficher_ecran(bopt->posimage.x, bopt->posimage.y, bopt->image, screen, NULL);
+    }
+    else*/
+        afficher_ecran(b->posimage.x, b->posimage.y, b->image, screen, NULL);
 }
 
 void show_credits(btndim *BD, btn *B, menuitems *MI, settingsitems *SI, SDL_Surface *screen)

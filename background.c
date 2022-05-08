@@ -1,19 +1,25 @@
 #include "background.h"
 
-void init_bg(background *b)
+void init_bg(background *b, int x)
 {
+  if (x){
   b->image = IMG_Load("images/11.png");
   b->imageM = IMG_Load("images/11mask.png");
-  b->posimage.x = 0;  
   b->posimage.y = 1080 - b->image->h;
-  b->posmask.x = 0;
   b->posmask.y = 1080 - 484;
   b->posmask.w = 300;
   b->posmask.h = 484; 
-  b->posmaskOpt.x = 0;
-  b->posmaskOpt.y = 1080 - 484;
-  b->posmaskOpt.w = 300;
-  b->posmaskOpt.h = 484;
+  }
+  else{
+      b->image = IMG_Load("images/11.png");
+  b->imageM = IMG_Load("images/11mask.png");
+  b->posimage.y = 1080 - b->image->h;
+  b->posmask.y = 1080 - 484;
+  b->posmask.w = 300;
+  b->posmask.h = 484; 
+  b->posimage.x = 0;  
+  b->posmask.x = 0;
+}
 }
 
 SDL_Color GetPixel(SDL_Surface *pSurface, int x, int y)
@@ -56,7 +62,6 @@ int collisionPP(SDL_Rect p, SDL_Surface *Masque)
   while ((i <= 7))
   {
     colgotten = GetPixel(Masque, Pos[i].x, Pos[i].y);
-    printf("position %d- x: %d y: %d R:%d G:%d B:%d\n", i, Pos[i].x, Pos[i].y, colgotten.r, colgotten.g, colgotten.b);
     if ((colobs.r == colgotten.r) && (colobs.b == colgotten.b) && (colobs.g == colgotten.g))
       return 1;
     else

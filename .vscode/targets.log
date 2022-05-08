@@ -6,7 +6,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Sun May  8 12:27:57 2022
+# Make data base, printed on Sun May  8 19:11:25 2022
 
 # Variables
 
@@ -121,7 +121,7 @@ XDG_SESSION_DESKTOP = ubuntu
 # environment
 SSH_AUTH_SOCK = /run/user/1000/keyring/ssh
 # environment
-GIO_LAUNCHED_DESKTOP_FILE_PID = 6039
+GIO_LAUNCHED_DESKTOP_FILE_PID = 34663
 # automatic
 %F = $(notdir $%)
 # environment
@@ -187,7 +187,7 @@ SHLVL = 0
 # environment
 GNOME_SHELL_SESSION_MODE = ubuntu
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-8f3a10a7-d8c9-4ced-a525-08692add82f0.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-5b333bcc-dfca-4e48-ad77-5ba43a6d284c.sock
 # default
 MAKE_VERSION := 4.2.1
 # environment
@@ -267,7 +267,7 @@ LC_ADDRESS = ar_TN.UTF-8
 # environment
 LANG = C
 # environment
-VSCODE_PID = 6085
+VSCODE_PID = 34713
 # variable set hash-table stats:
 # Load=129/1024=13%, Rehash=0, Collisions=23/154=15%
 
@@ -277,12 +277,12 @@ VSCODE_PID = 6085
 
 # Directories
 
-# . (device 2053, inode 792429): 48 files, no impossibilities.
+# . (device 2053, inode 792429): 52 files, no impossibilities.
 
  
 make: *** No rule to make target 'all'.  Stop.
 
-# 48 files, no impossibilities in 1 directories.
+# 52 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -308,6 +308,13 @@ enigme.c:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
+
+enigme2.o: enigme2.c
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'makefile', line 26):
+	gcc -c enigme2.c -g
 
 # Not a target:
 init.c:
@@ -361,7 +368,7 @@ character.c:
 # Not a target:
 makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-05-07 11:27:42.926430579
+#  Last modified 2022-05-08 14:12:24.561963808
 #  File has been updated.
 #  Successfully updated.
 
@@ -371,12 +378,18 @@ background.c:
 #  Modification time never checked.
 #  File has not been updated.
 
-prog: main.o minimap.o background.o es.o enigme.o character.o gamehead.o ninjahubstd.o init.o affichage.o timer.o
+# Not a target:
+enigme2.c:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+prog: main.o enigme2.o minimap.o background.o es.o enigme.o character.o gamehead.o ninjahubstd.o init.o affichage.o timer.o
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 #  recipe to execute (from 'makefile', line 2):
-	gcc main.o minimap.c background.c es.c enigme.c character.c gamehead.o ninjahubstd.o init.o affichage.o timer.o -o prog -lSDL -lSDL_ttf -g -lSDL_image -lSDL_mixer
+	gcc main.o enigme2.c minimap.c background.c es.c enigme.c character.c gamehead.o ninjahubstd.o init.o affichage.o timer.o -o prog -lSDL -lSDL_ttf -g -lSDL_image -lSDL_mixer
 
 # Not a target:
 .DEFAULT:
@@ -461,19 +474,19 @@ ninjahubstd.c:
 #  File has not been updated.
 
 # files hash-table stats:
-# Load=27/1024=3%, Rehash=0, Collisions=2/70=3%
+# Load=29/1024=3%, Rehash=0, Collisions=2/75=3%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 53 / storage = 497 B / avg = 9 B
-# current buf: size = 8162 B / used = 497 B / count = 53 / avg = 9 B
+# strcache buffers: 1 (0) / strings = 57 / storage = 535 B / avg = 9 B
+# current buf: size = 8162 B / used = 535 B / count = 57 / avg = 9 B
 
-# strcache performance: lookups = 103 / hit rate = 48%
+# strcache performance: lookups = 111 / hit rate = 48%
 # hash-table stats:
-# Load=53/8192=1%, Rehash=0, Collisions=3/103=3%
-# Finished Make data base on Sun May  8 12:27:57 2022
+# Load=57/8192=1%, Rehash=0, Collisions=3/111=3%
+# Finished Make data base on Sun May  8 19:11:25 2022
 
  

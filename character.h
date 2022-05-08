@@ -8,7 +8,7 @@
 
 
 
-void initcharacter(character *p);
+void initcharacter(character *p, int x);
 void setcharacter(character *p, character *popt,  Uint8* keystate); 
 void changedirection (character  *p,character *popt,minimap *m, background *b, int SecOpt);
 void afficher_character (character * p, SDL_Surface *screen);

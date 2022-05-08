@@ -15,6 +15,6 @@ typedef struct{
 void afficher_enigme(enigme *e, SDL_Surface *screen);
 int init_enigme(enigme *e, char nomfich[], SDL_Surface *screen);
 void animer(enigme *e, SDL_Surface *screen);
-//void sauvegarder()
-//void charger()
+void sauvegarder(character p, background b, minimap m, gameitems GI);
+void charger(character *p, background *b, minimap *m, gameitems *GI);
 #endif

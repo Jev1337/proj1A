@@ -11,6 +11,8 @@
         "gamestructs.h": "c",
         "init.h": "c",
         "sdl_image.h": "c",
-        "stdlib.h": "c"
+        "stdlib.h": "c",
+        "ninjahubstd.h": "c",
+        "unistd.h": "c"
     }
 }

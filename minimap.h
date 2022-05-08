@@ -7,6 +7,7 @@
 #include <SDL/SDL_mixer.h>
 #include <SDL/SDL_image.h>
 #include <string.h>
+#include <time.h>
 
 typedef struct
 {
@@ -16,8 +17,8 @@ typedef struct
     SDL_Rect pospoint;    // position point minimap
     int temps;
 } minimap;
-void initmap(minimap *m);
-void afficherminimap(minimap m, SDL_Surface *screen);
+void initmap(minimap *m, int x);
+void afficherminimap(minimap m, SDL_Surface *zoomable, SDL_Surface *screen);
 void affichertemps(int temps, SDL_Surface *screen);
 
 #endif
