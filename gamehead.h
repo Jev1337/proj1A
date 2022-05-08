@@ -28,7 +28,7 @@
 #include <time.h>
 #include "es.h"
 #include "minimap.h"
-
+#include "ard.h"
 #include "ninjahubstd.h"
 #include "timer.h"
 #include "gamestructs.h"

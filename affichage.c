@@ -521,7 +521,7 @@ int game(btndim *BD, btn *B, menuitems *MI, gameitems *GI, pauseitems *PI, misc 
 
     if (GI->SecOpt)
         afficher_character(popt, screen);
-    if (GI->lvl == 5 && (b->posmask.x >= 6200 || b->posmask.x >= 6200))
+    if (GI->lvl == 5 && (b->posmask.x >= 6200))
     {
         if (e->attack)
         {
@@ -542,7 +542,7 @@ int game(btndim *BD, btn *B, menuitems *MI, gameitems *GI, pauseitems *PI, misc 
     // Collision Function
     Uint8 *keystate = SDL_GetKeyState(NULL);
 
-    if ((b->posmask.x >= 6990) && GI->lvl != 5)
+    if ((b->posmask.x >= 6890) && GI->lvl != 5)
     {
         m->pospoint.x = 400;
         m->pospoint.y = 80;
@@ -655,6 +655,9 @@ int game(btndim *BD, btn *B, menuitems *MI, gameitems *GI, pauseitems *PI, misc 
     if (keystate[SDLK_p]){
         *actpos = 8;
     }
+    if (keystate[SDLK_l]){
+        *actpos = 7;
+    }
     if (keystate[SDLK_UP])
     {
         jump(p, BD, B, GI, e, *coin, b, m, screen);
@@ -664,6 +667,8 @@ int game(btndim *BD, btn *B, menuitems *MI, gameitems *GI, pauseitems *PI, misc 
         {
             jump(popt, BD, B, GI, e, *coin, b, m, screen);
         }
+
+
     SDL_PollEvent(&event);
 
     setcharacter(p, popt, keystate);

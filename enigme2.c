@@ -3,8 +3,14 @@
 #include <string.h>
 #include <SDL/SDL.h>
 #include <SDL/SDL_mixer.h>
+#include <SDL/SDL_ttf.h>
 #include <SDL/SDL_image.h>
 #include "en.h"
+Mix_Chunk *click = NULL;
+SDL_Surface *hero = NULL;
+SDL_Surface *cons = NULL;
+
+int volume = 100;
 
 void init_enigme2(enigme2 *e)
 {
@@ -24,6 +30,11 @@ void init_enigme2(enigme2 *e)
 		e->animation.Clips[i].h = 450;
 		e->animation.Clips[i].x = w;
 		e->animation.Clips[i].y = 0;
+	}
+	click = Mix_LoadWAV("sounds/scratch.wav");
+	if (click == NULL)
+	{
+		return;
 	}
 }
 
@@ -89,5 +100,70 @@ void afficher_resultat(SDL_Surface *screen, int r, enigme2 *en)
 		en->img = IMG_Load("images/lose.jpg");
 		SDL_BlitSurface(en->img, NULL, screen, &(en->p));
 		SDL_Flip(screen);
+	}
+}
+
+void character(SDL_Surface *screen, int *choice)
+{
+	SDL_Event event;
+
+	SDL_Surface *daddou, *lassaad;
+	daddou = IMG_Load("images/daddou.png");
+	lassaad = IMG_Load("images/lassaad.png");
+
+	SDL_Rect daddou_pos, lassaad_pos;
+
+	daddou_pos.x = 800;
+	daddou_pos.y = 200;
+
+	lassaad_pos.x = 0;
+	lassaad_pos.y = 200;
+
+	SDL_BlitSurface(daddou, NULL, screen, &daddou_pos);
+	SDL_BlitSurface(lassaad, NULL, screen, &lassaad_pos);
+	SDL_Flip(screen);
+
+	SDL_WaitEvent(&event);
+
+	if (event.type == SDL_MOUSEBUTTONDOWN)
+	{
+		if (event.button.x >= daddou_pos.x && event.button.x <= daddou_pos.x + 103 && event.button.y >= daddou_pos.y && event.button.y <= daddou_pos.y + 376)
+			*choice = 1;
+
+		if (event.button.x >= lassaad_pos.x && event.button.x <= lassaad_pos.x + 472 && event.button.y >= lassaad_pos.y && event.button.y <= lassaad_pos.y + 615)
+			*choice = 2;
+	}
+}
+
+void controller(SDL_Surface *screen, int *choice)
+{
+
+	SDL_Event event;
+
+	SDL_Surface *keyboard, *controller;
+	keyboard = IMG_Load("images/keyboard.jpg");
+	controller = IMG_Load("images/controller.jpg");
+
+	SDL_Rect keyboard_pos, controller_pos;
+
+	keyboard_pos.x = 800;
+	keyboard_pos.y = 200;
+
+	controller_pos.x = 0;
+	controller_pos.y = 200;
+
+	SDL_BlitSurface(keyboard, NULL, screen, &keyboard_pos);
+	SDL_BlitSurface(controller, NULL, screen, &controller_pos);
+	SDL_Flip(screen);
+
+	SDL_WaitEvent(&event);
+
+	if (event.type == SDL_MOUSEBUTTONDOWN)
+	{
+		if (event.button.x >= keyboard_pos.x && event.button.x <= keyboard_pos.x + 360 && event.button.y >= keyboard_pos.y && event.button.y <= keyboard_pos.y + 360)
+			*choice = 1;
+
+		if (event.button.x >= controller_pos.x && event.button.x <= controller_pos.x + 800 && event.button.y >= controller_pos.y && event.button.y <= controller_pos.y + 800)
+			*choice = 2;
 	}
 }

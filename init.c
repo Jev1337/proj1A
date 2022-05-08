@@ -172,16 +172,16 @@ int load_clips(misc *M, menuitems *MI, character *p, character *popt){
         MI->rainclip[i].w = M->SCREEN_W;
         MI->rainclip[i].h = M->SCREEN_H;
     }
-        for (w=0,i=0;i<5;i++, w+=300){ 
+        for (w=0,i=0;i<4;i++, w+=366){ 
         p->clips[i].x = w; 
         p->clips[i].y = 0;
-        p->clips[i].w = 300;
+        p->clips[i].w = 366;
         p->clips[i].h = 484;
     }
-    for (w=0,i=0;i<5;i++, w+=300){
+    for (w=0,i=0;i<4;i++, w+=366){
         popt->clips[i].x = w;
         popt->clips[i].y = 0;
-        popt->clips[i].w = 300;
+        popt->clips[i].w = 366;
         popt->clips[i].h = 484;
     }
 

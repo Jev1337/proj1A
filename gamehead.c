@@ -41,7 +41,7 @@ int afficher_menu(btndim *BD, btn *B, menuitems *MI, gameitems *GI, settingsitem
     show_menu(BD, B, MI, SI, screen);
     enigme e;
     enigme2 e2;
-    // init_enigme2(&e2);
+    init_enigme2(&e2);
     int frame = 0;
     int cap = 1;
     Timer fps;
@@ -128,6 +128,7 @@ int afficher_menu(btndim *BD, btn *B, menuitems *MI, gameitems *GI, settingsitem
                 if (GI->LoadSave)
                 {
                     charger(p, b, &m, GI);
+                    printf("%d", GI->lvl);
                     switch (GI->lvl)
                     {
                     case 1:
@@ -279,7 +280,7 @@ int afficher_menu(btndim *BD, btn *B, menuitems *MI, gameitems *GI, settingsitem
             switch (event.type)
             {
             case SDL_QUIT:
-                run = 0;
+                quit = 0;
                 break;
             }
             do
@@ -288,6 +289,7 @@ int afficher_menu(btndim *BD, btn *B, menuitems *MI, gameitems *GI, settingsitem
 
                 SDL_BlitSurface(e2.img, NULL, screen, &(e2.p));
                 SDL_BlitSurface(e2.animation.SpriteSheet, &e2.animation.Clips[e2.animation.ClipLoaded], screen, &e2.animation.pos);
+                SDL_Delay(16);
                 SDL_Flip(screen);
                 if (currentTime <= 10)
                     e2.animation.ClipLoaded = 0;
@@ -309,8 +311,9 @@ int afficher_menu(btndim *BD, btn *B, menuitems *MI, gameitems *GI, settingsitem
             }
             else
                 afficher_resultat(screen, 0, &e2);
-
-            SDL_WaitEvent(&event);
+                            SDL_Delay(16);
+                SDL_Flip(screen);
+            SDL_Delay(3000);
             actpos = 2;
         }
         if (SDL_Flip(screen) == -1)

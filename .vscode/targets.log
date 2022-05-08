@@ -8,7 +8,7 @@ make: *** No rule to make target 'all'.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Sun May  8 20:25:23 2022
+# Make data base, printed on Sun May  8 21:50:18 2022
 
 # Variables
 
@@ -51,7 +51,7 @@ SNAP_DATA = /var/snap/code/95
 # environment
 VSCODE_NLS_CONFIG = {"locale":"en-us","availableLanguages":{},"_languagePackSupport":true}
 # environment
-JOURNAL_STREAM = 8:32901
+JOURNAL_STREAM = 8:31155
 # environment
 XDG_CONFIG_DIRS = /etc/xdg/xdg-ubuntu:/etc/xdg
 # environment
@@ -71,13 +71,14 @@ MAKELEVEL := 0
 # environment
 XDG_DATA_DIRS = /usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop
 # environment
+ 
 DBUS_SESSION_BUS_ADDRESS = unix:path=/run/user/1000/bus
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
 _ = /snap/code/95/usr/share/code/code
 # environment
-MANAGERPID = 1104
+MANAGERPID = 1053
 # environment
 LESSOPEN = | /usr/bin/lesspipe %s
 # environment
@@ -93,7 +94,7 @@ PATH = /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/
 # environment
 GPG_AGENT_INFO = /run/user/1000/gnupg/S.gpg-agent:0:1
 # environment
-SESSION_MANAGER = local/malek-VirtualBox:@/tmp/.ICE-unix/1381,unix/malek-VirtualBox:/tmp/.ICE-unix/1381
+SESSION_MANAGER = local/malek-VirtualBox:@/tmp/.ICE-unix/1337,unix/malek-VirtualBox:/tmp/.ICE-unix/1337
 # environment
 XDG_RUNTIME_DIR = /run/user/1000
 # environment
@@ -111,7 +112,7 @@ DISABLE_WAYLAND = 1
 # environment
 ELECTRON_RUN_AS_NODE = 1
 # environment
-INVOCATION_ID = 94a40577a4f5447e98242810e0969c16
+INVOCATION_ID = 68d68722d758440a9e658d9ac025e534
 # environment
 GDK_PIXBUF_MODULEDIR = /snap/code/95/usr/lib/x86_64-linux-gnu/gdk-pixbuf-2.0/2.10.0/loaders
 # default
@@ -123,7 +124,7 @@ XDG_SESSION_DESKTOP = ubuntu
 # environment
 SSH_AUTH_SOCK = /run/user/1000/keyring/ssh
 # environment
-GIO_LAUNCHED_DESKTOP_FILE_PID = 42508
+GIO_LAUNCHED_DESKTOP_FILE_PID = 4536
 # automatic
 %F = $(notdir $%)
 # environment
@@ -137,7 +138,7 @@ PWD = /home/malek/proj1A
 # default
 .LOADED := 
 # environment
-SSH_AGENT_PID = 1344
+SSH_AGENT_PID = 1302
 # environment
 ORIGINAL_XDG_CURRENT_DESKTOP = ubuntu:GNOME
 # environment
@@ -189,7 +190,7 @@ SHLVL = 0
 # environment
 GNOME_SHELL_SESSION_MODE = ubuntu
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-b7cb2f96-b0f5-4c05-86c8-bb5a40414207.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-e5bb516d-3e14-46df-81ed-d7926b23dcbd.sock
 # default
 MAKE_VERSION := 4.2.1
 # environment
@@ -269,7 +270,7 @@ LC_ADDRESS = ar_TN.UTF-8
 # environment
 LANG = C
 # environment
-VSCODE_PID = 42554
+VSCODE_PID = 4580
 # variable set hash-table stats:
 # Load=129/1024=13%, Rehash=0, Collisions=23/154=15%
 
@@ -279,10 +280,9 @@ VSCODE_PID = 42554
 
 # Directories
 
-# . (device 2053, inode 792429): 55 files, no impossibilities.
+# . (device 2053, inode 792429): 57 files, no impossibilities.
 
- 
-# 55 files, no impossibilities in 1 directories.
+# 57 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -343,6 +343,7 @@ main.c:
 #  File has not been updated.
 
 # Not a target:
+ 
 es.c:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
@@ -494,12 +495,12 @@ ninjahubstd.c:
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 60 / storage = 550 B / avg = 9 B
-# current buf: size = 8162 B / used = 550 B / count = 60 / avg = 9 B
+# strcache buffers: 1 (0) / strings = 62 / storage = 562 B / avg = 9 B
+# current buf: size = 8162 B / used = 562 B / count = 62 / avg = 9 B
 
-# strcache performance: lookups = 118 / hit rate = 49%
+# strcache performance: lookups = 120 / hit rate = 48%
 # hash-table stats:
-# Load=60/8192=1%, Rehash=0, Collisions=4/118=3%
-# Finished Make data base on Sun May  8 20:25:23 2022
+# Load=62/8192=1%, Rehash=0, Collisions=4/120=3%
+# Finished Make data base on Sun May  8 21:50:18 2022
 
  

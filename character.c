@@ -7,7 +7,7 @@ void initcharacter(character *p, int x)
         p->charsprite[1] = IMG_Load("images/rightsheetC.png");
 
         p->offset.y = 1080 - p->clips[1].h;
-        p->offset.w = 300;
+        p->offset.w = 366;
         p->offset.h = p->clips[1].h;
     }
     else
@@ -21,7 +21,7 @@ void initcharacter(character *p, int x)
         p->charsprite[1] = IMG_Load("images/rightsheetC.png");
 
         p->offset.y = 1080 - p->clips[p->direction].h;
-        p->offset.w = 300;
+        p->offset.w = 366;
         p->offset.h = p->clips[p->direction].h;
 
     }
@@ -259,14 +259,14 @@ void changedirection(character *p, character *popt, minimap *m, background *b, i
             }
         }
         p->direction++;
-        if (p->direction == 5)
+        if (p->direction == 4)
             p->direction = 1;
     }
     else if (p->side == 3)
     {
     }
     else if (p->side == -1)
-        p->direction = 4;
+        p->direction = 3;
     else
         p->direction = 0;
 
@@ -319,7 +319,7 @@ void changedirection(character *p, character *popt, minimap *m, background *b, i
         {
         }
         else if (popt->side == -1)
-            popt->direction = 4;
+            popt->direction = 3;
         else
             popt->direction = 0;
     }

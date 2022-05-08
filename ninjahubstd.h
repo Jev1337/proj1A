@@ -16,7 +16,7 @@ typedef struct{
     SDL_Surface *charsprite[2];
     int direction; //Numero Image 
     int side; // Direction Gauche Droite Haut Bas
-    SDL_Rect clips[5];
+    SDL_Rect clips[4];
     SDL_Rect offset;
     int health;
     int speed;

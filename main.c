@@ -45,6 +45,7 @@ int main(int argc, char *args[])
 	screen = init(&M);
 	GI.SecOpt = 0;
 	GI.zoomable = IMG_Load("images/11minimapBIG.png");
+	//system("stty -F /dev/ttyUSB0 9600 -parenb cs8 -cstopb");
 	if (screen == NULL)
 		return 1;
 	MI_Init(&MI);
