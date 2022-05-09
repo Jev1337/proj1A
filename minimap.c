@@ -18,7 +18,7 @@ void affichertemps(int temps, SDL_Surface *screen) // temps compteur
 void initmap(minimap *m, int x)
 {
     if (x){
-    m->minimap = IMG_Load("images/11minimap.png");
+    m->minimap =  IMG_Load("images/Red(LevelOne)minimap.png");
     m->posminimap.x = 400;
     m->posminimap.y = 20;
     m->point = IMG_Load("images/point.png");
@@ -26,7 +26,7 @@ void initmap(minimap *m, int x)
     m->pospoint.y = 80;
     }
     else{
-        m->minimap = IMG_Load("images/11minimap.png");
+        m->minimap =  IMG_Load("images/Red(LevelOne)minimap.png");
         m->posminimap.x = 400;
         m->posminimap.y = 20;
         m->point = IMG_Load("images/point.png");

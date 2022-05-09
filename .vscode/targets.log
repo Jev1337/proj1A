@@ -8,7 +8,7 @@ make: *** No rule to make target 'all'.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Sun May  8 21:50:18 2022
+# Make data base, printed on Mon May  9 10:41:56 2022
 
 # Variables
 
@@ -51,7 +51,7 @@ SNAP_DATA = /var/snap/code/95
 # environment
 VSCODE_NLS_CONFIG = {"locale":"en-us","availableLanguages":{},"_languagePackSupport":true}
 # environment
-JOURNAL_STREAM = 8:31155
+JOURNAL_STREAM = 8:31545
 # environment
 XDG_CONFIG_DIRS = /etc/xdg/xdg-ubuntu:/etc/xdg
 # environment
@@ -71,14 +71,13 @@ MAKELEVEL := 0
 # environment
 XDG_DATA_DIRS = /usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop
 # environment
- 
 DBUS_SESSION_BUS_ADDRESS = unix:path=/run/user/1000/bus
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
 _ = /snap/code/95/usr/share/code/code
 # environment
-MANAGERPID = 1053
+MANAGERPID = 1112
 # environment
 LESSOPEN = | /usr/bin/lesspipe %s
 # environment
@@ -94,7 +93,7 @@ PATH = /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/
 # environment
 GPG_AGENT_INFO = /run/user/1000/gnupg/S.gpg-agent:0:1
 # environment
-SESSION_MANAGER = local/malek-VirtualBox:@/tmp/.ICE-unix/1337,unix/malek-VirtualBox:/tmp/.ICE-unix/1337
+SESSION_MANAGER = local/malek-VirtualBox:@/tmp/.ICE-unix/1372,unix/malek-VirtualBox:/tmp/.ICE-unix/1372
 # environment
 XDG_RUNTIME_DIR = /run/user/1000
 # environment
@@ -108,11 +107,12 @@ XDG_MENU_PREFIX = gnome-
 # environment
 VSCODE_LOG_STACK = false
 # environment
+ 
 DISABLE_WAYLAND = 1
 # environment
 ELECTRON_RUN_AS_NODE = 1
 # environment
-INVOCATION_ID = 68d68722d758440a9e658d9ac025e534
+INVOCATION_ID = b39114abd2574f91a79aec053553428b
 # environment
 GDK_PIXBUF_MODULEDIR = /snap/code/95/usr/lib/x86_64-linux-gnu/gdk-pixbuf-2.0/2.10.0/loaders
 # default
@@ -124,7 +124,7 @@ XDG_SESSION_DESKTOP = ubuntu
 # environment
 SSH_AUTH_SOCK = /run/user/1000/keyring/ssh
 # environment
-GIO_LAUNCHED_DESKTOP_FILE_PID = 4536
+GIO_LAUNCHED_DESKTOP_FILE_PID = 7984
 # automatic
 %F = $(notdir $%)
 # environment
@@ -138,7 +138,7 @@ PWD = /home/malek/proj1A
 # default
 .LOADED := 
 # environment
-SSH_AGENT_PID = 1302
+SSH_AGENT_PID = 1335
 # environment
 ORIGINAL_XDG_CURRENT_DESKTOP = ubuntu:GNOME
 # environment
@@ -146,6 +146,7 @@ GTK_MODULES = gail:atk-bridge
 # environment
 VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
 # environment
+ 
 HOME = /home/malek
 # environment
 LESSCLOSE = /usr/bin/lesspipe %s %s
@@ -177,6 +178,7 @@ GNOME_DESKTOP_SESSION_ID = this-is-deprecated
 LC_TIME = ar_TN.UTF-8
 # environment
 SNAP_REAL_HOME = /home/malek
+ 
 # default
 MAKE = $(MAKE_COMMAND)
 # default
@@ -190,7 +192,7 @@ SHLVL = 0
 # environment
 GNOME_SHELL_SESSION_MODE = ubuntu
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-e5bb516d-3e14-46df-81ed-d7926b23dcbd.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-e4f33438-12c4-4325-841e-02ccb1cebeaa.sock
 # default
 MAKE_VERSION := 4.2.1
 # environment
@@ -212,6 +214,7 @@ MAKE_COMMAND := make
 # default
 .VARIABLES := 
 # automatic
+ 
 *F = $(notdir $*)
 # environment
 VSCODE_IPC_HOOK = /run/user/1000/vscode-a41887fa-1.67.0-main.sock
@@ -270,7 +273,7 @@ LC_ADDRESS = ar_TN.UTF-8
 # environment
 LANG = C
 # environment
-VSCODE_PID = 4580
+VSCODE_PID = 8031
 # variable set hash-table stats:
 # Load=129/1024=13%, Rehash=0, Collisions=23/154=15%
 
@@ -280,9 +283,9 @@ VSCODE_PID = 4580
 
 # Directories
 
-# . (device 2053, inode 792429): 57 files, no impossibilities.
+# . (device 2053, inode 792429): 58 files, no impossibilities.
 
-# 57 files, no impossibilities in 1 directories.
+# 58 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -343,7 +346,6 @@ main.c:
 #  File has not been updated.
 
 # Not a target:
- 
 es.c:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
@@ -495,12 +497,13 @@ ninjahubstd.c:
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 62 / storage = 562 B / avg = 9 B
-# current buf: size = 8162 B / used = 562 B / count = 62 / avg = 9 B
+# strcache buffers: 1 (0) / strings = 63 / storage = 569 B / avg = 9 B
+ 
+# current buf: size = 8162 B / used = 569 B / count = 63 / avg = 9 B
 
-# strcache performance: lookups = 120 / hit rate = 48%
+# strcache performance: lookups = 121 / hit rate = 47%
 # hash-table stats:
-# Load=62/8192=1%, Rehash=0, Collisions=4/120=3%
-# Finished Make data base on Sun May  8 21:50:18 2022
+# Load=63/8192=1%, Rehash=0, Collisions=4/121=3%
+# Finished Make data base on Mon May  9 10:41:56 2022
 
  

@@ -23,5 +23,5 @@ void init_enigme2(enigme2 *e);
 void generate_afficher(SDL_Surface *screen, char image[], enigme2 *e, int *alea);
 int resolution(int *running, int *run);
 void afficher_resultat(SDL_Surface *screen, int r, enigme2 *en);
-void character(SDL_Surface *screen, int *choice);
+void character2(SDL_Surface *screen, int *choice);
 void controller(SDL_Surface *screen, int *choice);

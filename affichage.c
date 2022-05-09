@@ -516,12 +516,13 @@ int game(btndim *BD, btn *B, menuitems *MI, gameitems *GI, pauseitems *PI, misc 
     SDL_Event event;
     show_game(BD, B, GI, b, screen);
     afficher_character(p, screen);
-    afficherminimap(*m, GI->zoomable, screen);
+    if (GI->lvl != 9)
+        afficherminimap(*m, GI->zoomable, screen);
     affichertemps(time(NULL)-m->temps, screen);
 
     if (GI->SecOpt)
         afficher_character(popt, screen);
-    if (GI->lvl == 5 && (b->posmask.x >= 6200))
+    if (GI->lvl == 9)
     {
         if (e->attack)
         {
@@ -542,7 +543,7 @@ int game(btndim *BD, btn *B, menuitems *MI, gameitems *GI, pauseitems *PI, misc 
     // Collision Function
     Uint8 *keystate = SDL_GetKeyState(NULL);
 
-    if ((b->posmask.x >= 6890) && GI->lvl != 5)
+    if ((b->posmask.x >= 6890) && GI->lvl != 9)
     {
         m->pospoint.x = 400;
         m->pospoint.y = 80;
@@ -568,7 +569,11 @@ int game(btndim *BD, btn *B, menuitems *MI, gameitems *GI, pauseitems *PI, misc 
             SDL_Delay(100);
             SDL_Flip(screen);
             SDL_FreeSurface(b->image);
-            b->image = IMG_Load("images/11night0.png");
+            SDL_FreeSurface(m->minimap);
+            b->image = IMG_Load("images/Red(LevelOne).png");
+            b->imageM = IMG_Load("images/Red(LevelOne)Mask.png");
+            m->minimap =  IMG_Load("images/Red(LevelOne)minimap.png");
+            GI->zoomable = IMG_Load("images/Red(LevelOne)minimapBIG.png");
             show_game(BD, B, GI, b, screen);
             SDL_Flip(screen);
             break;
@@ -586,7 +591,11 @@ int game(btndim *BD, btn *B, menuitems *MI, gameitems *GI, pauseitems *PI, misc 
             SDL_Delay(100);
             SDL_Flip(screen);
             SDL_FreeSurface(b->image);
-            b->image = IMG_Load("images/11night1.png");
+            SDL_FreeSurface(m->minimap);
+            b->image = IMG_Load("images/Red(LevelTwo).png");
+            b->imageM = IMG_Load("images/Red(LevelTwo)Mask.png");
+            m->minimap =  IMG_Load("images/Red(LevelTwo)minimap.png");
+            GI->zoomable = IMG_Load("images/Red(LevelTwo)minimapBIG.png");
             show_game(BD, B, GI, b, screen);
             SDL_Flip(screen);
             break;
@@ -604,7 +613,11 @@ int game(btndim *BD, btn *B, menuitems *MI, gameitems *GI, pauseitems *PI, misc 
             SDL_Delay(100);
             SDL_Flip(screen);
             SDL_FreeSurface(b->image);
-            b->image = IMG_Load("images/11night2.png");
+            SDL_FreeSurface(m->minimap);
+            b->image = IMG_Load("images/Red(LevelThree).png");
+            b->imageM = IMG_Load("images/Red(LevelThree)Mask.png");
+            m->minimap =  IMG_Load("images/Red(LevelThree)minimap.png");
+            GI->zoomable = IMG_Load("images/Red(LevelThree)minimapBIG.png");
             show_game(BD, B, GI, b, screen);
             SDL_Flip(screen);
             break;
@@ -622,7 +635,11 @@ int game(btndim *BD, btn *B, menuitems *MI, gameitems *GI, pauseitems *PI, misc 
             SDL_Delay(100);
             SDL_Flip(screen);
             SDL_FreeSurface(b->image);
-            b->image = IMG_Load("images/11night3.png");
+            SDL_FreeSurface(m->minimap);
+            b->image = IMG_Load("images/Red(LevelFour).png");
+            b->imageM = IMG_Load("images/Red(LevelFour)Mask.png");
+            m->minimap =  IMG_Load("images/Red(LevelFour)minimap.png");
+            GI->zoomable = IMG_Load("images/Red(LevelFour)minimapBIG.png");
             show_game(BD, B, GI, b, screen);
             SDL_Flip(screen);
             break;
@@ -640,7 +657,96 @@ int game(btndim *BD, btn *B, menuitems *MI, gameitems *GI, pauseitems *PI, misc 
             SDL_Delay(100);
             SDL_Flip(screen);
             SDL_FreeSurface(b->image);
-            b->image = IMG_Load("images/11night4.png");
+            SDL_FreeSurface(m->minimap);
+            b->image = IMG_Load("images/Blue(LevelOne).png");
+            b->imageM = IMG_Load("images/Blue(LevelOne)Mask.png");
+            m->minimap =  IMG_Load("images/Blue(LevelOne)minimap.png");
+            GI->zoomable = IMG_Load("images/Blue(LevelOne)minimapBIG.png");
+            show_game(BD, B, GI, b, screen);
+            SDL_Flip(screen);
+            break;
+        case 6:
+            SDL_FillRect(screen, NULL, 0xB2B2B2);
+            SDL_Delay(100);
+            SDL_Flip(screen);
+            SDL_FillRect(screen, NULL, 0x5C5C5C);
+            SDL_Delay(100);
+            SDL_Flip(screen);
+            SDL_FillRect(screen, NULL, 0x222222);
+            SDL_Delay(100);
+            SDL_Flip(screen);
+            SDL_FillRect(screen, NULL, 0);
+            SDL_Delay(100);
+            SDL_Flip(screen);
+            SDL_FreeSurface(b->image);
+            SDL_FreeSurface(m->minimap);
+            b->image = IMG_Load("images/Blue(LevelTwo).png");
+            b->imageM = IMG_Load("images/Blue(LevelTwo)Mask.png");
+            m->minimap =  IMG_Load("images/Blue(LevelTwo)minimap.png");
+            GI->zoomable = IMG_Load("images/Blue(LevelTwo)minimapBIG.png");
+            show_game(BD, B, GI, b, screen);
+            SDL_Flip(screen);
+            break;
+        case 7:
+            SDL_FillRect(screen, NULL, 0xB2B2B2);
+            SDL_Delay(100);
+            SDL_Flip(screen);
+            SDL_FillRect(screen, NULL, 0x5C5C5C);
+            SDL_Delay(100);
+            SDL_Flip(screen);
+            SDL_FillRect(screen, NULL, 0x222222);
+            SDL_Delay(100);
+            SDL_Flip(screen);
+            SDL_FillRect(screen, NULL, 0);
+            SDL_Delay(100);
+            SDL_Flip(screen);
+            SDL_FreeSurface(b->image);
+            SDL_FreeSurface(m->minimap);
+            b->image = IMG_Load("images/Last(LevelOne).png");
+            b->imageM = IMG_Load("images/Last(LevelOne)Mask.png");
+            m->minimap =  IMG_Load("images/Last(LevelOne)minimap.png");
+            GI->zoomable = IMG_Load("images/Last(LevelOne)minimapBIG.png");
+            show_game(BD, B, GI, b, screen);
+            SDL_Flip(screen);
+            break;
+        case 8:
+            SDL_FillRect(screen, NULL, 0xB2B2B2);
+            SDL_Delay(100);
+            SDL_Flip(screen);
+            SDL_FillRect(screen, NULL, 0x5C5C5C);
+            SDL_Delay(100);
+            SDL_Flip(screen);
+            SDL_FillRect(screen, NULL, 0x222222);
+            SDL_Delay(100);
+            SDL_Flip(screen);
+            SDL_FillRect(screen, NULL, 0);
+            SDL_Delay(100);
+            SDL_Flip(screen);
+            SDL_FreeSurface(b->image);
+            SDL_FreeSurface(m->minimap);
+            b->image = IMG_Load("images/Last(LevelTwo).png");
+            b->imageM = IMG_Load("images/Last(LevelTwo)Mask.png");
+            m->minimap =  IMG_Load("images/Last(LevelTwo)minimap.png");
+            GI->zoomable = IMG_Load("images/Last(LevelTwo)minimapBIG.png");
+            show_game(BD, B, GI, b, screen);
+            SDL_Flip(screen);
+            break;
+        case 9:
+            SDL_FillRect(screen, NULL, 0xB2B2B2);
+            SDL_Delay(100);
+            SDL_Flip(screen);
+            SDL_FillRect(screen, NULL, 0x5C5C5C);
+            SDL_Delay(100);
+            SDL_Flip(screen);
+            SDL_FillRect(screen, NULL, 0x222222);
+            SDL_Delay(100);
+            SDL_Flip(screen);
+            SDL_FillRect(screen, NULL, 0);
+            SDL_Delay(100);
+            SDL_Flip(screen);
+            SDL_FreeSurface(b->image);
+            b->image = IMG_Load("images/Last(LevelThree).png");
+            b->imageM = IMG_Load("images/Last(LevelThree)Mask.png");
             show_game(BD, B, GI, b, screen);
             SDL_Flip(screen);
             break;

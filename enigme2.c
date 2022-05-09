@@ -103,7 +103,7 @@ void afficher_resultat(SDL_Surface *screen, int r, enigme2 *en)
 	}
 }
 
-void character(SDL_Surface *screen, int *choice)
+void character2(SDL_Surface *screen, int *choice)
 {
 	SDL_Event event;
 

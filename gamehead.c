@@ -43,6 +43,7 @@ int afficher_menu(btndim *BD, btn *B, menuitems *MI, gameitems *GI, settingsitem
     enigme2 e2;
     init_enigme2(&e2);
     int frame = 0;
+    
     int cap = 1;
     Timer fps;
     int quit = 0;
@@ -58,7 +59,7 @@ int afficher_menu(btndim *BD, btn *B, menuitems *MI, gameitems *GI, settingsitem
     tic t;
     int coup;
     int joueur;
-        initialiserTic(&t);
+    initialiserTic(&t);
     int a, bint;
     if (Mix_PlayMusic(M->music, -1) == -1)
     {
@@ -130,42 +131,95 @@ int afficher_menu(btndim *BD, btn *B, menuitems *MI, gameitems *GI, settingsitem
                     charger(p, b, &m, GI);
                     printf("%d", GI->lvl);
                     switch (GI->lvl)
-                    {
-                    case 1:
-                        SDL_FreeSurface(b->image);
-                        b->image = IMG_Load("images/11night0.png");
-                        show_game(BD, B, GI, b, screen);
-                        SDL_Flip(screen);
-                        break;
-                    case 2:
-
-                        SDL_FreeSurface(b->image);
-                        b->image = IMG_Load("images/11night1.png");
-                        show_game(BD, B, GI, b, screen);
-                        SDL_Flip(screen);
-                        break;
-                    case 3:
-
-                        SDL_FreeSurface(b->image);
-                        b->image = IMG_Load("images/11night2.png");
-                        show_game(BD, B, GI, b, screen);
-                        SDL_Flip(screen);
-                        break;
-                    case 4:
-
-                        SDL_FreeSurface(b->image);
-                        b->image = IMG_Load("images/11night3.png");
-                        show_game(BD, B, GI, b, screen);
-                        SDL_Flip(screen);
-                        break;
-                    case 5:
-
-                        SDL_FreeSurface(b->image);
-                        b->image = IMG_Load("images/11night4.png");
-                        show_game(BD, B, GI, b, screen);
-                        SDL_Flip(screen);
-                        break;
-                    }
+        {
+        case 1:
+            SDL_FreeSurface(b->image);
+            SDL_FreeSurface(m.minimap);
+            b->image = IMG_Load("images/Red(LevelOne).png");
+            b->imageM = IMG_Load("images/Red(LevelOne)Mask.png");
+            m.minimap =  IMG_Load("images/Red(LevelOne)minimap.png");
+            GI->zoomable = IMG_Load("images/Red(LevelOne)minimapBIG.png");
+            show_game(BD, B, GI, b, screen);
+            SDL_Flip(screen);
+            break;
+        case 2:
+            SDL_FreeSurface(b->image);
+            SDL_FreeSurface(m.minimap);
+            b->image = IMG_Load("images/Red(LevelTwo).png");
+            b->imageM = IMG_Load("images/Red(LevelTwo)Mask.png");
+            m.minimap =  IMG_Load("images/Red(LevelTwo)minimap.png");
+            GI->zoomable = IMG_Load("images/Red(LevelTwo)minimapBIG.png");
+            show_game(BD, B, GI, b, screen);
+            SDL_Flip(screen);
+            break;
+        case 3:
+            SDL_FreeSurface(b->image);
+            SDL_FreeSurface(m.minimap);
+            b->image = IMG_Load("images/Red(LevelThree).png");
+            b->imageM = IMG_Load("images/Red(LevelThree)Mask.png");
+            m.minimap =  IMG_Load("images/Red(LevelThree)minimap.png");
+            GI->zoomable = IMG_Load("images/Red(LevelThree)minimapBIG.png");
+            show_game(BD, B, GI, b, screen);
+            SDL_Flip(screen);
+            break;
+        case 4:
+            SDL_FreeSurface(b->image);
+            SDL_FreeSurface(m.minimap);
+            b->image = IMG_Load("images/Red(LevelFour).png");
+            b->imageM = IMG_Load("images/Red(LevelFour)Mask.png");
+            m.minimap =  IMG_Load("images/Red(LevelFour)minimap.png");
+            GI->zoomable = IMG_Load("images/Red(LevelFour)minimapBIG.png");
+            show_game(BD, B, GI, b, screen);
+            SDL_Flip(screen);
+            break;
+        case 5:
+            SDL_FreeSurface(b->image);
+            SDL_FreeSurface(m.minimap);
+            b->image = IMG_Load("images/Blue(LevelOne).png");
+            b->imageM = IMG_Load("images/Blue(LevelOne)Mask.png");
+            m.minimap =  IMG_Load("images/Blue(LevelOne)minimap.png");
+            GI->zoomable = IMG_Load("images/Blue(LevelOne)minimapBIG.png");
+            show_game(BD, B, GI, b, screen);
+            SDL_Flip(screen);
+            break;
+        case 6:
+            SDL_FreeSurface(b->image);
+            SDL_FreeSurface(m.minimap);
+            b->image = IMG_Load("images/Blue(LevelTwo).png");
+            b->imageM = IMG_Load("images/Blue(LevelTwo)Mask.png");
+            m.minimap =  IMG_Load("images/Blue(LevelTwo)minimap.png");
+            GI->zoomable = IMG_Load("images/Blue(LevelTwo)minimapBIG.png");
+            show_game(BD, B, GI, b, screen);
+            SDL_Flip(screen);
+            break;
+        case 7:
+            SDL_FreeSurface(b->image);
+            SDL_FreeSurface(m.minimap);
+            b->image = IMG_Load("images/Last(LevelOne).png");
+            b->imageM = IMG_Load("images/Last(LevelOne)Mask.png");
+            m.minimap =  IMG_Load("images/Last(LevelOne)minimap.png");
+            GI->zoomable = IMG_Load("images/Last(LevelOne)minimapBIG.png");
+            show_game(BD, B, GI, b, screen);
+            SDL_Flip(screen);
+            break;
+        case 8:
+            SDL_FreeSurface(b->image);
+            SDL_FreeSurface(m.minimap);
+            b->image = IMG_Load("images/Last(LevelTwo).png");
+            b->imageM = IMG_Load("images/Last(LevelTwo)Mask.png");
+            m.minimap =  IMG_Load("images/Last(LevelTwo)minimap.png");
+            GI->zoomable = IMG_Load("images/Last(LevelTwo)minimapBIG.png");
+            show_game(BD, B, GI, b, screen);
+            SDL_Flip(screen);
+            break;
+        case 9:
+            SDL_FreeSurface(b->image);
+            b->image = IMG_Load("images/Last(LevelThree).png");
+            b->imageM = IMG_Load("images/Last(LevelThree)Mask.png");
+            show_game(BD, B, GI, b, screen);
+            SDL_Flip(screen);
+            break;
+        }
                 }
                 else
                 {
@@ -180,58 +234,58 @@ int afficher_menu(btndim *BD, btn *B, menuitems *MI, gameitems *GI, settingsitem
         if (actpos == 8)
         {
             afficherTic(t.tabsuiv, screen);
-                printf("%d\n", atilganer(t.tabsuiv));
-                if (t.tour < 9 && atilganer(t.tabsuiv) == 0)
+            printf("%d\n", atilganer(t.tabsuiv));
+            if (t.tour < 9 && atilganer(t.tabsuiv) == 0)
+            {
+                if (t.joueur != -1)
                 {
-                    if (t.joueur != -1)
-                    {
-                        calcul_coup(t.tabsuiv);
-                        t.joueur = -1;
-                        t.tour++;
-                    }
-                    else
-                    {
-                        SDL_WaitEvent(&event);
-                        if (event.type == SDL_MOUSEBUTTONDOWN)
-                        {
-
-                            if (event.button.x > 0 && event.button.x <= 200 && event.button.y > 0 && event.button.y <= 200)
-                                coup = 0;
-                            if (event.button.x > 200 && event.button.x <= 400 && event.button.y > 0 && event.button.y <= 200)
-                                coup = 1;
-                            if (event.button.x > 400 && event.button.x <= 600 && event.button.y > 0 && event.button.y <= 200)
-                                coup = 2;
-
-                            if (event.button.x > 0 && event.button.x <= 200 && event.button.y > 200 && event.button.y <= 400)
-                                coup = 3;
-                            if (event.button.x > 200 && event.button.x <= 400 && event.button.y > 200 && event.button.y <= 400)
-                                coup = 4;
-                            if (event.button.x > 400 && event.button.x <= 600 && event.button.y > 200 && event.button.y <= 400)
-                                coup = 5;
-
-                            if (event.button.x > 0 && event.button.x <= 200 && event.button.y > 400 && event.button.y <= 600)
-                                coup = 6;
-                            if (event.button.x > 200 && event.button.x <= 400 && event.button.y > 400 && event.button.y <= 600)
-                                coup = 7;
-                            if (event.button.x > 400 && event.button.x <= 600 && event.button.y > 400 && event.button.y <= 600)
-                                coup = 8;
-
-                            t.tabsuiv[coup] = -1;
-                            t.joueur = 1;
-                            t.tour++;
-                        }
-                        else if (event.type == SDL_QUIT)
-                        {
-                            quit = 0;
-                        }
-                    }
+                    calcul_coup(t.tabsuiv);
+                    t.joueur = -1;
+                    t.tour++;
                 }
                 else
                 {
-                    actpos = 2;
-                    Resultat(t.tabsuiv, screen, t);
-                    quit = 0;
+                    SDL_WaitEvent(&event);
+                    if (event.type == SDL_MOUSEBUTTONDOWN)
+                    {
+
+                        if (event.button.x > 0 && event.button.x <= 200 && event.button.y > 0 && event.button.y <= 200)
+                            coup = 0;
+                        if (event.button.x > 200 && event.button.x <= 400 && event.button.y > 0 && event.button.y <= 200)
+                            coup = 1;
+                        if (event.button.x > 400 && event.button.x <= 600 && event.button.y > 0 && event.button.y <= 200)
+                            coup = 2;
+
+                        if (event.button.x > 0 && event.button.x <= 200 && event.button.y > 200 && event.button.y <= 400)
+                            coup = 3;
+                        if (event.button.x > 200 && event.button.x <= 400 && event.button.y > 200 && event.button.y <= 400)
+                            coup = 4;
+                        if (event.button.x > 400 && event.button.x <= 600 && event.button.y > 200 && event.button.y <= 400)
+                            coup = 5;
+
+                        if (event.button.x > 0 && event.button.x <= 200 && event.button.y > 400 && event.button.y <= 600)
+                            coup = 6;
+                        if (event.button.x > 200 && event.button.x <= 400 && event.button.y > 400 && event.button.y <= 600)
+                            coup = 7;
+                        if (event.button.x > 400 && event.button.x <= 600 && event.button.y > 400 && event.button.y <= 600)
+                            coup = 8;
+
+                        t.tabsuiv[coup] = -1;
+                        t.joueur = 1;
+                        t.tour++;
+                    }
+                    else if (event.type == SDL_QUIT)
+                    {
+                        quit = 0;
+                    }
                 }
+            }
+            else
+            {
+                actpos = 2;
+                Resultat(t.tabsuiv, screen, t);
+                quit = 0;
+            }
         }
         if (actpos == 3)
         {
@@ -273,6 +327,17 @@ int afficher_menu(btndim *BD, btn *B, menuitems *MI, gameitems *GI, settingsitem
         }
         if (actpos == 7)
         {
+            int character_choice = 0, console_choice = 0;
+            do
+            {
+                character2(screen, &character_choice);
+            } while (character_choice == 0);
+            printf("Your character choice is %d", character_choice);
+            do
+            {
+                controller(screen, &console_choice);
+            } while (console_choice == 0);
+            printf("Your console choice is %d", console_choice);
             t_prev = SDL_GetTicks();
             generate_afficher(screen, image, &e2, &alea);
             running = 1;
@@ -311,8 +376,8 @@ int afficher_menu(btndim *BD, btn *B, menuitems *MI, gameitems *GI, settingsitem
             }
             else
                 afficher_resultat(screen, 0, &e2);
-                            SDL_Delay(16);
-                SDL_Flip(screen);
+            SDL_Delay(16);
+            SDL_Flip(screen);
             SDL_Delay(3000);
             actpos = 2;
         }

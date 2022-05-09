@@ -136,7 +136,7 @@ void jump(character *p, btndim *BD, btn *B, gameitems *GI, Ennemi *e, PickUp coi
         show_game(BD, B, GI, b, screen);
         afficher_character(p, screen);
         afficherminimap(*m,GI->zoomable, screen);
-        if (GI->lvl == 5 && (b->posmask.x >= 6200))
+        if (GI->lvl == 9)
         {
             
             afficher_ecran(1300, 800, coin.animation.spriteSheet[0], screen, &coin.animation.Clips[coin.animation.clipLoaded]);
@@ -193,7 +193,7 @@ void jump(character *p, btndim *BD, btn *B, gameitems *GI, Ennemi *e, PickUp coi
         show_game(BD, B, GI, b,screen);
         afficher_character(p, screen);
         afficherminimap(*m,GI->zoomable, screen);
-        if (GI->lvl == 5 && (b->posmask.x >= 6200))
+        if (GI->lvl == 9)
         {
            
             afficher_ecran(1300, 800, coin.animation.spriteSheet[0], screen, &coin.animation.Clips[coin.animation.clipLoaded]);
