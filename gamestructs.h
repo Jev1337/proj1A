@@ -73,6 +73,8 @@ typedef struct{
     int SecOpt;
     int LoadSave;
     SDL_Surface *zoomable;
+    SDL_Surface *heart;
+    SDL_Rect heartClip[5];
 }gameitems;
 
 /**

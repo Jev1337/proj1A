@@ -8,7 +8,7 @@ make: *** No rule to make target 'all'.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Mon May  9 10:41:56 2022
+# Make data base, printed on Mon May  9 11:52:08 2022
 
 # Variables
 
@@ -107,7 +107,6 @@ XDG_MENU_PREFIX = gnome-
 # environment
 VSCODE_LOG_STACK = false
 # environment
- 
 DISABLE_WAYLAND = 1
 # environment
 ELECTRON_RUN_AS_NODE = 1
@@ -124,7 +123,7 @@ XDG_SESSION_DESKTOP = ubuntu
 # environment
 SSH_AUTH_SOCK = /run/user/1000/keyring/ssh
 # environment
-GIO_LAUNCHED_DESKTOP_FILE_PID = 7984
+GIO_LAUNCHED_DESKTOP_FILE_PID = 13289
 # automatic
 %F = $(notdir $%)
 # environment
@@ -146,7 +145,6 @@ GTK_MODULES = gail:atk-bridge
 # environment
 VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
 # environment
- 
 HOME = /home/malek
 # environment
 LESSCLOSE = /usr/bin/lesspipe %s %s
@@ -178,7 +176,6 @@ GNOME_DESKTOP_SESSION_ID = this-is-deprecated
 LC_TIME = ar_TN.UTF-8
 # environment
 SNAP_REAL_HOME = /home/malek
- 
 # default
 MAKE = $(MAKE_COMMAND)
 # default
@@ -192,7 +189,7 @@ SHLVL = 0
 # environment
 GNOME_SHELL_SESSION_MODE = ubuntu
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-e4f33438-12c4-4325-841e-02ccb1cebeaa.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-d4aa562b-b9d9-48b1-ad61-643ca60a7c10.sock
 # default
 MAKE_VERSION := 4.2.1
 # environment
@@ -214,7 +211,6 @@ MAKE_COMMAND := make
 # default
 .VARIABLES := 
 # automatic
- 
 *F = $(notdir $*)
 # environment
 VSCODE_IPC_HOOK = /run/user/1000/vscode-a41887fa-1.67.0-main.sock
@@ -273,7 +269,7 @@ LC_ADDRESS = ar_TN.UTF-8
 # environment
 LANG = C
 # environment
-VSCODE_PID = 8031
+VSCODE_PID = 13335
 # variable set hash-table stats:
 # Load=129/1024=13%, Rehash=0, Collisions=23/154=15%
 
@@ -299,6 +295,7 @@ affichage.c:
 #  Modification time never checked.
 #  File has not been updated.
 
+ 
 background.o: background.c
 #  Implicit rule search has not been done.
 #  Modification time never checked.
@@ -498,12 +495,11 @@ ninjahubstd.c:
 # No general ('VPATH' variable) search path.
 
 # strcache buffers: 1 (0) / strings = 63 / storage = 569 B / avg = 9 B
- 
 # current buf: size = 8162 B / used = 569 B / count = 63 / avg = 9 B
 
 # strcache performance: lookups = 121 / hit rate = 47%
 # hash-table stats:
 # Load=63/8192=1%, Rehash=0, Collisions=4/121=3%
-# Finished Make data base on Mon May  9 10:41:56 2022
+# Finished Make data base on Mon May  9 11:52:08 2022
 
  

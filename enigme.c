@@ -13,7 +13,7 @@ void afficher_enigme(enigme *e, SDL_Surface *screen)
     afficher_ecran(960, 330, e->Q, screen, NULL);
 }
 
-void animer(enigme *e, SDL_Surface *screen)
+int animer(enigme *e, SDL_Surface *screen)
 {
     SDL_Event event;
     int respon = -1;
@@ -114,6 +114,7 @@ void animer(enigme *e, SDL_Surface *screen)
     SDL_FreeSurface(resp[0]);
     SDL_FreeSurface(resp[1]);
     SDL_FreeSurface(remaintime);
+    return respon == e->RJ;
 }
 
 int init_enigme(enigme *e, char nomfich[], SDL_Surface *screen)
@@ -145,14 +146,14 @@ int init_enigme(enigme *e, char nomfich[], SDL_Surface *screen)
 
     afficher_enigme(e, screen);
     SDL_Flip(screen);
-    animer(e, screen);
+    int result = animer(e, screen);
 
     SDL_FreeSurface(e->QM);
     SDL_FreeSurface(e->Q);
     SDL_FreeSurface(e->R[0]);
     SDL_FreeSurface(e->R[1]);
     SDL_FreeSurface(e->R[2]);
-    return 0;
+    return result;
 }
     SDL_Surface *image;//background
     SDL_Surface *imageM;//masque

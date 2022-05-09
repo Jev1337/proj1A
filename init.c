@@ -164,7 +164,7 @@ int load_files(btndim *BD, btn *B,menuitems *MI, pauseitems *PI, gameitems *GI, 
  * @return int (1 for OK) This function could be void too there is no difference
  */
 
-int load_clips(misc *M, menuitems *MI, character *p, character *popt){
+int load_clips(misc *M, menuitems *MI,gameitems *GI, character *p, character *popt){
     int i, w;
     for (w=M->SCREEN_W,i=0;i<8;i++, w+=M->SCREEN_W){
         MI->rainclip[i].x = w;
@@ -183,6 +183,12 @@ int load_clips(misc *M, menuitems *MI, character *p, character *popt){
         popt->clips[i].y = 0;
         popt->clips[i].w = 366;
         popt->clips[i].h = 484;
+    }
+    for (w=0, i=0; i<5; i++, w+=45){
+        GI->heartClip[i].x = w;
+        GI->heartClip[i].y = 0;
+        GI->heartClip[i].w = 45;
+        GI->heartClip[i].h = 45;
     }
 
     return 1;

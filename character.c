@@ -15,7 +15,7 @@ void initcharacter(character *p, int x)
         p->direction = 1;
         p->side = -2;
         p->offset.x = 0;
-        p->health = 3;
+        p->health = 5;
         p->speed = 30;
         p->charsprite[0] = IMG_Load("images/leftsheetC.png");
         p->charsprite[1] = IMG_Load("images/rightsheetC.png");
@@ -212,7 +212,7 @@ void jump(character *p, btndim *BD, btn *B, gameitems *GI, Ennemi *e, PickUp coi
     }
 }
 
-void changedirection(character *p, character *popt, minimap *m, background *b, int SecOpt)
+void changedirection(character *p, character *popt, minimap *m, background *b, gameitems *GI, int SecOpt)
 {
     if (p->side == 0)
     {
@@ -253,6 +253,11 @@ void changedirection(character *p, character *popt, minimap *m, background *b, i
             else if (b->posimage.x > -(b->image->w - 1920))
             {
                 b->posimage.x -= p->speed;
+                b->posmask.x += p->speed;
+                if (m->pospoint.x >= m->posminimap.x) // point follow player
+                    m->pospoint.x += p->speed / 5.3;
+            }else if (GI->lvl == 9){
+                p->offset.x += p->speed;
                 b->posmask.x += p->speed;
                 if (m->pospoint.x >= m->posminimap.x) // point follow player
                     m->pospoint.x += p->speed / 5.3;

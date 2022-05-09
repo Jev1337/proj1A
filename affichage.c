@@ -516,10 +516,11 @@ int game(btndim *BD, btn *B, menuitems *MI, gameitems *GI, pauseitems *PI, misc 
     SDL_Event event;
     show_game(BD, B, GI, b, screen);
     afficher_character(p, screen);
+    afficher_ecran(0, 50, GI->heart, screen, &GI->heartClip[abs(p->health-5)]); 
     if (GI->lvl != 9)
         afficherminimap(*m, GI->zoomable, screen);
     affichertemps(time(NULL)-m->temps, screen);
-
+    
     if (GI->SecOpt)
         afficher_character(popt, screen);
     if (GI->lvl == 9)
@@ -532,15 +533,18 @@ int game(btndim *BD, btn *B, menuitems *MI, gameitems *GI, pauseitems *PI, misc 
         else
             afficherEnnemi(*e, screen);
         animerCoin(coin);
-        deplacer(e);
+        deplacerIA(e,p->offset);
         afficher_ecran(1300, 800, coin->animation.spriteSheet[0], screen, &coin->animation.Clips[coin->animation.clipLoaded]); // afficher coin
     }
+    if (GI->lvl == 9)
+    if (collisionBB(p->offset, e->pos) == 1){
+        p->offset.x = 0;
+        p->health--;
+    }
+        
+    if (collisionBB(p->offset, coin->pos) == 1)
+        *actpos = 1;
 
-    /*if (collisionBB(p->offset, coin->pos) == 1)
-    {
-        printf("Collision detected!!\n");
-    }*/
-    // Collision Function
     Uint8 *keystate = SDL_GetKeyState(NULL);
 
     if ((b->posmask.x >= 6890) && GI->lvl != 9)
@@ -779,7 +783,7 @@ int game(btndim *BD, btn *B, menuitems *MI, gameitems *GI, pauseitems *PI, misc 
 
     setcharacter(p, popt, keystate);
 
-    changedirection(p, popt, m, b, GI->SecOpt);
+    changedirection(p, popt, m, b, GI, GI->SecOpt);
 
     return 0;
 }

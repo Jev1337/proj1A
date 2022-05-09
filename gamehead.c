@@ -305,7 +305,12 @@ int afficher_menu(btndim *BD, btn *B, menuitems *MI, gameitems *GI, settingsitem
         }
         if (actpos == 2)
         { // State of Game
-
+            if (p->health == 0){
+                    GI->lvl = 1;
+                    initmap(&m, 0);
+                    init_bg(b, 0);
+                    initcharacter(p, 0);
+                }
             quit = game(BD, B, MI, GI, PI, M, p, popt, en, &coin, b, &m, &actpos, screen);
             if (quit == 2)
                 return 1;
@@ -320,9 +325,9 @@ int afficher_menu(btndim *BD, btn *B, menuitems *MI, gameitems *GI, settingsitem
         }
         if (actpos == 6)
         {
-            quit = init_enigme(&e, "enigme.txt", screen);
-            if (quit == 2)
-                return 1;
+            int result = init_enigme(&e, "enigme.txt", screen);
+            if (!result)
+                p->health--;
             actpos = 2;
         }
         if (actpos == 7)
