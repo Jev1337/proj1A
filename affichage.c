@@ -542,8 +542,10 @@ int game(btndim *BD, btn *B, menuitems *MI, gameitems *GI, pauseitems *PI, misc 
         p->health--;
     }
         
-    if (collisionBB(p->offset, coin->pos) == 1)
+    if (collisionBB(p->offset, coin->pos) == 1){
         *actpos = 1;
+        printf("\nScore = 3921\n");
+    }
 
     Uint8 *keystate = SDL_GetKeyState(NULL);
 

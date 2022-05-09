@@ -8,7 +8,7 @@ make: *** No rule to make target 'all'.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Mon May  9 11:52:08 2022
+# Make data base, printed on Mon May  9 12:40:38 2022
 
 # Variables
 
@@ -123,7 +123,7 @@ XDG_SESSION_DESKTOP = ubuntu
 # environment
 SSH_AUTH_SOCK = /run/user/1000/keyring/ssh
 # environment
-GIO_LAUNCHED_DESKTOP_FILE_PID = 13289
+GIO_LAUNCHED_DESKTOP_FILE_PID = 19039
 # automatic
 %F = $(notdir $%)
 # environment
@@ -189,7 +189,7 @@ SHLVL = 0
 # environment
 GNOME_SHELL_SESSION_MODE = ubuntu
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-d4aa562b-b9d9-48b1-ad61-643ca60a7c10.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-690d0e50-f9e8-4204-823a-504e22e2e273.sock
 # default
 MAKE_VERSION := 4.2.1
 # environment
@@ -269,7 +269,7 @@ LC_ADDRESS = ar_TN.UTF-8
 # environment
 LANG = C
 # environment
-VSCODE_PID = 13335
+VSCODE_PID = 19086
 # variable set hash-table stats:
 # Load=129/1024=13%, Rehash=0, Collisions=23/154=15%
 
@@ -281,6 +281,7 @@ VSCODE_PID = 13335
 
 # . (device 2053, inode 792429): 58 files, no impossibilities.
 
+ 
 # 58 files, no impossibilities in 1 directories.
 
 # Implicit Rules
@@ -295,7 +296,6 @@ affichage.c:
 #  Modification time never checked.
 #  File has not been updated.
 
- 
 background.o: background.c
 #  Implicit rule search has not been done.
 #  Modification time never checked.
@@ -500,6 +500,6 @@ ninjahubstd.c:
 # strcache performance: lookups = 121 / hit rate = 47%
 # hash-table stats:
 # Load=63/8192=1%, Rehash=0, Collisions=4/121=3%
-# Finished Make data base on Mon May  9 11:52:08 2022
+# Finished Make data base on Mon May  9 12:40:38 2022
 
  

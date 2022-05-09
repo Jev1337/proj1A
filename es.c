@@ -137,14 +137,14 @@ void deplacer(Ennemi *e)
     if (e->animation.side == 1)
     {
         e->pos.x += 50;
-        if (e->pos.x >= 1920)
+        if (e->pos.x >= 1600)
             e->animation.side = 0;
         animerEnnemi(e);
     }
     else if (e->animation.side == 0)
     {
         e->pos.x -= 50;
-        if (e->pos.x <= 400)
+        if (e->pos.x <= 500)
             e->animation.side = 1;
         animerEnnemi(e);
     }
@@ -185,28 +185,29 @@ void freeEnnemie(Ennemi e)
 void deplacerIA(Ennemi *e, SDL_Rect posPerso)
 {
     int diff = e->pos.x - posPerso.x;
-    if (diff > 100 && diff < 200 && e->pos.x >= 400)
+    printf("%d\n", diff);
+    if (diff > 100 && diff < 200 && e->pos.x >= 500)
     {
         e->pos.x -= 15;
         e->animation.side = 0;
         e->attack = 0;
         animerEnnemi(e);
     }
-    else if (diff < -200 && diff > -400 && e->pos.x <= 1920)
+    else if (diff < -200 && diff > -400 && e->pos.x <=1600)
     {
         e->pos.x += 15;
         e->animation.side = 1;
         e->attack = 0;
         animerEnnemi(e);
     }
-    else if (diff >= 50 && diff <= 100)
+    else if (diff >= 50 && diff <= 420)
     {
         e->animation.clipLoaded = 0;
         e->attackAnimation.side = 0;
         e->attack = 1;
         return;
     }
-    else if (diff <= -150 && diff >= -200)
+    else if (diff <= -150 && diff >= -320)
     {
         e->animation.clipLoaded = 0;
         e->attackAnimation.side = 1;

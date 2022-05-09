@@ -148,7 +148,7 @@ void jump(character *p, btndim *BD, btn *B, gameitems *GI, Ennemi *e, PickUp coi
         }
         else
             afficherEnnemi(*e, screen);
-            deplacer(e);
+            deplacerIA(e, p->offset);
         }
 
         SDL_Flip(screen);
@@ -205,7 +205,7 @@ void jump(character *p, btndim *BD, btn *B, gameitems *GI, Ennemi *e, PickUp coi
         }
         else
             afficherEnnemi(*e, screen);
-            deplacer(e);
+            deplacerIA(e, p->offset);
         }
         SDL_Flip(screen);
         SDL_Delay(18);
