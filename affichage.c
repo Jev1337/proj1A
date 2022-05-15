@@ -39,7 +39,7 @@ int menu(btndim *BD, btn *B, gameitems *GI, misc *M, menuitems *MI, settingsitem
             {
                 x = event.button.x;
                 y = event.button.y;
-                if (B->isselected[4]) // NewGame
+                if (B->isselected[4] == 2) // NewGame
                 {
                     if (Mix_PlayChannel(1, M->scratch, 0) == -1)
                     {
@@ -50,8 +50,9 @@ int menu(btndim *BD, btn *B, gameitems *GI, misc *M, menuitems *MI, settingsitem
                     Mix_HaltMusic();
                     show_game(BD, B, GI, b, screen);
                     GI->LoadSave = 0;
+                    B->isselected[4] = 0;
                 }
-                if (B->isselected[0]) // Continue
+                if (B->isselected[0] == 2 && GI->LoadSave == 1) // Continue
                 {
                     if (Mix_PlayChannel(1, M->scratch, 0) == -1)
                     {
@@ -62,6 +63,7 @@ int menu(btndim *BD, btn *B, gameitems *GI, misc *M, menuitems *MI, settingsitem
                     Mix_HaltMusic();
                     show_game(BD, B, GI, b, screen);
                     GI->LoadSave = 1;
+                    B->isselected[0] = 0;
                 }
                 /*if (B->isselected[1]) // Credits
                 {
@@ -72,7 +74,7 @@ int menu(btndim *BD, btn *B, gameitems *GI, misc *M, menuitems *MI, settingsitem
                     *actpos = 3;
                     show_credits(BD, B, MI, SI, screen);
                 }*/
-                if (B->isselected[3]) // Settings
+                if (B->isselected[3] == 2) // Settings
                 {
                     if (Mix_PlayChannel(1, M->scratch, 0) == -1)
                     {
@@ -81,14 +83,45 @@ int menu(btndim *BD, btn *B, gameitems *GI, misc *M, menuitems *MI, settingsitem
                     *actpos_previous = 1;
                     *actpos = 4;
                     show_settings(BD, B, SI, M, screen);
+                    B->isselected[3] = 0;
                 }
-                if (B->isselected[2]) // Quit
+                if (B->isselected[2] == 2) // Quit
                 {
                     if (Mix_PlayChannel(1, M->scratch, 0) == -1)
                     {
                         return 2;
                     }
                     return 1;
+                    B->isselected[2] = 0;
+                }
+            }
+        }
+        if (event.type == SDL_MOUSEBUTTONDOWN)
+        {
+            if (event.button.button == SDL_BUTTON_LEFT)
+            {
+                x = event.button.x;
+                y = event.button.y;
+                if (B->isselected[4]) // NewGame
+                {
+                    // afficher_ecran(BD->menubtns[4].x, BD->menubtns[4].y, B->menubtns_ss[4], screen, NULL);
+                    B->isselected[4] = 2;
+                }
+                if (B->isselected[0]) // Continue
+                {
+                    // afficher_ecran(BD->menubtns[0].x, BD->menubtns[0].y, B->menubtns_ss[0], screen, NULL);
+                    B->isselected[0] = 2;
+                }
+
+                if (B->isselected[3]) // Settings
+                {
+                    // afficher_ecran(BD->menubtns[3].x, BD->menubtns[3].y, B->menubtns_ss[3], screen, NULL);
+                    B->isselected[3] = 2;
+                }
+                if (B->isselected[2]) // Quit
+                {
+                    // afficher_ecran(BD->menubtns[2].x, BD->menubtns[2].y, B->menubtns_ss[2], screen, NULL);
+                    B->isselected[2] = 2;
                 }
             }
         }
@@ -266,93 +299,91 @@ int setting(btndim *BD, btn *B, pauseitems *PI, menuitems *MI, gameitems *GI, se
                         return 2;
                     }
                     if (actpos_previous == 1)
-                        show_menu(BD, B, MI, SI, screen);
+                        show_menu(BD,GI, B, MI, SI, screen);
                     if (actpos_previous == 5)
                         show_pausemenu(BD, B, MI, GI, PI, b, screen);
                     *actpos = actpos_previous;
                     // applysettings
                 }
                 if (x >= 1227 && x <= 1263 && y >= 390 && y <= 436)
-                 {
-                     if (Mix_PlayChannel(1, M->scratch, 0) == -1)
-                     {
-                         return 2;
-                     }
-                     M->volumeSFX = 19;
-                     show_settings(BD, B, SI, M, screen);
-                     Mix_VolumeMusic(M->volumeSFX);
-                     
+                {
+                    if (Mix_PlayChannel(1, M->scratch, 0) == -1)
+                    {
+                        return 2;
+                    }
+                    M->volumeSFX = 19;
+                    show_settings(BD, B, SI, M, screen);
+                    Mix_VolumeMusic(M->volumeSFX);
 
-                     // applysettings
-                 }
-                 if (x >= 1269 && x <= 1306 && y >= 390 && y <= 436)
-                 {
-                     if (Mix_PlayChannel(1, M->scratch, 0) == -1)
-                     {
-                         return 2;
-                     }
-                     M->volumeSFX= 35;
-                     Mix_VolumeMusic(M->volumeSFX);
-                     
-                     show_settings(BD, B, SI, M, screen);
+                    // applysettings
+                }
+                if (x >= 1269 && x <= 1306 && y >= 390 && y <= 436)
+                {
+                    if (Mix_PlayChannel(1, M->scratch, 0) == -1)
+                    {
+                        return 2;
+                    }
+                    M->volumeSFX = 35;
+                    Mix_VolumeMusic(M->volumeSFX);
 
-                     // applysettings
-                 }
-                 if (x >= 1313 && x <= 1349 && y >= 390 && y <= 436)
-                 {
-                     if (Mix_PlayChannel(1, M->scratch, 0) == -1)
-                     {
-                         return 2;
-                     }
-                     M->volumeSFX = 51;
+                    show_settings(BD, B, SI, M, screen);
 
-                     Mix_VolumeMusic(M->volumeSFX);
-                     
-                     show_settings(BD, B, SI, M, screen);
+                    // applysettings
+                }
+                if (x >= 1313 && x <= 1349 && y >= 390 && y <= 436)
+                {
+                    if (Mix_PlayChannel(1, M->scratch, 0) == -1)
+                    {
+                        return 2;
+                    }
+                    M->volumeSFX = 51;
 
-                     // applysettings
-                 }
-                 if (x >= 1353 && x <= 1391 && y >= 390 && y <= 436)
-                 {
-                     if (Mix_PlayChannel(1, M->scratch, 0) == -1)
-                     {
-                         return 2;
-                     }
-                     M->volumeSFX = 67;
-                     Mix_VolumeMusic(M->volumeSFX);
-                     
-                     show_settings(BD, B, SI, M, screen);
+                    Mix_VolumeMusic(M->volumeSFX);
 
-                     // applysettings
-                 }
-                 if (x >= 1395 && x <= 1433 && y >= 390 && y <= 436)
-                 {
-                     if (Mix_PlayChannel(1, M->scratch, 0) == -1)
-                     {
-                         return 2;
-                     }
-                     M->volumeSFX = 83;
-                     Mix_VolumeMusic(M->volumeSFX);
-                     
-                     show_settings(BD, B, SI, M, screen);
+                    show_settings(BD, B, SI, M, screen);
 
-                     // applysettings
-                 }
-                 if (x >= 1437 && x <= 1475 && y >= 390 && y <= 436)
-                 {
-                     if (Mix_PlayChannel(1, M->scratch, 0) == -1)
-                     {
-                         return 2;
-                     }
-                     M->volumeSFX = 128;
-                     Mix_VolumeMusic(M->volumeSFX);
-                     
-                     show_settings(BD, B, SI, M, screen);
+                    // applysettings
+                }
+                if (x >= 1353 && x <= 1391 && y >= 390 && y <= 436)
+                {
+                    if (Mix_PlayChannel(1, M->scratch, 0) == -1)
+                    {
+                        return 2;
+                    }
+                    M->volumeSFX = 67;
+                    Mix_VolumeMusic(M->volumeSFX);
 
-                     // applysettings
-                 }
-                 
-                 
+                    show_settings(BD, B, SI, M, screen);
+
+                    // applysettings
+                }
+                if (x >= 1395 && x <= 1433 && y >= 390 && y <= 436)
+                {
+                    if (Mix_PlayChannel(1, M->scratch, 0) == -1)
+                    {
+                        return 2;
+                    }
+                    M->volumeSFX = 83;
+                    Mix_VolumeMusic(M->volumeSFX);
+
+                    show_settings(BD, B, SI, M, screen);
+
+                    // applysettings
+                }
+                if (x >= 1437 && x <= 1475 && y >= 390 && y <= 436)
+                {
+                    if (Mix_PlayChannel(1, M->scratch, 0) == -1)
+                    {
+                        return 2;
+                    }
+                    M->volumeSFX = 128;
+                    Mix_VolumeMusic(M->volumeSFX);
+
+                    show_settings(BD, B, SI, M, screen);
+
+                    // applysettings
+                }
+
                 //----
 
                 if (x >= 1227 && x <= 1263 && y >= 524 && y <= 570)
@@ -363,7 +394,7 @@ int setting(btndim *BD, btn *B, pauseitems *PI, menuitems *MI, gameitems *GI, se
                     }
                     M->volume = 19;
                     show_settings(BD, B, SI, M, screen);
-                    
+
                     Mix_Volume(1, M->volume);
 
                     // applysettings
@@ -375,7 +406,7 @@ int setting(btndim *BD, btn *B, pauseitems *PI, menuitems *MI, gameitems *GI, se
                         return 2;
                     }
                     M->volume = 35;
-                    
+
                     Mix_Volume(1, M->volume);
                     show_settings(BD, B, SI, M, screen);
 
@@ -389,7 +420,6 @@ int setting(btndim *BD, btn *B, pauseitems *PI, menuitems *MI, gameitems *GI, se
                     }
                     M->volume = 51;
 
-                    
                     Mix_Volume(1, M->volume);
                     show_settings(BD, B, SI, M, screen);
 
@@ -402,7 +432,7 @@ int setting(btndim *BD, btn *B, pauseitems *PI, menuitems *MI, gameitems *GI, se
                         return 2;
                     }
                     M->volume = 67;
-                    
+
                     Mix_Volume(1, M->volume);
                     show_settings(BD, B, SI, M, screen);
 
@@ -415,7 +445,7 @@ int setting(btndim *BD, btn *B, pauseitems *PI, menuitems *MI, gameitems *GI, se
                         return 2;
                     }
                     M->volume = 83;
-                    
+
                     Mix_Volume(1, M->volume);
                     show_settings(BD, B, SI, M, screen);
 
@@ -428,66 +458,63 @@ int setting(btndim *BD, btn *B, pauseitems *PI, menuitems *MI, gameitems *GI, se
                         return 2;
                     }
                     M->volume = 128;
-                    
+
                     Mix_Volume(1, M->volume);
                     show_settings(BD, B, SI, M, screen);
 
                     // applysettings
                 }
                 // 1479 1517
-                if (x >= 1587 && x <= 1633 && y >= 716 && y <= 768 && B->isselected[6] != 2)
+                if (x >= 1587 && x <= 1633 && y >= 716 && y <= 768 && B->isselected[7] != 2)
                 {
                     if (Mix_PlayChannel(1, M->scratch, 0) == -1)
                     {
                         return 2;
                     }
-                    if (B->isselected[6] == 0)
+                    if (B->isselected[7] == 0)
                     {
-                        B->isselected[6] = 1;
+                        B->isselected[7] = 1;
                         screen = SDL_SetVideoMode(M->SCREEN_W, M->SCREEN_H, SCREEN_BBP, SDL_SWSURFACE);
                         if (actpos_previous == 1)
-                            show_menu(BD, B, MI, SI, screen);
+                            show_menu(BD,GI, B, MI, SI, screen);
                         if (actpos_previous == 5)
                             show_pausemenu(BD, B, MI, GI, PI, b, screen);
                         show_settings(BD, B, SI, M, screen);
-                        afficher_ecran(1201, 612, B->fsbtn[2], screen, NULL);
                     }
 
-                    else if (B->isselected[6] == 1)
+                    else if (B->isselected[7] == 1)
                     {
-                        B->isselected[6] = 2;
+                        B->isselected[7] = 2;
                         screen = SDL_SetVideoMode(M->SCREEN_W, M->SCREEN_H, SCREEN_BBP, SDL_SWSURFACE | SDL_RESIZABLE);
                         if (actpos_previous == 1)
-                            show_menu(BD, B, MI, SI, screen);
+                            show_menu(BD,GI, B, MI, SI, screen);
                         if (actpos_previous == 5)
                             show_pausemenu(BD, B, MI, GI, PI, b, screen);
                         show_settings(BD, B, SI, M, screen);
-                        afficher_ecran(1201, 612, B->fsbtn[1], screen, NULL);
                     }
                 }
-                if (x >= 1216 && x <= 1262 && y >= 714 && y <= 766 && B->isselected[6] != 0)
+                if (x >= 1216 && x <= 1262 && y >= 714 && y <= 766 && B->isselected[7] != 0)
                 {
                     if (Mix_PlayChannel(1, M->scratch, 0) == -1)
                     {
                         return 2;
                     }
-                    if (B->isselected[6] == 2)
+                    if (B->isselected[7] == 2)
                     {
-                        B->isselected[6] = 1;
+                        B->isselected[7] = 1;
                         screen = SDL_SetVideoMode(M->SCREEN_W, M->SCREEN_H, SCREEN_BBP, SDL_SWSURFACE);
                         if (actpos_previous == 1)
-                            show_menu(BD, B, MI, SI, screen);
+                            show_menu(BD,GI, B, MI, SI, screen);
                         if (actpos_previous == 5)
                             show_pausemenu(BD, B, MI, GI, PI, b, screen);
                         show_settings(BD, B, SI, M, screen);
-                        afficher_ecran(1201, 612, B->fsbtn[2], screen, NULL);
                     }
-                    else if (B->isselected[6] == 1)
+                    else if (B->isselected[7] == 1)
                     {
-                        B->isselected[6] = 0;
+                        B->isselected[7] = 0;
                         screen = SDL_SetVideoMode(M->SCREEN_W, M->SCREEN_H, SCREEN_BBP, SDL_SWSURFACE | SDL_FULLSCREEN);
                         if (actpos_previous == 1)
-                            show_menu(BD, B, MI, SI, screen);
+                            show_menu(BD,GI, B, MI, SI, screen);
                         if (actpos_previous == 5)
                             show_pausemenu(BD, B, MI, GI, PI, b, screen);
                         show_settings(BD, B, SI, M, screen);
@@ -504,7 +531,7 @@ int setting(btndim *BD, btn *B, pauseitems *PI, menuitems *MI, gameitems *GI, se
             if (event.key.keysym.sym == SDLK_j)
             {
                 if (actpos_previous == 1)
-                    show_menu(BD, B, MI, SI, screen);
+                    show_menu(BD,GI, B, MI, SI, screen);
                 if (actpos_previous == 2)
                 {
                     // load game progress
@@ -868,6 +895,7 @@ int pause(btndim *BD, btn *B, settingsitems *SI, gameitems *GI, pauseitems *PI, 
                     }
                     *actpos_previous = 1;
                     *actpos = 1;
+
                 }
                 if (x >= 760 && x <= 1159 && y >= 413 && y <= 532) // resume
                 {
@@ -902,7 +930,7 @@ int pause(btndim *BD, btn *B, settingsitems *SI, gameitems *GI, pauseitems *PI, 
                 if (B->isselected[2] == 0)
                 {
                     B->isselected[2] = 1;
-                    afficher_ecran(760, 665, B->menubtns_s[2], screen, NULL);
+                    afficher_ecran(720, 700, B->menubtns_s[2], screen, NULL);
                 }
             }
             else
@@ -920,7 +948,7 @@ int pause(btndim *BD, btn *B, settingsitems *SI, gameitems *GI, pauseitems *PI, 
                 if (B->isselected[5] == 0)
                 {
                     B->isselected[5] = 1;
-                    afficher_ecran(760, 413, B->resumebtn[1], screen, NULL);
+                    afficher_ecran(720, 400, B->menubtns_s[0], screen, NULL);
                 }
             }
             else
@@ -938,7 +966,7 @@ int pause(btndim *BD, btn *B, settingsitems *SI, gameitems *GI, pauseitems *PI, 
                 if (B->isselected[6] == 0)
                 {
                     B->isselected[6] = 1;
-                    afficher_ecran(760, 540, B->settingsbtnreal[1], screen, NULL);
+                    afficher_ecran(720,550, B->menubtns_s[3], screen, NULL);
                 }
             }
             else
@@ -956,37 +984,72 @@ int pause(btndim *BD, btn *B, settingsitems *SI, gameitems *GI, pauseitems *PI, 
     return 0;
 }
 
-void show_menu(btndim *BD, btn *B, menuitems *MI, settingsitems *SI, SDL_Surface *screen)
+void show_menu(btndim *BD, gameitems *GI, btn *B, menuitems *MI, settingsitems *SI, SDL_Surface *screen)
 {
     afficher_ecran(0, 0, MI->background, screen, NULL);
     /*afficher_ecran(896.01, 305.14, MI->gamename, screen, NULL);*/
-    afficher_ecran(0, 299, MI->btnreset, screen, NULL);
-    if (B->isselected[0])
+    if (GI->LoadSave)
+        afficher_ecran(0, 299, MI->btnreset, screen, NULL);
+    else
+        afficher_ecran(0, 299, B->menubtns_ss[1], screen, NULL);
+    if (B->isselected[0] == 1 && GI->LoadSave == 1)
     {
         afficher_ecran(BD->menubtns[0].x, BD->menubtns[0].y, B->menubtns_s[0], screen, NULL);
         /*afficher_ecran(684, 534, MI->leftarrow, screen, NULL);
         afficher_ecran(1175, 534, MI->rightarrow, screen, NULL);*/
     }
-    if (B->isselected[1])
+
+    if (B->isselected[1] == 1)
     {
         /*afficher_ecran(BD->menubtns[1].x, BD->menubtns[1].y, B->menubtns_s[1], screen, NULL);
         afficher_ecran(684, 680, MI->leftarrow, screen, NULL);
         afficher_ecran(1175, 680, MI->rightarrow, screen, NULL);*/
     }
-    if (B->isselected[2])
+    if (B->isselected[2] == 1)
     {
 
         afficher_ecran(BD->menubtns[2].x, BD->menubtns[2].y, B->menubtns_s[2], screen, NULL);
         /*afficher_ecran(684, 814, MI->leftarrow, screen, NULL);
         afficher_ecran(1175, 814, MI->rightarrow, screen, NULL);*/
     }
-    if (B->isselected[3])
+   
+    if (B->isselected[3] == 1 )
     {
         afficher_ecran(BD->menubtns[3].x, BD->menubtns[3].y, B->menubtns_s[3], screen, NULL);
     }
-    if (B->isselected[4])
+    if (B->isselected[4] == 1)
     {
         afficher_ecran(BD->menubtns[4].x, BD->menubtns[4].y, B->menubtns_s[4], screen, NULL);
+    }
+        
+
+    if (B->isselected[0] == 2 && GI->LoadSave == 1)
+    {
+        afficher_ecran(BD->menubtns[0].x, BD->menubtns[0].y, B->menubtns_ss[0], screen, NULL);
+        /*afficher_ecran(684, 534, MI->leftarrow, screen, NULL);
+        afficher_ecran(1175, 534, MI->rightarrow, screen, NULL);*/
+    }
+    if (B->isselected[1] == 2)
+    {
+        afficher_ecran(BD->menubtns[1].x, BD->menubtns[1].y, B->menubtns_ss[1], screen, NULL);
+        /*afficher_ecran(BD->menubtns[1].x, BD->menubtns[1].y, B->menubtns_s[1], screen, NULL);
+        afficher_ecran(684, 680, MI->leftarrow, screen, NULL);
+        afficher_ecran(1175, 680, MI->rightarrow, screen, NULL);*/
+    }
+    if (B->isselected[2] == 2)
+    {
+
+        afficher_ecran(BD->menubtns[2].x, BD->menubtns[2].y, B->menubtns_ss[2], screen, NULL);
+        /*afficher_ecran(684, 814, MI->leftarrow, screen, NULL);
+        afficher_ecran(1175, 814, MI->rightarrow, screen, NULL);*/
+    }
+    if (B->isselected[3] == 2)
+    {
+        afficher_ecran(BD->menubtns[3].x, BD->menubtns[3].y, B->menubtns_ss[3], screen, NULL);
+    }
+    if (B->isselected[4] == 2)
+    {
+        afficher_ecran(BD->menubtns[4].x, BD->menubtns[4].y, B->menubtns_ss[4], screen, NULL);
     }
 }
 
@@ -994,9 +1057,9 @@ void show_pausemenu(btndim *BD, btn *B, menuitems *MI, gameitems *GI, pauseitems
 {
     show_game(BD, B, GI, b, screen);
     afficher_ecran(0, 0, PI->pausemenu, screen, NULL);
-    afficher_ecran(760, 413, B->resumebtn[0], screen, NULL);
-    afficher_ecran(760, 540, B->settingsbtnreal[0], screen, NULL);
-    afficher_ecran(760, 665, B->menubtns_u[2], screen, NULL);
+    afficher_ecran(720, 400, B->menubtns_u[0], screen, NULL);
+    afficher_ecran(720, 550, B->menubtns_u[3], screen, NULL);
+    afficher_ecran(720, 700, B->menubtns_u[2], screen, NULL);
 }
 
 void show_game(btndim *BD, btn *B, gameitems *GI, background *b, SDL_Surface *screen)
@@ -1021,11 +1084,11 @@ void show_game(btndim *BD, btn *B, gameitems *GI, background *b, SDL_Surface *sc
 void show_settings(btndim *BD, btn *B, settingsitems *SI, misc *M, SDL_Surface *screen)
 {
     afficher_ecran(0, 0, SI->settings, screen, NULL);
-    if (B->isselected[6] == 0)
+    if (B->isselected[7] == 0)
         afficher_ecran(1201, 612, B->fsbtn[0], screen, NULL);
-    else if (B->isselected[6])
+    else if (B->isselected[7] == 1)
         afficher_ecran(1201, 612, B->fsbtn[2], screen, NULL);
-    else
+    else 
         afficher_ecran(1201, 612, B->fsbtn[1], screen, NULL);
     // afficher_ecran(1222,520,SI->volume[0],screen, NULL);
 

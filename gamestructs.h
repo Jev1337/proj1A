@@ -40,6 +40,7 @@ typedef struct{
 typedef struct{
     SDL_Surface *menubtns_u[5]; /*!< Menu Buttons that are unselected loaded in SDL_Surface*/
     SDL_Surface *menubtns_s[5]; /*!< Menu Buttons that are selected loaded in SDL_Surface*/
+    SDL_Surface *menubtns_ss[5];
     SDL_Surface *resumebtn[2]; /*!< Resume Button (0 is unselected, 1 is selected) loaded in SDL_Surface*/
     SDL_Surface *settingsbtnreal[2]; /*!< Settings Button (0 is unselected, 1 is selected) loaded in SDL_Surface*/
     SDL_Surface *donebtn[2]; /*!< Shared Done BUtton (0 is unselected, 1 is selected) loaded in SDL_Surface*/

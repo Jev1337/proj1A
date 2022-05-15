@@ -8,4 +8,5 @@ int load_files(btndim *BD ,btn * B, menuitems *MI, pauseitems *PI, gameitems *GI
 int load_clips(misc *M,menuitems *MI,gameitems *GI, character *p, character *popt);
 void MI_Init(menuitems *MI);
 void SI_Init(settingsitems *SI);
+void B_Init(btn *B);
 #endif

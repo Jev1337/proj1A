@@ -38,7 +38,7 @@
  */
 int afficher_menu(btndim *BD, btn *B, menuitems *MI, gameitems *GI, settingsitems *SI, pauseitems *PI, misc *M, character *p, character *popt, Ennemi *en, background *b, SDL_Surface *screen)
 {
-    show_menu(BD, B, MI, SI, screen);
+    show_menu(BD, GI, B, MI, SI, screen);
     enigme e;
     enigme2 e2;
     init_enigme2(&e2);
@@ -72,12 +72,18 @@ int afficher_menu(btndim *BD, btn *B, menuitems *MI, gameitems *GI, settingsitem
     init_bg(b, 0);
     initcharacter(p, 0);
 
+    FILE *file = fopen("savegame.txt", "r");
+    int c = fgetc(file);
+    if (c == EOF)
+        GI->LoadSave = 0;
+    fclose(file);
+
     while (quit == 0)
     {
         start(&fps);
         if (actpos == 1) // If we are in the main menu
         {
-            show_menu(BD, B, MI, SI, screen);
+            show_menu(BD, GI, B, MI, SI, screen);
             if (frame >= 8)
             {
                 frame = 0;
@@ -89,14 +95,6 @@ int afficher_menu(btndim *BD, btn *B, menuitems *MI, gameitems *GI, settingsitem
             if (quit == 2)
                 return 1;
 
-            if (actpos == 2 && GI->LoadSave)
-            {
-                FILE *file = fopen("savegame.txt", "r");
-                int c = fgetc(file);
-                if (c == EOF)
-                    GI->LoadSave = 0;
-                fclose(file);
-            }
             if (actpos == 2 && GI->LoadSave)
             {
                 /*afficher_ecran(700, 250, savemenu, screen, NULL);
@@ -226,9 +224,6 @@ int afficher_menu(btndim *BD, btn *B, menuitems *MI, gameitems *GI, settingsitem
                 init_bg(b, 0);
                 initcharacter(p, 0);
             }
-
-            if (actpos != 1 && actpos != 4 && actpos != 3)
-                SDL_FillRect(screen, NULL, 0);
         }
         if (actpos == 8)
         {
@@ -291,8 +286,6 @@ int afficher_menu(btndim *BD, btn *B, menuitems *MI, gameitems *GI, settingsitem
             quit = setting(BD, B, PI, MI, GI, SI, M, b, &actpos, actpos_previous, screen);
             if (quit == 2)
                 return 1;
-            if (actpos != 4)
-                SDL_FillRect(screen, NULL, 0);
         }
         if (actpos == 2)
         { // State of Game
@@ -306,14 +299,24 @@ int afficher_menu(btndim *BD, btn *B, menuitems *MI, gameitems *GI, settingsitem
             quit = game(BD, B, MI, GI, PI, M, p, popt, en, &coin, b, &m, &actpos, screen);
             if (quit == 2)
                 return 1;
-        }
+                }
         if (actpos == 5)
         {
             quit = pause(BD, B, SI, GI, PI, MI, M, b, &actpos, &actpos_previous, screen);
             if (quit == 2)
                 return 1;
             if (actpos == 1)
+            {
                 sauvegarder(*p, *b, m, *GI);
+                GI->LoadSave = 1;
+
+                B->isselected[0] = 0;
+                B->isselected[1] = 0;
+                B->isselected[2] = 0;
+                B->isselected[3] = 0;
+                B->isselected[4] = 0;
+
+            }
         }
         if (actpos == 6)
         {

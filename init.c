@@ -53,6 +53,44 @@ void SI_Init(settingsitems *SI)
     SI->settings = IMG_Load("images/settings.png");
 }
 
+void B_Init(btn *B)
+{
+    B->menubtns_u[2] = IMG_Load("images/quitbtn_u.png");
+    B->menubtns_s[2] = IMG_Load("images/quitbtn_s.png");
+    B->menubtns_u[1] = IMG_Load("images/creditsbtn_u.png");
+    B->menubtns_s[1] = IMG_Load("images/creditsbtn_s.png");
+    B->menubtns_u[0] = IMG_Load("images/continuebtn_u.png");
+    B->menubtns_s[0] = IMG_Load("images/continuebtn_s.png");
+    B->resumebtn[0] = IMG_Load("images/resumebtn_u.png");
+    B->resumebtn[1] = IMG_Load("images/resumebtn_s.png");
+    B->settingsbtnreal[0] = IMG_Load("images/settingsbtnreal_u.png");
+    B->settingsbtnreal[1] = IMG_Load("images/settingsbtnreal_s.png");
+    B->donebtn[0] = IMG_Load("images/done_u.png");
+    B->donebtn[1] = IMG_Load("images/donebtn_s.png");
+    B->menubtns_u[4] = IMG_Load("images/newgamebtn_u.png");
+    B->menubtns_s[4] = IMG_Load("images/newgamebtn_s.png");
+    B->menubtns_u[3] = IMG_Load("images/optionbtn_u.png");
+    B->menubtns_s[3] = IMG_Load("images/optionbtn_s.png");
+    B->fsbtn[0] = IMG_Load("images/FullScreenSettings.png");
+    B->fsbtn[1] = IMG_Load("images/WindowedDebugSettings.png");
+    B->fsbtn[2] = IMG_Load("images/WindowedSettings.png");
+    B->menubtns_ss[0] = IMG_Load("images/continuebtn_ss.png");
+    B->menubtns_ss[1] = IMG_Load("images/menuresetuu.png");
+    B->menubtns_ss[2] = IMG_Load("images/quitbtn_ss.png");
+    B->menubtns_ss[3] = IMG_Load("images/optionbtn_ss.png");
+    B->menubtns_ss[4] = IMG_Load("images/newgame_ss.png");
+
+    B->isselected[0] = 0;
+    B->isselected[1] = 0;
+    B->isselected[2] = 0;
+    B->isselected[3] = 0;
+    B->isselected[4] = 0;
+    B->isselected[5] = 0;
+    B->isselected[6] = 0;
+    B->isselected[7] = 0;
+    B->isselected[8] = 0;
+}
+
 /**
  * @brief
  *
@@ -102,54 +140,27 @@ int load_files(btndim *BD, btn *B, menuitems *MI, pauseitems *PI, gameitems *GI,
     BD->fsbtn.x = 1201;
     BD->fsbtn.y = 612;
 
-    B->menubtns_u[2] = IMG_Load("images/quitbtn_u.png");
-    B->menubtns_s[2] = IMG_Load("images/quitbtn_s.png");
     BD->menubtns[2].w = B->menubtns_s[2]->w;
     BD->menubtns[2].h = B->menubtns_s[2]->h;
 
-    B->menubtns_u[1] = IMG_Load("images/creditsbtn_u.png");
-    B->menubtns_s[1] = IMG_Load("images/creditsbtn_s.png");
     BD->menubtns[1].w = B->menubtns_s[1]->w;
     BD->menubtns[1].h = B->menubtns_s[1]->h;
 
-    B->menubtns_u[0] = IMG_Load("images/continuebtn_u.png");
-    B->menubtns_s[0] = IMG_Load("images/continuebtn_s.png");
     BD->menubtns[0].w = B->menubtns_s[0]->w;
     ;
     BD->menubtns[0].h = B->menubtns_s[0]->h;
 
-    B->menubtns_u[4] = IMG_Load("images/newgamebtn_u.png");
-    B->menubtns_s[4] = IMG_Load("images/newgamebtn_s.png");
     BD->menubtns[4].w = B->menubtns_s[4]->w;
     BD->menubtns[4].h = B->menubtns_s[4]->h;
-    B->menubtns_u[3] = IMG_Load("images/optionbtn_u.png");
-    B->menubtns_s[3] = IMG_Load("images/optionbtn_s.png");
+
     BD->menubtns[3].w = B->menubtns_s[3]->w;
     BD->menubtns[3].h = B->menubtns_s[3]->h;
 
-    B->resumebtn[0] = IMG_Load("images/resumebtn_u.png");
-    B->resumebtn[1] = IMG_Load("images/resumebtn_s.png");
-
-    B->settingsbtnreal[0] = IMG_Load("images/settingsbtnreal_u.png");
-    B->settingsbtnreal[1] = IMG_Load("images/settingsbtnreal_s.png");
-    B->donebtn[0] = IMG_Load("images/done_u.png");
-    B->donebtn[1] = IMG_Load("images/donebtn_s.png");
     BD->donebtn.w = B->donebtn[1]->w;
     BD->donebtn.h = B->donebtn[1]->h;
-    B->fsbtn[0] = IMG_Load("images/FullScreenSettings.png");
-    B->fsbtn[1] = IMG_Load("images/WindowedDebugSettings.png");
-    B->fsbtn[2] = IMG_Load("images/WindowedSettings.png");
+
     BD->fsbtn.w = B->fsbtn[1]->w;
     BD->fsbtn.h = B->fsbtn[1]->h;
-    B->isselected[0] = 0;
-    B->isselected[1] = 0;
-    B->isselected[2] = 0;
-    B->isselected[3] = 0;
-    B->isselected[4] = 0;
-    B->isselected[5] = 0;
-    B->isselected[6] = 0;
-    B->isselected[7] = 0;
-    B->isselected[8] = 0;
 
     M->music = Mix_LoadMUS("sounds/beat.mp3");
     M->scratch = Mix_LoadWAV("sounds/scratch.wav");
