@@ -63,6 +63,7 @@ typedef struct{
     SDL_Surface *rainspr;  /*!< Rain Spritesheet loaded in SDL_Surface*/
     SDL_Surface *gamename; /*!< Game Name Image loaded in SDL_Surface*/
     SDL_Rect rainclip[8]; /*!< Rain Clips Coordinates Initialized in SDL_Rect*/
+    int lvl;
 }menuitems;
 
 /**

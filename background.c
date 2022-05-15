@@ -2,24 +2,31 @@
 
 void init_bg(background *b, int x)
 {
-  if (x){
   b->image = IMG_Load("images/Red(LevelOne).png");
   b->imageM = IMG_Load("images/Red(LevelOne)Mask.png");
-  b->posimage.y = 1080 - b->image->h;
+    b->image2 = IMG_Load("images/Red(LevelOne).png");
+  b->imageM2 = IMG_Load("images/Red(LevelOne)Mask.png");
+  
+  b->posimage.y = 0;
   b->posmask.y = 1080 - 484;
   b->posmask.w = 300;
-  b->posmask.h = 484; 
-  }
-  else{
-  b->image = IMG_Load("images/Red(LevelOne).png");
-  b->imageM = IMG_Load("images/Red(LevelOne)Mask.png");
-  b->posimage.y = 1080 - b->image->h;
-  b->posmask.y = 1080 - 484;
-  b->posmask.w = 300;
-  b->posmask.h = 484; 
-  b->posimage.x = 0;  
-  b->posmask.x = 0;
-}
+  b->posmask.h = 484;
+
+    b->posimage.x = 0;
+    b->posimage.w = 1920;
+    b->posimage.h = 1080;
+    b->posmask.x = 0;
+
+    b->posimage2.y = 0;
+    b->posmask2.y = 1080 - 484;
+    b->posmask2.w = 300;
+    b->posmask2.h = 484;
+    b->posimage2.x = 0;
+    b->posimage2.w = 1920/2;
+    b->posimage2.h = 1080;
+    b->posmask2.x = 0;
+
+
 }
 
 SDL_Color GetPixel(SDL_Surface *pSurface, int x, int y)
@@ -36,7 +43,7 @@ SDL_Color GetPixel(SDL_Surface *pSurface, int x, int y)
 
 int collisionPP(SDL_Rect p, SDL_Surface *Masque)
 {
-  SDL_Color colobs; 
+  SDL_Color colobs;
   SDL_Color colgotten;
   SDL_Rect Pos[8];
   int i = 0;

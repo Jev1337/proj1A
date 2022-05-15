@@ -8,7 +8,6 @@ gcc -c background.c -g
 gcc -c es.c -g
 gcc -c enigme.c -g
 gcc -c character.c -g
- 
 gcc -c gamehead.c -g
 gcc -c ninjahubstd.c -g
 gcc -c init.c -g

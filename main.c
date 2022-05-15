@@ -40,7 +40,7 @@ int main(int argc, char *args[])
 	character popt;
 	Ennemi e;
 	background b;
-		
+	
 	srand(time(NULL));
 	screen = init(&M);
 
@@ -50,10 +50,13 @@ int main(int argc, char *args[])
 	MI_Init(&MI);
 	SI_Init(&SI);
 	B_Init(&B);
-	GI.SecOpt = 0;
+	GI.SecOpt = 1;
+	GI.lvl = 0;
 	GI.zoomable = IMG_Load("images/Red(LevelOne)minimapBIG.png");
 	GI.heart = IMG_Load("images/heartsheets.png");
 	GI.LoadSave = 1;
+	if (GI.SecOpt)
+		GI.LoadSave = 0;
 	if (load_files(&BD, &B, &MI,&PI,&GI,&SI,&M, &p, &popt) == 0)
 		return 1;
 	if (load_clips(&M,&MI,&GI, &p, &popt) == 0)

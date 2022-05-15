@@ -43,7 +43,6 @@ int afficher_menu(btndim *BD, btn *B, menuitems *MI, gameitems *GI, settingsitem
     enigme2 e2;
     init_enigme2(&e2);
     int frame = 0;
-
     int cap = 1;
     Timer fps;
     int quit = 0;
@@ -65,13 +64,13 @@ int afficher_menu(btndim *BD, btn *B, menuitems *MI, gameitems *GI, settingsitem
     {
         return 1;
     }
-
     SDL_Surface *savemenu = IMG_Load("images/savemenu.png");
 
     initmap(&m, 0);
     init_bg(b, 0);
     initcharacter(p, 0);
-
+    initcharacter(popt, 0);
+    popt->offset.x = 1920/2;
     FILE *file = fopen("savegame.txt", "r");
     int c = fgetc(file);
     if (c == EOF)
@@ -209,11 +208,12 @@ int afficher_menu(btndim *BD, btn *B, menuitems *MI, gameitems *GI, settingsitem
                         SDL_Flip(screen);
                         break;
                     case 9:
-                        SDL_FreeSurface(b->image);
-                        b->image = IMG_Load("images/Last(LevelThree).png");
-                        b->imageM = IMG_Load("images/Last(LevelThree)Mask.png");
-                        show_game(BD, B, GI, b, screen);
-                        SDL_Flip(screen);
+                            GI->SecOpt = 0;
+                            SDL_FreeSurface(b->image);
+                            b->image = IMG_Load("images/Last(LevelThree).png");
+                            b->imageM = IMG_Load("images/Last(LevelThree)Mask.png");
+                            show_game(BD, B, GI, b, screen);
+                            SDL_Flip(screen);
                         break;
                     }
                 }

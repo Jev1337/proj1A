@@ -40,6 +40,7 @@ void MI_Init(menuitems *MI)
     MI->credits = IMG_Load("images/credits.png");
     MI->btnreset = IMG_Load("images/menureset.png");
     MI->rainspr = IMG_Load("images/rainsh.png");
+    MI->lvl = 0;
 }
 
 void SI_Init(settingsitems *SI)
@@ -109,7 +110,7 @@ int load_files(btndim *BD, btn *B, menuitems *MI, pauseitems *PI, gameitems *GI,
 
     SDL_Color white = {255, 255, 255};
 
-    GI->lvl = 0;
+
 
     BD->menubtns[2].x = 58;
     BD->menubtns[2].y = 867;
@@ -147,7 +148,6 @@ int load_files(btndim *BD, btn *B, menuitems *MI, pauseitems *PI, gameitems *GI,
     BD->menubtns[1].h = B->menubtns_s[1]->h;
 
     BD->menubtns[0].w = B->menubtns_s[0]->w;
-    ;
     BD->menubtns[0].h = B->menubtns_s[0]->h;
 
     BD->menubtns[4].w = B->menubtns_s[4]->w;

@@ -1,7 +1,6 @@
 #ifndef NINJAHUBSTD_H_INCLUDED
 #define NINJAHUBSTD_H_INCLUDED
 
-
 #include "gamehead.h"
 
 typedef struct{
@@ -9,7 +8,11 @@ typedef struct{
     SDL_Surface *imageM;//masque
     SDL_Rect posimage;//position background
     SDL_Rect posmask;
-    SDL_Rect posmaskOpt;
+
+    SDL_Surface *image2;//background
+    SDL_Surface *imageM2;//masque
+    SDL_Rect posimage2;//position background
+    SDL_Rect posmask2;
 }background;
 
 typedef struct{

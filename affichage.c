@@ -630,7 +630,6 @@ int game(btndim *BD, btn *B, menuitems *MI, gameitems *GI, pauseitems *PI, misc 
         GI->lvl++;
         b->posmask.x = 0;
         p->offset.x = 0;
-        popt->offset.x = 0;
         b->posimage.x = 0;
         switch (GI->lvl)
         {
@@ -811,6 +810,7 @@ int game(btndim *BD, btn *B, menuitems *MI, gameitems *GI, pauseitems *PI, misc 
             SDL_Flip(screen);
             break;
         case 9:
+            GI->SecOpt = 0;
             SDL_FillRect(screen, NULL, 0xB2B2B2);
             SDL_Delay(100);
             SDL_Flip(screen);
@@ -823,6 +823,220 @@ int game(btndim *BD, btn *B, menuitems *MI, gameitems *GI, pauseitems *PI, misc 
             SDL_FillRect(screen, NULL, 0);
             SDL_Delay(100);
             SDL_Flip(screen);
+            SDL_FreeSurface(b->image);
+            b->image = IMG_Load("images/Last(LevelThree).png");
+            b->imageM = IMG_Load("images/Last(LevelThree)Mask.png");
+            show_game(BD, B, GI, b, screen);
+            SDL_Flip(screen);
+            break;
+        }
+    }
+
+    //----------
+    if (GI->SecOpt)
+    if ((b->posmask2.x >= 6890) && MI->lvl != 9)
+    {
+        //m->pospoint.x = 400;
+        //m->pospoint.y = 80;
+        *actpos = 6;
+        MI->lvl++;
+        b->posmask2.x = 0;
+        popt->offset.x = 1920/2;
+        b->posimage2.x = 0;
+        switch (MI->lvl)
+        {
+        case 1:
+            SDL_FillRect(screen, NULL, 0xB2B2B2);
+            SDL_Delay(100);
+            SDL_Flip(screen);
+            SDL_FillRect(screen, NULL, 0x5C5C5C);
+            SDL_Delay(100);
+            SDL_Flip(screen);
+            SDL_FillRect(screen, NULL, 0x222222);
+            SDL_Delay(100);
+            SDL_Flip(screen);
+            SDL_FillRect(screen, NULL, 0);
+            SDL_Delay(100);
+            SDL_Flip(screen);
+            SDL_FreeSurface(b->image2);
+            //SDL_FreeSurface(m->minimap);
+            b->image2 = IMG_Load("images/Red(LevelOne).png");
+            b->imageM2 = IMG_Load("images/Red(LevelOne)Mask.png");
+            //m->minimap = IMG_Load("images/Red(LevelOne)minimap.png");
+            //GI->zoomable = IMG_Load("images/Red(LevelOne)minimapBIG.png");
+            show_game(BD, B, GI, b, screen);
+            SDL_Flip(screen);
+            break;
+        case 2:
+            SDL_FillRect(screen, NULL, 0xB2B2B2);
+            SDL_Delay(100);
+            SDL_Flip(screen);
+            SDL_FillRect(screen, NULL, 0x5C5C5C);
+            SDL_Delay(100);
+            SDL_Flip(screen);
+            SDL_FillRect(screen, NULL, 0x222222);
+            SDL_Delay(100);
+            SDL_Flip(screen);
+            SDL_FillRect(screen, NULL, 0);
+            SDL_Delay(100);
+            SDL_Flip(screen);
+            SDL_FreeSurface(b->image2);
+            //SDL_FreeSurface(m->minimap);
+            b->image2 = IMG_Load("images/Red(LevelTwo).png");
+            b->imageM2 = IMG_Load("images/Red(LevelTwo)Mask.png");
+            //m->minimap = IMG_Load("images/Red(LevelTwo)minimap.png");
+            //GI->zoomable = IMG_Load("images/Red(LevelTwo)minimapBIG.png");
+            show_game(BD, B, GI, b, screen);
+            SDL_Flip(screen);
+            break;
+        case 3:
+            SDL_FillRect(screen, NULL, 0xB2B2B2);
+            SDL_Delay(100);
+            SDL_Flip(screen);
+            SDL_FillRect(screen, NULL, 0x5C5C5C);
+            SDL_Delay(100);
+            SDL_Flip(screen);
+            SDL_FillRect(screen, NULL, 0x222222);
+            SDL_Delay(100);
+            SDL_Flip(screen);
+            SDL_FillRect(screen, NULL, 0);
+            SDL_Delay(100);
+            SDL_Flip(screen);
+            SDL_FreeSurface(b->image2);
+            //SDL_FreeSurface(m->minimap);
+            b->image2 = IMG_Load("images/Red(LevelThree).png");
+            b->imageM2 = IMG_Load("images/Red(LevelThree)Mask.png");
+            //m->minimap = IMG_Load("images/Red(LevelThree)minimap.png");
+            //GI->zoomable = IMG_Load("images/Red(LevelThree)minimapBIG.png");
+            show_game(BD, B, GI, b, screen);
+            SDL_Flip(screen);
+            break;
+        case 4:
+            SDL_FillRect(screen, NULL, 0xB2B2B2);
+            SDL_Delay(100);
+            SDL_Flip(screen);
+            SDL_FillRect(screen, NULL, 0x5C5C5C);
+            SDL_Delay(100);
+            SDL_Flip(screen);
+            SDL_FillRect(screen, NULL, 0x222222);
+            SDL_Delay(100);
+            SDL_Flip(screen);
+            SDL_FillRect(screen, NULL, 0);
+            SDL_Delay(100);
+            SDL_Flip(screen);
+            SDL_FreeSurface(b->image2);
+            //SDL_FreeSurface(m->minimap);
+            b->image2 = IMG_Load("images/Red(LevelFour).png");
+            b->imageM2 = IMG_Load("images/Red(LevelFour)Mask.png");
+            //m->minimap = IMG_Load("images/Red(LevelFour)minimap.png");
+            //GI->zoomable = IMG_Load("images/Red(LevelFour)minimapBIG.png");
+            show_game(BD, B, GI, b, screen);
+            SDL_Flip(screen);
+            break;
+        case 5:
+            SDL_FillRect(screen, NULL, 0xB2B2B2);
+            SDL_Delay(100);
+            SDL_Flip(screen);
+            SDL_FillRect(screen, NULL, 0x5C5C5C);
+            SDL_Delay(100);
+            SDL_Flip(screen);
+            SDL_FillRect(screen, NULL, 0x222222);
+            SDL_Delay(100);
+            SDL_Flip(screen);
+            SDL_FillRect(screen, NULL, 0);
+            SDL_Delay(100);
+            SDL_Flip(screen);
+            SDL_FreeSurface(b->image2);
+           // SDL_FreeSurface(m->minimap);
+            b->image2 = IMG_Load("images/Blue(LevelOne).png");
+            b->imageM2 = IMG_Load("images/Blue(LevelOne)Mask.png");
+            //m->minimap = IMG_Load("images/Blue(LevelOne)minimap.png");
+            //GI->zoomable = IMG_Load("images/Blue(LevelOne)minimapBIG.png");
+            show_game(BD, B, GI, b, screen);
+            SDL_Flip(screen);
+            break;
+        case 6:
+            SDL_FillRect(screen, NULL, 0xB2B2B2);
+            SDL_Delay(100);
+            SDL_Flip(screen);
+            SDL_FillRect(screen, NULL, 0x5C5C5C);
+            SDL_Delay(100);
+            SDL_Flip(screen);
+            SDL_FillRect(screen, NULL, 0x222222);
+            SDL_Delay(100);
+            SDL_Flip(screen);
+            SDL_FillRect(screen, NULL, 0);
+            SDL_Delay(100);
+            SDL_Flip(screen);
+            SDL_FreeSurface(b->image2);
+            //SDL_FreeSurface(m->minimap);
+            b->image2 = IMG_Load("images/Blue(LevelTwo).png");
+            b->imageM2 = IMG_Load("images/Blue(LevelTwo)Mask.png");
+            //m->minimap = IMG_Load("images/Blue(LevelTwo)minimap.png");
+            //GI->zoomable = IMG_Load("images/Blue(LevelTwo)minimapBIG.png");
+            show_game(BD, B, GI, b, screen);
+            SDL_Flip(screen);
+            break;
+        case 7:
+            SDL_FillRect(screen, NULL, 0xB2B2B2);
+            SDL_Delay(100);
+            SDL_Flip(screen);
+            SDL_FillRect(screen, NULL, 0x5C5C5C);
+            SDL_Delay(100);
+            SDL_Flip(screen);
+            SDL_FillRect(screen, NULL, 0x222222);
+            SDL_Delay(100);
+            SDL_Flip(screen);
+            SDL_FillRect(screen, NULL, 0);
+            SDL_Delay(100);
+            SDL_Flip(screen);
+            SDL_FreeSurface(b->image2);
+            //SDL_FreeSurface(m->minimap);
+            b->image2 = IMG_Load("images/Last(LevelOne).png");
+            b->imageM2 = IMG_Load("images/Last(LevelOne)Mask.png");
+            //m->minimap = IMG_Load("images/Last(LevelOne)minimap.png");
+            //GI->zoomable = IMG_Load("images/Last(LevelOne)minimapBIG.png");
+            show_game(BD, B, GI, b, screen);
+            SDL_Flip(screen);
+            break;
+        case 8:
+            SDL_FillRect(screen, NULL, 0xB2B2B2);
+            SDL_Delay(100);
+            SDL_Flip(screen);
+            SDL_FillRect(screen, NULL, 0x5C5C5C);
+            SDL_Delay(100);
+            SDL_Flip(screen);
+            SDL_FillRect(screen, NULL, 0x222222);
+            SDL_Delay(100);
+            SDL_Flip(screen);
+            SDL_FillRect(screen, NULL, 0);
+            SDL_Delay(100);
+            SDL_Flip(screen);
+            SDL_FreeSurface(b->image2);
+            //SDL_FreeSurface(m->minimap);
+            b->image2 = IMG_Load("images/Last(LevelTwo).png");
+            b->imageM2 = IMG_Load("images/Last(LevelTwo)Mask.png");
+            //m->minimap = IMG_Load("images/Last(LevelTwo)minimap.png");
+            //GI->zoomable = IMG_Load("images/Last(LevelTwo)minimapBIG.png");
+            show_game(BD, B, GI, b, screen);
+            SDL_Flip(screen);
+            break;
+        case 9:
+            GI->lvl = 9;
+            GI->SecOpt = 0;
+            SDL_FillRect(screen, NULL, 0xB2B2B2);
+            SDL_Delay(100);
+            SDL_Flip(screen);
+            SDL_FillRect(screen, NULL, 0x5C5C5C);
+            SDL_Delay(100);
+            SDL_Flip(screen);
+            SDL_FillRect(screen, NULL, 0x222222);
+            SDL_Delay(100);
+            SDL_Flip(screen);
+            SDL_FillRect(screen, NULL, 0);
+            SDL_Delay(100);
+            SDL_Flip(screen);
+            SDL_FreeSurface(b->image2);
             SDL_FreeSurface(b->image);
             b->image = IMG_Load("images/Last(LevelThree).png");
             b->imageM = IMG_Load("images/Last(LevelThree)Mask.png");
@@ -847,12 +1061,12 @@ int game(btndim *BD, btn *B, menuitems *MI, gameitems *GI, pauseitems *PI, misc 
     }
     if (keystate[SDLK_UP])
     {
-        jump(p, BD, B, GI, e, *coin, b, m, screen);
+        jump(p, popt, 1, BD, B, GI, e, *coin, b, m, screen);
     }
     if (GI->SecOpt)
         if (keystate[SDLK_w])
         {
-            jump(popt, BD, B, GI, e, *coin, b, m, screen);
+            jump(p, popt, 2, BD, B, GI, e, *coin, b, m, screen);
         }
 
     SDL_PollEvent(&event);
@@ -1078,7 +1292,11 @@ void show_game(btndim *BD, btn *B, gameitems *GI, background *b, SDL_Surface *sc
         afficher_ecran(bopt->posimage.x, bopt->posimage.y, bopt->image, screen, NULL);
     }
     else*/
-    afficher_ecran(b->posimage.x, b->posimage.y, b->image, screen, NULL);
+    if (GI->SecOpt){
+            afficher_ecran(0, 0, b->image, screen, &b->posimage);
+            afficher_ecran(1920/2, 0, b->image2, screen, &b->posimage2);
+    }else
+        afficher_ecran(b->posimage.x, b->posimage.y, b->image, screen, NULL);
 }
 
 void show_settings(btndim *BD, btn *B, settingsitems *SI, misc *M, SDL_Surface *screen)
