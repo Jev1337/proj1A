@@ -622,7 +622,7 @@ int game(btndim *BD, btn *B, menuitems *MI, gameitems *GI, pauseitems *PI, misc 
 
     Uint8 *keystate = SDL_GetKeyState(NULL);
 
-    if ((b->posmask.x >= 6890) && GI->lvl != 9)
+    if ((b->posmask.x >= 6780) && GI->lvl != 9)
     {
         m->pospoint.x = 400;
         m->pospoint.y = 80;

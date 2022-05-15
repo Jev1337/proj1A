@@ -50,7 +50,7 @@ int main(int argc, char *args[])
 	MI_Init(&MI);
 	SI_Init(&SI);
 	B_Init(&B);
-	GI.SecOpt = 1;
+	GI.SecOpt = 0;
 	GI.lvl = 0;
 	GI.zoomable = IMG_Load("images/Red(LevelOne)minimapBIG.png");
 	GI.heart = IMG_Load("images/heartsheets.png");
