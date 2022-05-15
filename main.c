@@ -48,7 +48,8 @@ int main(int argc, char *args[])
 	if (screen == NULL)
 		return 1;
 	MI_Init(&MI);
-		GI.SecOpt = 0;
+	SI_Init(&SI);
+	GI.SecOpt = 0;
 	GI.zoomable = IMG_Load("images/Red(LevelOne)minimapBIG.png");
 	GI.heart = IMG_Load("images/heartsheets.png");
 	if (load_files(&BD, &B, &MI,&PI,&GI,&SI,&M, &p, &popt) == 0)

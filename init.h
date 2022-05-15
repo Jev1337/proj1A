@@ -7,4 +7,5 @@ SDL_Surface *init(misc *M);
 int load_files(btndim *BD ,btn * B, menuitems *MI, pauseitems *PI, gameitems *GI, settingsitems *SI, misc *M, character *p, character *popt);
 int load_clips(misc *M,menuitems *MI,gameitems *GI, character *p, character *popt);
 void MI_Init(menuitems *MI);
+void SI_Init(settingsitems *SI);
 #endif

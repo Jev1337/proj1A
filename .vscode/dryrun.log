@@ -2,13 +2,13 @@ make --dry-run --always-make --keep-going --print-directory
 make: Entering directory '/home/malek/proj1A'
 gcc -c main.c -g
 gcc -c XO.c -g
- 
 gcc -c enigme2.c -g
 gcc -c minimap.c -g
 gcc -c background.c -g
 gcc -c es.c -g
 gcc -c enigme.c -g
 gcc -c character.c -g
+ 
 gcc -c gamehead.c -g
 gcc -c ninjahubstd.c -g
 gcc -c init.c -g

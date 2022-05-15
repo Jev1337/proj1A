@@ -7,7 +7,6 @@
 
 int menu(btndim *BD, btn *B, gameitems *GI, misc *M, menuitems *MI, settingsitems *SI, character *p, character *popt, background *b, int *actpos, int *actpos_previous, SDL_Surface *screen);
 int setting(btndim *BD,btn *B,pauseitems *PI, menuitems *MI, gameitems *GI, settingsitems *SI,misc *M, background *b, int *actpos, int actpos_previous, SDL_Surface *screen);
-int credit(btndim *BD,btn *B,misc *M, menuitems *MI, settingsitems *SI, int *actpos, SDL_Surface *screen); 
 int game(btndim *BD, btn *B, menuitems *MI, gameitems *GI, pauseitems *PI, misc *M, character *p, character *popt, Ennemi *e, PickUp *coin, background *b,  minimap *m, int *actpos, SDL_Surface *screen);
 int pause(btndim *BD,btn *B,settingsitems *SI, gameitems *GI, pauseitems *PI, menuitems *MI, misc *M, background *b, int *actpos, int *actpos_previous, SDL_Surface *screen);
 void show_menu(btndim *BD,btn *B,menuitems *MI, settingsitems *SI, SDL_Surface *screen);

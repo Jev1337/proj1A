@@ -90,6 +90,7 @@ typedef struct{
  */
 typedef struct{
     SDL_Surface *settings; /*!< Settings Image loaded in SDL_Surface*/
+    SDL_Surface *volume[6];
 }settingsitems;
 
 /**
@@ -104,6 +105,7 @@ typedef struct{
     int SCREEN_W; /*!< The Actual Screen Width is stored here*/
     int SCREEN_H; /*!< The Actual Screen Height is stored here*/
     int volume; /*!< Volume loaded in SDL_Surface*/
+    int volumeSFX;
 
 }misc;
 
