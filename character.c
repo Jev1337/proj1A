@@ -62,7 +62,7 @@ void setcharacter(character *p, character *popt, gameitems *GI, pauseitems *PI, 
     {
         if (keystate[SDLK_LEFT] || keystate[SDLK_RIGHT])
         {
-            Mix_PlayChannel(2, PI->run, 0);
+            Mix_PlayChannel(1, PI->run, 0);
             PI->mvmt = 1;
         }
     }
@@ -89,7 +89,7 @@ void setcharacter(character *p, character *popt, gameitems *GI, pauseitems *PI, 
         PI->mvmt = 0;
     }
     if (!PI->mvmt)
-        Mix_Pause(2);
+        Mix_Pause(1);
     if (GI->SecOpt)
     {
 
