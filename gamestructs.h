@@ -77,6 +77,10 @@ typedef struct{
     SDL_Surface *zoomable;
     SDL_Surface *heart;
     SDL_Rect heartClip[5];
+    SDL_Surface *egg;
+    SDL_Rect eggsheet[8];
+    int eggstat;
+    int eshealth;
 }gameitems;
 
 /**
@@ -85,6 +89,10 @@ typedef struct{
  */
 typedef struct{
     SDL_Surface *pausemenu; /*!< Pause Menu Image loaded in SDL_Surface*/
+    Mix_Chunk *run;
+    Mix_Chunk *throw;
+    int mvmt;
+    int mvmt2;
 }pauseitems;
 /**
  * @struct settingsitems
@@ -93,6 +101,7 @@ typedef struct{
 typedef struct{
     SDL_Surface *settings; /*!< Settings Image loaded in SDL_Surface*/
     SDL_Surface *volume[6];
+
 }settingsitems;
 
 /**
@@ -108,6 +117,9 @@ typedef struct{
     int SCREEN_H; /*!< The Actual Screen Height is stored here*/
     int volume; /*!< Volume loaded in SDL_Surface*/
     int volumeSFX;
+    SDL_Surface *cooldown;
+    SDL_Rect cooldownsheet[5];
+    int cldw;
 
 }misc;
 

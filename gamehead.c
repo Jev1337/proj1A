@@ -124,7 +124,6 @@ int afficher_menu(btndim *BD, btn *B, menuitems *MI, gameitems *GI, settingsitem
                 if (GI->LoadSave)
                 {
                     charger(p, b, &m, GI);
-                    printf("%d", GI->lvl);
                     switch (GI->lvl)
                     {
                     case 1:

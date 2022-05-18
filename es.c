@@ -185,7 +185,6 @@ void freeEnnemie(Ennemi e)
 void deplacerIA(Ennemi *e, SDL_Rect posPerso)
 {
     int diff = e->pos.x - posPerso.x;
-    printf("%d\n", diff);
     if (diff > 100 && diff < 200 && e->pos.x >= 500)
     {
         e->pos.x -= 15;
@@ -231,7 +230,6 @@ void attackPerso(Ennemi *e, SDL_Surface *screen)
     e->attackAnimation.clipLoaded++;
     if (e->attackAnimation.clipLoaded >= e->attackAnimation.frames)
     {
-        printf("Life -1\n");
         e->attackAnimation.clipLoaded = 0;
     }
 }

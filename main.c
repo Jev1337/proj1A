@@ -50,11 +50,9 @@ int main(int argc, char *args[])
 	MI_Init(&MI);
 	SI_Init(&SI);
 	B_Init(&B);
-	GI.SecOpt = 0;
-	GI.lvl = 0;
-	GI.zoomable = IMG_Load("images/Red(LevelOne)minimapBIG.png");
-	GI.heart = IMG_Load("images/heartsheets.png");
-	GI.LoadSave = 1;
+	GI_Init(&GI);
+	M_Init(&M);
+	PI_Init(&PI);
 	if (GI.SecOpt)
 		GI.LoadSave = 0;
 	if (load_files(&BD, &B, &MI,&PI,&GI,&SI,&M, &p, &popt) == 0)

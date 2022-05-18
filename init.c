@@ -52,6 +52,19 @@ void SI_Init(settingsitems *SI)
     SI->volume[4] = IMG_Load("images/vol5.png");
     SI->volume[5] = IMG_Load("images/vol6.png");
     SI->settings = IMG_Load("images/settings.png");
+
+}
+
+void GI_Init(gameitems *GI)
+{
+    GI->SecOpt = 0;
+    GI->lvl = 0;
+    GI->zoomable = IMG_Load("images/Red(LevelOne)minimapBIG.png");
+    GI->heart = IMG_Load("images/heartsheets.png");
+    GI->LoadSave = 1;
+    GI->egg = IMG_Load("images/eggsheet.png");
+    GI->eggstat = -1;
+    GI->eshealth = 3;
 }
 
 void B_Init(btn *B)
@@ -92,6 +105,24 @@ void B_Init(btn *B)
     B->isselected[8] = 0;
 }
 
+void M_Init(misc *M){
+        M->music = Mix_LoadMUS("sounds/beat.mp3");
+    M->scratch = Mix_LoadWAV("sounds/scratch.wav");
+    M->font = TTF_OpenFont("fonts/Retro.ttf", 48);
+    M->fontBig = TTF_OpenFont("fonts/Retro.ttf", 72);
+    M->volume = 128;
+    M->volumeSFX = 128;
+    M->cooldown = IMG_Load("images/cooldown.png");
+    M->cldw = 4;
+}
+
+void PI_Init(pauseitems *PI){
+    PI->pausemenu = IMG_Load("images/pausemenu.png");
+    PI->run=Mix_LoadWAV("sounds/running.wav");
+    PI->mvmt=0;
+    PI->mvmt2=0;
+}
+
 /**
  * @brief
  *
@@ -109,8 +140,6 @@ int load_files(btndim *BD, btn *B, menuitems *MI, pauseitems *PI, gameitems *GI,
 {
 
     SDL_Color white = {255, 255, 255};
-
-
 
     BD->menubtns[2].x = 58;
     BD->menubtns[2].y = 867;
@@ -162,18 +191,12 @@ int load_files(btndim *BD, btn *B, menuitems *MI, pauseitems *PI, gameitems *GI,
     BD->fsbtn.w = B->fsbtn[1]->w;
     BD->fsbtn.h = B->fsbtn[1]->h;
 
-    M->music = Mix_LoadMUS("sounds/beat.mp3");
-    M->scratch = Mix_LoadWAV("sounds/scratch.wav");
-    M->font = TTF_OpenFont("fonts/Retro.ttf", 48);
-    M->fontBig = TTF_OpenFont("fonts/Retro.ttf", 72);
-    M->volume = 128;
-    M->volumeSFX = 128;
 
     MI->gamename = TTF_RenderText_Solid(M->font, "AR:T", white);
     MI->leftarrow = TTF_RenderText_Solid(M->fontBig, ">", white);
     MI->rightarrow = TTF_RenderText_Solid(M->fontBig, "<", white);
 
-    PI->pausemenu = IMG_Load("images/pausemenu.png");
+    
 
     if (MI->rightarrow == NULL || MI->leftarrow == NULL || MI->rainspr == NULL || MI->gamename == NULL || B->fsbtn[0] == NULL || B->fsbtn[1] == NULL || B->fsbtn[2] == NULL || M->music == NULL || M->font == NULL || M->scratch == NULL || SI->settings == NULL || MI->background == NULL || B->menubtns_u[2] == NULL || B->menubtns_u[1] == NULL || B->menubtns_u[0] == NULL || B->menubtns_u[4] == NULL || B->menubtns_u[3] == NULL || B->donebtn[1] == NULL || B->donebtn[0] == NULL || B->menubtns_s[2] == NULL || B->menubtns_s[1] == NULL || B->menubtns_s[0] == NULL || B->menubtns_s[4] == NULL || B->menubtns_s[3] == NULL || B->donebtn[1] == NULL || B->donebtn[0] == NULL || PI->pausemenu == NULL || B->settingsbtnreal[1] == NULL || B->settingsbtnreal[0] == NULL || B->resumebtn[1] == NULL || B->resumebtn[0] == NULL)
     {
@@ -221,6 +244,20 @@ int load_clips(misc *M, menuitems *MI, gameitems *GI, character *p, character *p
         GI->heartClip[i].y = 0;
         GI->heartClip[i].w = 44;
         GI->heartClip[i].h = 44;
+    }
+    for (w = 0, i = 0; i < 8; i++, w += 100.25)
+    {
+        GI->eggsheet[i].x = w;
+        GI->eggsheet[i].y = 0;
+        GI->eggsheet[i].w = 100.25;
+        GI->eggsheet[i].h = 128;
+    }
+    for (w = 0, i = 0; i < 5; i++, w += 171)
+    {
+        M->cooldownsheet[i].x = w;
+        M->cooldownsheet[i].y = 0;
+        M->cooldownsheet[i].w = 171;
+        M->cooldownsheet[i].h = 27;
     }
 
     return 1;

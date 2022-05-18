@@ -26,10 +26,8 @@ void initcharacter(character *p, int x)
     }
 }
 
-void setcharacter(character *p, character *popt, Uint8 *keystate)
+void setcharacter(character *p, character *popt, gameitems *GI, pauseitems *PI, Uint8 *keystate)
 {
-    // Mix_Chunk *run;
-    // run = Mix_LoadWAV("sounds/running.wav");
     if (keystate[SDLK_LSHIFT])
     {
         if (p->speed < 100)
@@ -42,7 +40,6 @@ void setcharacter(character *p, character *popt, Uint8 *keystate)
         if (p->speed > 10)
         {
             p->speed -= 10;
-
         }
     }
 
@@ -60,9 +57,15 @@ void setcharacter(character *p, character *popt, Uint8 *keystate)
             popt->speed -= 10;
         }
     }
-    // if (keystate[SDLK_LEFT] || keystate[SDLK_RIGHT])
-    // Mix_PlayChannel(2,run, 0);
 
+    if (!PI->mvmt)
+    {
+        if (keystate[SDLK_LEFT] || keystate[SDLK_RIGHT])
+        {
+            Mix_PlayChannel(2, PI->run, 0);
+            PI->mvmt = 1;
+        }
+    }
     if (keystate[SDLK_LEFT])
     {
         p->side = 0;
@@ -70,7 +73,6 @@ void setcharacter(character *p, character *popt, Uint8 *keystate)
     else if (p->side == 0)
     {
         p->side = -1;
-        // Mix_Pause(-1);
     }
     if (keystate[SDLK_RIGHT])
     {
@@ -79,28 +81,52 @@ void setcharacter(character *p, character *popt, Uint8 *keystate)
     else if (p->side == 1)
     {
         p->side = -2;
-        // Mix_Pause(-1);
     }
-    // if (keystate[SDLK_LEFT] || keystate[SDLK_RIGHT])
-    // Mix_PlayChannel(2,run, 0);
+    if (keystate[SDLK_UP])
+        PI->mvmt = 0;
+    if (keystate[SDLK_LEFT] == 0 && keystate[SDLK_RIGHT] == 0)
+    {
+        PI->mvmt = 0;
+    }
+    if (!PI->mvmt)
+        Mix_Pause(2);
+    if (GI->SecOpt)
+    {
 
-    if (keystate[SDLK_a])
-    {
-        popt->side = 0;
-    }
-    else if (popt->side == 0)
-    {
-        popt->side = -1;
-        // Mix_Pause(-1);
-    }
-    if (keystate[SDLK_d])
-    {
-        popt->side = 1;
-    }
-    else if (popt->side == 1)
-    {
-        popt->side = -2;
-        // Mix_Pause(-1);
+        if (!PI->mvmt2)
+        {
+            if (keystate[SDLK_a] || keystate[SDLK_d])
+            {
+                Mix_PlayChannel(2, PI->run, 0);
+                PI->mvmt2 = 1;
+            }
+        }
+
+        if (keystate[SDLK_a])
+        {
+            popt->side = 0;
+        }
+        else if (popt->side == 0)
+        {
+            popt->side = -1;
+        }
+        if (keystate[SDLK_d])
+        {
+            popt->side = 1;
+        }
+        else if (popt->side == 1)
+        {
+            popt->side = -2;
+        }
+        if (keystate[SDLK_UP])
+            PI->mvmt2 = 0;
+        if (keystate[SDLK_LEFT] == 0 && keystate[SDLK_RIGHT] == 0)
+        {
+            PI->mvmt2 = 0;
+        }
+
+        if (!PI->mvmt2)
+            Mix_Pause(2);
     }
 }
 
@@ -156,12 +182,10 @@ void jump(character *p, character *popt, int x, btndim *BD, btn *B, gameitems *G
 
             show_game(BD, B, GI, b, screen);
             afficher_character(p, screen);
-            afficherminimap(*m, GI->zoomable, screen);
-            if (GI->lvl == 9)
+            if (GI->lvl != 9)
+                afficherminimap(*m, GI->zoomable, screen);
+            if (GI->lvl == 9 && GI->eshealth != 0)
             {
-
-                afficher_ecran(1300, 800, coin.animation.spriteSheet[0], screen, &coin.animation.Clips[coin.animation.clipLoaded]);
-                animerCoin(&coin);
                 if (e->attack)
                 {
                     afficherAttack(*e, screen);
@@ -171,7 +195,11 @@ void jump(character *p, character *popt, int x, btndim *BD, btn *B, gameitems *G
                     afficherEnnemi(*e, screen);
                 deplacerIA(e, p->offset);
             }
-
+            if (GI->lvl == 9)
+            {
+                afficher_ecran(1300, 800, coin.animation.spriteSheet[0], screen, &coin.animation.Clips[coin.animation.clipLoaded]);
+                animerCoin(&coin);
+            }
             SDL_Flip(screen);
             SDL_Delay(18);
         }
@@ -219,12 +247,10 @@ void jump(character *p, character *popt, int x, btndim *BD, btn *B, gameitems *G
             }
             show_game(BD, B, GI, b, screen);
             afficher_character(p, screen);
-            afficherminimap(*m, GI->zoomable, screen);
-            if (GI->lvl == 9)
+            if (GI->lvl != 9)
+                afficherminimap(*m, GI->zoomable, screen);
+            if (GI->lvl == 9 && GI->eshealth != 0)
             {
-
-                afficher_ecran(1300, 800, coin.animation.spriteSheet[0], screen, &coin.animation.Clips[coin.animation.clipLoaded]);
-                animerCoin(&coin);
                 if (e->attack)
                 {
                     afficherAttack(*e, screen);
@@ -233,6 +259,11 @@ void jump(character *p, character *popt, int x, btndim *BD, btn *B, gameitems *G
                 else
                     afficherEnnemi(*e, screen);
                 deplacerIA(e, p->offset);
+            }
+            if (GI->lvl == 9)
+            {
+                afficher_ecran(1300, 800, coin.animation.spriteSheet[0], screen, &coin.animation.Clips[coin.animation.clipLoaded]);
+                animerCoin(&coin);
             }
             SDL_Flip(screen);
             SDL_Delay(18);
@@ -263,16 +294,16 @@ void jump(character *p, character *popt, int x, btndim *BD, btn *B, gameitems *G
             }
             else if (popt->side == 0 | popt->side == -1)
             {
-                if (popt->offset.x - 10 > 1920/2)
+                if (popt->offset.x - 10 > 1920 / 2)
                 {
                     popt->offset.x -= popt->speed;
                     b->posmask2.x -= popt->speed;
-                   /* if (m->pospoint.x >= m->posminimap.x) // point follow player
-                        m->pospoint.x -= popt->speed / 5.3;*/
+                    /* if (m->pospoint.x >= m->posminimap.x) // point follow player
+                         m->pospoint.x -= popt->speed / 5.3;*/
                 }
-                else if (b->posimage2.x < 1920/2)
+                else if (b->posimage2.x < 1920 / 2)
                 {
-                        b->posimage2.x -= popt->speed;
+                    b->posimage2.x -= popt->speed;
                     b->posmask2.x -= popt->speed;
                     /*if (m->pospoint.x >= m->posminimap.x) // point follow player
                         m->pospoint.x -= popt->speed / 5.3;*/
@@ -313,7 +344,7 @@ void jump(character *p, character *popt, int x, btndim *BD, btn *B, gameitems *G
                 }
                 else if (b->posimage2.x > -(b->image2->w - 1920))
                 {
-                        b->posimage2.x += popt->speed;
+                    b->posimage2.x += popt->speed;
                     b->posmask2.x += popt->speed;
                     /*if (m->pospoint.x >= m->posminimap.x) // point follow player
                         m->pospoint.x += popt->speed / 5.3;*/
@@ -330,7 +361,7 @@ void jump(character *p, character *popt, int x, btndim *BD, btn *B, gameitems *G
                 }
                 else if (b->posimage2.x < 0)
                 {
-                        b->posimage2.x -= popt->speed;
+                    b->posimage2.x -= popt->speed;
                     b->posmask2.x -= popt->speed;
                     /*if (m->pospoint.x >= m->posminimap.x) // point follow player
                         m->pospoint.x -= popt->speed / 5.3;*/
