@@ -130,7 +130,7 @@ int menu(btndim *BD, btn *B, gameitems *GI, misc *M, menuitems *MI, settingsitem
             if (event.key.keysym.sym == SDLK_m)
             {
                 GI->LoadSave = 0;
-                GI->SecOpt=1;
+                GI->SecOpt = 1;
             }
             if (event.key.keysym.sym == SDLK_DOWN)
             {
@@ -587,10 +587,11 @@ int setting(btndim *BD, btn *B, pauseitems *PI, menuitems *MI, gameitems *GI, se
     return 0;
 }
 
-int game(btndim *BD, btn *B, menuitems *MI, gameitems *GI, pauseitems *PI, misc *M, character *p, character *popt, Ennemi *e, PickUp *coin, background *b, minimap *m, int *actpos, SDL_Surface *screen)
+int game(btndim *BD, btn *B, menuitems *MI, gameitems *GI, pauseitems *PI, misc *M, character *p, character *popt, Ennemi *e, PickUp *coin, background *b, Mix_Music *bg, Mix_Chunk *hurt, int *isMus, minimap *m, int *actpos, SDL_Surface *screen)
 {
 
     SDL_Event event;
+
     show_game(BD, B, GI, b, screen);
     afficher_character(p, screen);
     afficher_ecran(0, 50, GI->heart, screen, &GI->heartClip[abs(p->health - 5)]);
@@ -600,7 +601,6 @@ int game(btndim *BD, btn *B, menuitems *MI, gameitems *GI, pauseitems *PI, misc 
 
     if (GI->SecOpt)
         afficher_character(popt, screen);
-    printf("%d\n", GI->eshealth);
     if (GI->lvl == 9 && GI->eshealth != 0)
     {
         afficher_ecran(1920 - GI->heartClip[0].w, 50, GI->heart, screen, &GI->heartClip[abs(GI->eshealth - 4)]);
@@ -629,6 +629,7 @@ int game(btndim *BD, btn *B, menuitems *MI, gameitems *GI, pauseitems *PI, misc 
         *actpos = 1;
         GI->LoadSave = 0;
         printf("\nScore = 3921\n");
+        *isMus = -1;
     }
 
     Uint8 *keystate = SDL_GetKeyState(NULL);
@@ -1057,8 +1058,10 @@ int game(btndim *BD, btn *B, menuitems *MI, gameitems *GI, pauseitems *PI, misc 
             }
         }
 
-    if (keystate[SDLK_t] && GI->eggstat == -1 && GI->eshealth != 0)
+    if (keystate[SDLK_t] && GI->eggstat == -1 && GI->eshealth != 0 && GI->lvl == 9)
     {
+        Mix_VolumeChunk(PI->throw, M->volumeSFX);
+        Mix_PlayChannel(2, PI->throw, 0);
         GI->eggstat = 0;
     }
     if (GI->eggstat != -1)
@@ -1092,10 +1095,11 @@ int game(btndim *BD, btn *B, menuitems *MI, gameitems *GI, pauseitems *PI, misc 
         if (GI->eggstat == 7)
             GI->eggstat = -50;
 
-        if (collisionBB(e->pos, eggpos) == 1 && GI->eshealth !=0)
+        if (collisionBB(e->pos, eggpos) == 1 && GI->eshealth != 0)
         {
             GI->eshealth--;
             GI->eggstat = -50;
+            Mix_PlayChannel(2, hurt, 0);
         }
         GI->eggstat++;
     }
@@ -1126,9 +1130,25 @@ int game(btndim *BD, btn *B, menuitems *MI, gameitems *GI, pauseitems *PI, misc 
 
     SDL_PollEvent(&event);
 
-    setcharacter(p, popt, GI,PI, keystate);
+    setcharacter(p, popt, GI, PI, keystate);
 
     changedirection(p, popt, m, b, GI, GI->SecOpt);
+
+    if (keystate[SDLK_x])
+        *isMus = -1;
+    if (keystate[SDLK_g])
+        if (*isMus == 1)
+            *isMus = 0;
+        else
+            *isMus = 1;
+    if (Mix_PlayingMusic() && *isMus == 0)
+        Mix_PauseMusic();
+    if (Mix_PlayingMusic() && *isMus == -1)
+        Mix_HaltMusic();
+    if (!Mix_PlayingMusic() && *isMus == 1)
+    {
+        Mix_PlayMusic(bg, -1);
+    }
 
     return 0;
 }

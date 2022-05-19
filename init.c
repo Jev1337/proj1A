@@ -19,7 +19,7 @@ SDL_Surface *init(misc *M)
     const SDL_VideoInfo *info = SDL_GetVideoInfo();
     M->SCREEN_H = info->current_h;
     M->SCREEN_W = info->current_w;
-    screen = SDL_SetVideoMode(M->SCREEN_W, M->SCREEN_H, SCREEN_BBP, SDL_SWSURFACE | SDL_DOUBLEBUF /*| SDL_FULLSCREEN*/);
+    screen = SDL_SetVideoMode(M->SCREEN_W, M->SCREEN_H, SCREEN_BBP, SDL_SWSURFACE | SDL_DOUBLEBUF | SDL_FULLSCREEN);
     SDL_EnableKeyRepeat(1, 1);
     if (TTF_Init() == -1)
     {
@@ -121,6 +121,7 @@ void PI_Init(pauseitems *PI){
     PI->run=Mix_LoadWAV("sounds/running.wav");
     PI->mvmt=0;
     PI->mvmt2=0;
+    PI->throw = Mix_LoadWAV("sounds/throw.wav");
 }
 
 /**

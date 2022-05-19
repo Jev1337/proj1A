@@ -64,19 +64,21 @@ int afficher_menu(btndim *BD, btn *B, menuitems *MI, gameitems *GI, settingsitem
     {
         return 1;
     }
+    int isMus= 1;
     SDL_Surface *savemenu = IMG_Load("images/savemenu.png");
 
     initmap(&m, 0);
     init_bg(b, 0);
     initcharacter(p, 0);
     initcharacter(popt, 0);
-    popt->offset.x = 1920/2;
+    popt->offset.x = 1920 / 2;
     FILE *file = fopen("savegame.txt", "r");
     int c = fgetc(file);
     if (c == EOF)
         GI->LoadSave = 0;
     fclose(file);
-
+    Mix_Music *bg = Mix_LoadMUS("sounds/bg.mp3");
+    Mix_Chunk *hurt = Mix_LoadWAV("sounds/hurt.wav");
     while (quit == 0)
     {
         start(&fps);
@@ -207,18 +209,19 @@ int afficher_menu(btndim *BD, btn *B, menuitems *MI, gameitems *GI, settingsitem
                         SDL_Flip(screen);
                         break;
                     case 9:
-                            GI->SecOpt = 0;
-                            SDL_FreeSurface(b->image);
-                            b->image = IMG_Load("images/Last(LevelThree).png");
-                            b->imageM = IMG_Load("images/Last(LevelThree)Mask.png");
-                            show_game(BD, B, GI, b, screen);
-                            SDL_Flip(screen);
+                        GI->SecOpt = 0;
+                        SDL_FreeSurface(b->image);
+                        b->image = IMG_Load("images/Last(LevelThree).png");
+                        b->imageM = IMG_Load("images/Last(LevelThree)Mask.png");
+                        show_game(BD, B, GI, b, screen);
+                        SDL_Flip(screen);
                         break;
                     }
                 }
             }
             else if (GI->LoadSave == 0 && actpos == 2)
             {
+                GI->lvl = 0;
                 initmap(&m, 0);
                 init_bg(b, 0);
                 initcharacter(p, 0);
@@ -295,10 +298,24 @@ int afficher_menu(btndim *BD, btn *B, menuitems *MI, gameitems *GI, settingsitem
                 init_bg(b, 0);
                 initcharacter(p, 0);
             }
-            quit = game(BD, B, MI, GI, PI, M, p, popt, en, &coin, b, &m, &actpos, screen);
+            quit = game(BD, B, MI, GI, PI, M, p, popt, en, &coin, b,bg, hurt,&isMus, &m, &actpos, screen);
             if (quit == 2)
                 return 1;
-                }
+            if (actpos != 2)
+            {
+                Mix_Pause(1);
+            }
+            if (actpos == 1){ //game won
+                Mix_PlayMusic(M->music,-1);
+                isMus = 1;
+                SDL_Surface *wongame = IMG_Load("images/won.png");
+                afficher_ecran(0,0,wongame,screen,NULL);
+                SDL_Flip(screen);
+                SDL_Delay(3000);
+                SDL_FreeSurface(wongame);
+            }
+        }
+
         if (actpos == 5)
         {
             quit = pause(BD, B, SI, GI, PI, MI, M, b, &actpos, &actpos_previous, screen);
@@ -314,7 +331,6 @@ int afficher_menu(btndim *BD, btn *B, menuitems *MI, gameitems *GI, settingsitem
                 B->isselected[2] = 0;
                 B->isselected[3] = 0;
                 B->isselected[4] = 0;
-
             }
         }
         if (actpos == 6)
@@ -411,9 +427,16 @@ int afficher_menu(btndim *BD, btn *B, menuitems *MI, gameitems *GI, settingsitem
 void finprog(btn *B, menuitems *MI, gameitems *GI, settingsitems *SI, pauseitems *PI, misc *M, character *p, character *popt, SDL_Surface *screen)
 {
 
-    Mix_FreeChunk(M->scratch);
+    
+    SDL_FreeSurface(MI->btnreset);
+    SDL_FreeSurface(MI->rainspr);
+    SDL_FreeSurface(MI->gamename);
+    SDL_FreeSurface(MI->rightarrow);
+    SDL_FreeSurface(MI->leftarrow);
     SDL_FreeSurface(MI->background);
+    SDL_FreeSurface(MI->credits);
     SDL_FreeSurface(SI->settings);
+    Mix_FreeChunk(M->scratch);
     SDL_FreeSurface(B->menubtns_u[0]);
     SDL_FreeSurface(B->menubtns_u[1]);
     SDL_FreeSurface(B->menubtns_u[2]);
@@ -424,18 +447,33 @@ void finprog(btn *B, menuitems *MI, gameitems *GI, settingsitems *SI, pauseitems
     SDL_FreeSurface(B->menubtns_s[2]);
     SDL_FreeSurface(B->menubtns_s[3]);
     SDL_FreeSurface(B->menubtns_s[4]);
+    SDL_FreeSurface(B->menubtns_ss[0]);
+    SDL_FreeSurface(B->menubtns_ss[1]);
+    SDL_FreeSurface(B->menubtns_ss[2]);
+    SDL_FreeSurface(B->menubtns_ss[3]);
+    SDL_FreeSurface(B->menubtns_ss[4]);
     SDL_FreeSurface(B->donebtn[0]);
     SDL_FreeSurface(B->donebtn[1]);
     SDL_FreeSurface(B->fsbtn[0]);
     SDL_FreeSurface(B->fsbtn[1]);
     SDL_FreeSurface(B->fsbtn[2]);
-    SDL_FreeSurface(screen);
+    SDL_FreeSurface(B->resumebtn[0]);
+    SDL_FreeSurface(B->resumebtn[1]);
+    SDL_FreeSurface(B->settingsbtnreal[0]);
+    SDL_FreeSurface(B->settingsbtnreal[1]);
+    SDL_FreeSurface(p->charsprite[0]);
+    SDL_FreeSurface(p->charsprite[1]);
+    SDL_FreeSurface(popt->charsprite[0]);
+    SDL_FreeSurface(popt->charsprite[1]);
+    SDL_FreeSurface(GI->egg);
+    SDL_FreeSurface(GI->heart);
+    SDL_FreeSurface(GI->zoomable);
+    Mix_FreeChunk(PI->run);
+    Mix_FreeChunk(PI->throw);
     SDL_FreeSurface(PI->pausemenu);
-    SDL_FreeSurface(MI->btnreset);
-    SDL_FreeSurface(MI->rainspr);
-    SDL_FreeSurface(MI->gamename);
-    SDL_FreeSurface(MI->rightarrow);
-    SDL_FreeSurface(MI->leftarrow);
+    SDL_FreeSurface(screen);
+    
+
     // Quit SDL
     SDL_Quit();
 }

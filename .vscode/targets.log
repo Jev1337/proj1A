@@ -8,7 +8,7 @@ make: *** No rule to make target 'all'.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Wed May 18 17:25:00 2022
+# Make data base, printed on Thu May 19 12:18:29 2022
 
 # Variables
 
@@ -47,11 +47,11 @@ CURDIR := /home/malek/proj1A
 # makefile
 SHELL = /bin/sh
 # environment
-SNAP_DATA = /var/snap/code/96
+SNAP_DATA = /var/snap/code/97
 # environment
 VSCODE_NLS_CONFIG = {"locale":"en-us","availableLanguages":{},"_languagePackSupport":true}
 # environment
-JOURNAL_STREAM = 8:32073
+JOURNAL_STREAM = 8:32489
 # environment
 XDG_CONFIG_DIRS = /etc/xdg/xdg-ubuntu:/etc/xdg
 # environment
@@ -75,9 +75,9 @@ DBUS_SESSION_BUS_ADDRESS = unix:path=/run/user/1000/bus
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-_ = /snap/code/96/usr/share/code/code
+_ = /snap/code/97/usr/share/code/code
 # environment
-MANAGERPID = 1115
+MANAGERPID = 1079
 # environment
 LESSOPEN = | /usr/bin/lesspipe %s
 # environment
@@ -85,7 +85,7 @@ LC_NAME = ar_TN.UTF-8
 # environment
 VSCODE_CWD = /home/malek
 # environment
-GSETTINGS_SCHEMA_DIR = /snap/code/96/usr/share/glib-2.0/schemas
+GSETTINGS_SCHEMA_DIR = /snap/code/97/usr/share/glib-2.0/schemas
 # default
 MAKE_HOST := x86_64-pc-linux-gnu
 # environment
@@ -93,15 +93,15 @@ PATH = /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/
 # environment
 GPG_AGENT_INFO = /run/user/1000/gnupg/S.gpg-agent:0:1
 # environment
-SESSION_MANAGER = local/malek-VirtualBox:@/tmp/.ICE-unix/1375,unix/malek-VirtualBox:/tmp/.ICE-unix/1375
+SESSION_MANAGER = local/malek-VirtualBox:@/tmp/.ICE-unix/1352,unix/malek-VirtualBox:/tmp/.ICE-unix/1352
 # environment
 XDG_RUNTIME_DIR = /run/user/1000
 # environment
 GDK_PIXBUF_MODULE_FILE = /home/malek/snap/code/common/.cache/gdk-pixbuf-loaders.cache
 # environment
-SNAP = /snap/code/96
+SNAP = /snap/code/97
 # environment
-SNAP_VERSION = da15b6fd
+SNAP_VERSION = c3511e6c
 # environment
 XDG_MENU_PREFIX = gnome-
 # environment
@@ -111,9 +111,9 @@ DISABLE_WAYLAND = 1
 # environment
 ELECTRON_RUN_AS_NODE = 1
 # environment
-INVOCATION_ID = bbc71c88dc2d4bb6aae772b72a65c033
+INVOCATION_ID = daeee286e73d45909b9e93bb0b4f36a0
 # environment
-GDK_PIXBUF_MODULEDIR = /snap/code/96/usr/lib/x86_64-linux-gnu/gdk-pixbuf-2.0/2.10.0/loaders
+GDK_PIXBUF_MODULEDIR = /snap/code/97/usr/lib/x86_64-linux-gnu/gdk-pixbuf-2.0/2.10.0/loaders
 # default
 .FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell archives jobserver output-sync check-symlink load
 # environment
@@ -123,7 +123,7 @@ XDG_SESSION_DESKTOP = ubuntu
 # environment
 SSH_AUTH_SOCK = /run/user/1000/keyring/ssh
 # environment
-GIO_LAUNCHED_DESKTOP_FILE_PID = 11772
+GIO_LAUNCHED_DESKTOP_FILE_PID = 7378
 # automatic
 %F = $(notdir $%)
 # environment
@@ -137,7 +137,7 @@ PWD = /home/malek/proj1A
 # default
 .LOADED := 
 # environment
-SSH_AGENT_PID = 1340
+SSH_AGENT_PID = 1316
 # environment
 ORIGINAL_XDG_CURRENT_DESKTOP = ubuntu:GNOME
 # environment
@@ -151,7 +151,7 @@ LESSCLOSE = /usr/bin/lesspipe %s %s
 # environment
 VSCODE_CLI = 1
 # environment
-VSCODE_CODE_CACHE_PATH = /home/malek/.config/Code/CachedData/da15b6fd3ef856477bf6f4fb29ba1b7af717770d
+VSCODE_CODE_CACHE_PATH = /home/malek/.config/Code/CachedData/c3511e6c69bb39013c4a4b7b9566ec1ca73fc4d5
 # environment
 LOGNAME = malek
 # environment
@@ -183,19 +183,19 @@ MAKECMDGOALS := all
 # environment
 QT_IM_MODULE = ibus
 # environment
-SNAP_USER_DATA = /home/malek/snap/code/96
+SNAP_USER_DATA = /home/malek/snap/code/97
 # environment
 SHLVL = 0
 # environment
 GNOME_SHELL_SESSION_MODE = ubuntu
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-fe945c4c-0f4e-49e3-9554-88dac4f3c4d0.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-46c9bcc6-9afd-40d4-9ebb-6d1d8a54b44c.sock
 # default
 MAKE_VERSION := 4.2.1
 # environment
 USER = malek
 # environment
-SNAP_REVISION = 96
+SNAP_REVISION = 97
 # environment
 LC_MONETARY = ar_TN.UTF-8
 # makefile
@@ -213,7 +213,7 @@ MAKE_COMMAND := make
 # automatic
 *F = $(notdir $*)
 # environment
-VSCODE_IPC_HOOK = /run/user/1000/vscode-a41887fa-1.67.1-main.sock
+VSCODE_IPC_HOOK = /run/user/1000/vscode-a41887fa-1.67.2-main.sock
 # environment
 BAMF_DESKTOP_FILE_HINT = /var/lib/snapd/desktop/applications/code_code.desktop
 # makefile
@@ -269,7 +269,7 @@ LC_ADDRESS = ar_TN.UTF-8
 # environment
 LANG = C
 # environment
-VSCODE_PID = 11838
+VSCODE_PID = 7422
 # variable set hash-table stats:
 # Load=129/1024=13%, Rehash=0, Collisions=23/154=15%
 
@@ -500,6 +500,6 @@ ninjahubstd.c:
 # strcache performance: lookups = 123 / hit rate = 47%
 # hash-table stats:
 # Load=65/8192=1%, Rehash=0, Collisions=4/123=3%
-# Finished Make data base on Wed May 18 17:25:00 2022
+# Finished Make data base on Thu May 19 12:18:29 2022
 
  
