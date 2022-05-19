@@ -19,6 +19,6 @@ typedef struct
 } minimap;
 void initmap(minimap *m, int x);
 void afficherminimap(minimap m, SDL_Surface *zoomable, SDL_Surface *screen);
-void affichertemps(int temps, SDL_Surface *screen);
+void affichertemps(int temps, SDL_Surface *screen, TTF_Font *police);
 
 #endif

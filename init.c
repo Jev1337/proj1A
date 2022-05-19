@@ -109,7 +109,7 @@ void M_Init(misc *M){
         M->music = Mix_LoadMUS("sounds/beat.mp3");
     M->scratch = Mix_LoadWAV("sounds/scratch.wav");
     M->font = TTF_OpenFont("fonts/Retro.ttf", 48);
-    M->fontBig = TTF_OpenFont("fonts/Retro.ttf", 72);
+    M->fontBig = TTF_OpenFont("fonts/Retro.ttf", 26);
     M->volume = 128;
     M->volumeSFX = 128;
     M->cooldown = IMG_Load("images/cooldown.png");

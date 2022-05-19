@@ -597,7 +597,7 @@ int game(btndim *BD, btn *B, menuitems *MI, gameitems *GI, pauseitems *PI, misc 
     afficher_ecran(0, 50, GI->heart, screen, &GI->heartClip[abs(p->health - 5)]);
     if (GI->lvl != 9)
         afficherminimap(*m, GI->zoomable, screen);
-    affichertemps(time(NULL) - m->temps, screen);
+    affichertemps(time(NULL) - m->temps, screen, M->fontBig);
 
     if (GI->SecOpt)
         afficher_character(popt, screen);

@@ -1,10 +1,8 @@
 #include "minimap.h"
 
-void affichertemps(int temps, SDL_Surface *screen) // temps compteur
+void affichertemps(int temps, SDL_Surface *screen, TTF_Font *police) // temps compteur
 {
 
-    TTF_Font *police = NULL;
-    police = TTF_OpenFont("fonts/Urusans.TTF", 40);
     SDL_Color couleur = {255, 255, 255};
     SDL_Rect postemps;
     postemps.x = 0;
@@ -12,7 +10,7 @@ void affichertemps(int temps, SDL_Surface *screen) // temps compteur
     char s[20]; // pour mettre "temps:"
     sprintf(s, "Temps: %d", temps);
     SDL_Surface *txt;
-    txt = TTF_RenderText_Blended(police, s, couleur);
+    txt = TTF_RenderText_Solid(police, s, couleur);
     SDL_BlitSurface(txt, NULL, screen, &postemps); // affichage temps
 }
 void initmap(minimap *m, int x)

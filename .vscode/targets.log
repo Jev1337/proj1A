@@ -8,7 +8,7 @@ make: *** No rule to make target 'all'.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Thu May 19 12:18:29 2022
+# Make data base, printed on Thu May 19 20:04:03 2022
 
 # Variables
 
@@ -51,7 +51,7 @@ SNAP_DATA = /var/snap/code/97
 # environment
 VSCODE_NLS_CONFIG = {"locale":"en-us","availableLanguages":{},"_languagePackSupport":true}
 # environment
-JOURNAL_STREAM = 8:32489
+JOURNAL_STREAM = 8:33094
 # environment
 XDG_CONFIG_DIRS = /etc/xdg/xdg-ubuntu:/etc/xdg
 # environment
@@ -77,7 +77,7 @@ VSCODE_VERBOSE_LOGGING = true
 # environment
 _ = /snap/code/97/usr/share/code/code
 # environment
-MANAGERPID = 1079
+MANAGERPID = 1131
 # environment
 LESSOPEN = | /usr/bin/lesspipe %s
 # environment
@@ -93,7 +93,7 @@ PATH = /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/
 # environment
 GPG_AGENT_INFO = /run/user/1000/gnupg/S.gpg-agent:0:1
 # environment
-SESSION_MANAGER = local/malek-VirtualBox:@/tmp/.ICE-unix/1352,unix/malek-VirtualBox:/tmp/.ICE-unix/1352
+SESSION_MANAGER = local/malek-VirtualBox:@/tmp/.ICE-unix/1407,unix/malek-VirtualBox:/tmp/.ICE-unix/1407
 # environment
 XDG_RUNTIME_DIR = /run/user/1000
 # environment
@@ -111,7 +111,7 @@ DISABLE_WAYLAND = 1
 # environment
 ELECTRON_RUN_AS_NODE = 1
 # environment
-INVOCATION_ID = daeee286e73d45909b9e93bb0b4f36a0
+INVOCATION_ID = b455cf42eccc41bf88a2bbda2c75a5ec
 # environment
 GDK_PIXBUF_MODULEDIR = /snap/code/97/usr/lib/x86_64-linux-gnu/gdk-pixbuf-2.0/2.10.0/loaders
 # default
@@ -123,7 +123,7 @@ XDG_SESSION_DESKTOP = ubuntu
 # environment
 SSH_AUTH_SOCK = /run/user/1000/keyring/ssh
 # environment
-GIO_LAUNCHED_DESKTOP_FILE_PID = 7378
+GIO_LAUNCHED_DESKTOP_FILE_PID = 2224
 # automatic
 %F = $(notdir $%)
 # environment
@@ -137,7 +137,7 @@ PWD = /home/malek/proj1A
 # default
 .LOADED := 
 # environment
-SSH_AGENT_PID = 1316
+SSH_AGENT_PID = 1372
 # environment
 ORIGINAL_XDG_CURRENT_DESKTOP = ubuntu:GNOME
 # environment
@@ -189,7 +189,7 @@ SHLVL = 0
 # environment
 GNOME_SHELL_SESSION_MODE = ubuntu
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-46c9bcc6-9afd-40d4-9ebb-6d1d8a54b44c.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-bde0dbae-07cf-420a-8d76-5f4dca7e73df.sock
 # default
 MAKE_VERSION := 4.2.1
 # environment
@@ -269,7 +269,7 @@ LC_ADDRESS = ar_TN.UTF-8
 # environment
 LANG = C
 # environment
-VSCODE_PID = 7422
+VSCODE_PID = 2274
 # variable set hash-table stats:
 # Load=129/1024=13%, Rehash=0, Collisions=23/154=15%
 
@@ -281,8 +281,8 @@ VSCODE_PID = 7422
 
 # . (device 2053, inode 788170): 60 files, no impossibilities.
 
- 
 # 60 files, no impossibilities in 1 directories.
+ 
 
 # Implicit Rules
 
@@ -500,6 +500,6 @@ ninjahubstd.c:
 # strcache performance: lookups = 123 / hit rate = 47%
 # hash-table stats:
 # Load=65/8192=1%, Rehash=0, Collisions=4/123=3%
-# Finished Make data base on Thu May 19 12:18:29 2022
+# Finished Make data base on Thu May 19 20:04:03 2022
 
  
